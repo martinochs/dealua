@@ -54,7 +54,10 @@ if (-not $git) {
   Write-Host '  git commit -m "DealUA MVP"' -ForegroundColor White
   Write-Host "  See DEPLOY.md for GitHub + Vercel steps" -ForegroundColor White
 } else {
-  Write-Host "Git repo already exists." -ForegroundColor Green
+  Write-Host "Git repo already exists on branch main." -ForegroundColor Green
+  $log = & $git log -1 --oneline 2>&1
+  if ($LASTEXITCODE -eq 0) { Write-Host "  Latest commit: $log" -ForegroundColor Gray }
+  Write-Host "  Push to GitHub: see DEPLOY.md" -ForegroundColor White
 }
 
 Write-Host ""
