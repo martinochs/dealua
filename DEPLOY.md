@@ -32,10 +32,29 @@ git push -u origin main
 
 ## 2. Deploy on Vercel
 
+### Option A — Import from GitHub (recommended)
+
 1. Go to [vercel.com](https://vercel.com) and sign in
 2. **Add New Project** → import your GitHub repo
 3. Framework: **Next.js** (auto-detected)
 4. Click **Deploy**
+
+### Option B — Deploy from CLI (no GitHub required)
+
+Vercel CLI is installed. Log in once, then deploy:
+
+```powershell
+cd "C:\Users\marti\OneDrive\OneDrive - Steuerplus\DATA\03 NWB Steuer geschäftlich\Ochs, Martin\Mydealz"
+
+# One-time login (opens browser)
+vercel login
+
+# Preview deploy
+powershell -ExecutionPolicy Bypass -File deploy-vercel.ps1
+
+# Production URL
+powershell -ExecutionPolicy Bypass -File deploy-vercel.ps1 --prod
+```
 
 ### Mock mode (default)
 

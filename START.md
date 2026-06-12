@@ -43,5 +43,6 @@ Press `Ctrl+C` in the terminal.
 
 ## Go live
 
-1. **Supabase:** [SUPABASE.md](SUPABASE.md)
-2. **Deploy:** [DEPLOY.md](DEPLOY.md) (needs Git + GitHub + Vercel)
+1. **GitHub:** `gh auth login` then `powershell -ExecutionPolicy Bypass -File push-github.ps1`
+2. **Vercel:** import repo at [vercel.com](https://vercel.com) — or `vercel login` then `deploy-vercel.ps1 --prod`
+3. **Supabase (optional):** [SUPABASE.md](SUPABASE.md)
