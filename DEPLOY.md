@@ -5,9 +5,9 @@
 | Step | Status |
 |------|--------|
 | **Live site** | [https://dealua.vercel.app](https://dealua.vercel.app) (mock mode) |
-| **GitHub** | [github.com/martinochs](https://github.com/martinochs) — repo not pushed yet |
+| **GitHub** | [github.com/martinochs/dealua](https://github.com/martinochs/dealua) — pushed |
 | **Vercel** | Logged in as `martinochs24-3931`, project `dealua` |
-| **GitHub push** | Create repo at github.com/new, then `push-git-manual.ps1` |
+| **Git ↔ Vercel** | Connect `martinochs/dealua` in Vercel → Settings → Git |
 
 ## 1. Push to GitHub
 
