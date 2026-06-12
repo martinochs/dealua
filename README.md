@@ -18,8 +18,9 @@ A MyDealz-style deal-sharing platform for Ukraine. **Ready to run locally** with
 | SQL migrations + seed files | Done |
 | Build + lint | Passes |
 | Deploy docs | [DEPLOY.md](DEPLOY.md) |
-| Git repo (branch `main`, initial commit) | Done |
-| **GitHub push + Vercel deploy** | Run `gh auth login` then `push-github.ps1` — see [DEPLOY.md](DEPLOY.md) |
+| Git repo (branch `main`) | Done |
+| **Live site** | [dealua.vercel.app](https://dealua.vercel.app) |
+| **GitHub push** | Run `gh auth login` then `push-github.ps1` |
 | **Live Supabase DB** | Needs your Supabase project + env vars — see [SUPABASE.md](SUPABASE.md) |
 
 ## Quick start

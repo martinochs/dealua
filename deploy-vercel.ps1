@@ -18,8 +18,8 @@ if (-not $vercel) {
 
 Write-Host "=== DealUA → Vercel ===" -ForegroundColor Cyan
 
-$whoami = & $vercel whoami 2>&1
-if ($LASTEXITCODE -ne 0) {
+$whoami = (& $vercel whoami 2>$null | Select-Object -Last 1)
+if (-not $whoami -or $whoami -match "Error|not logged") {
   Write-Host ""
   Write-Host "Not logged in to Vercel. Run this first (opens browser):" -ForegroundColor Yellow
   Write-Host "  vercel login" -ForegroundColor White
@@ -31,10 +31,10 @@ Write-Host "Logged in as: $whoami" -ForegroundColor Gray
 $prod = $args -contains "--prod"
 if ($prod) {
   Write-Host "Deploying to production..." -ForegroundColor Yellow
-  & $vercel --prod
+  & $vercel --prod --yes dealua
 } else {
   Write-Host "Deploying preview (add --prod for production URL)..." -ForegroundColor Yellow
-  & $vercel
+  & $vercel --yes dealua
 }
 
 if ($LASTEXITCODE -eq 0) {

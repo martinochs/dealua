@@ -1,5 +1,13 @@
 # Deploy DealUA to Vercel
 
+## Current status
+
+| Step | Status |
+|------|--------|
+| **Live site** | [https://dealua.vercel.app](https://dealua.vercel.app) (mock mode) |
+| **Vercel** | Logged in as `martinochs24-3931`, project `dealua` |
+| **GitHub push** | Account created — run `gh auth login` below, then push |
+
 ## 1. Push to GitHub
 
 Git is already initialized on branch `main` with all commits.
