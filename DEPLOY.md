@@ -2,13 +2,31 @@
 
 ## 1. Push to GitHub
 
-Git is already initialized with an initial commit on branch `main`.
+Git is already initialized on branch `main` with all commits.
+
+### Option A — GitHub CLI (recommended)
+
+GitHub CLI is installed. Log in once, then push:
+
+```powershell
+cd "C:\Users\marti\OneDrive\OneDrive - Steuerplus\DATA\03 NWB Steuer geschäftlich\Ochs, Martin\Mydealz"
+
+# One-time login (opens browser)
+gh auth login
+
+# Create repo + push (default name: dealua, private)
+powershell -ExecutionPolicy Bypass -File push-github.ps1
+
+# Or public repo with custom name:
+powershell -ExecutionPolicy Bypass -File push-github.ps1 mydealz-ua public
+```
+
+### Option B — Manual
 
 Create a new repo on [GitHub](https://github.com/new) (no README), then:
 
 ```powershell
 git remote add origin https://github.com/YOUR_USERNAME/dealua.git
-git branch -M main
 git push -u origin main
 ```
 
