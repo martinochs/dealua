@@ -63,7 +63,7 @@ if ($LASTEXITCODE -ne 0) {
   Write-Host ""
   Write-Host "If repo already exists, add remote manually:" -ForegroundColor Yellow
   Write-Host "  gh repo create $repoName $visFlag" -ForegroundColor White
-  Write-Host "  git remote add origin https://github.com/YOUR_USERNAME/$repoName.git" -ForegroundColor White
+  Write-Host "  git remote add origin https://github.com/martinochs/$repoName.git" -ForegroundColor White
   Write-Host "  git push -u origin main" -ForegroundColor White
   exit $LASTEXITCODE
 }

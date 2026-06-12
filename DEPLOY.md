@@ -5,8 +5,9 @@
 | Step | Status |
 |------|--------|
 | **Live site** | [https://dealua.vercel.app](https://dealua.vercel.app) (mock mode) |
+| **GitHub** | [github.com/martinochs](https://github.com/martinochs) — repo not pushed yet |
 | **Vercel** | Logged in as `martinochs24-3931`, project `dealua` |
-| **GitHub push** | Account created — run `gh auth login` below, then push |
+| **GitHub push** | Create repo at github.com/new, then `push-git-manual.ps1` |
 
 ## 1. Push to GitHub
 
@@ -32,21 +33,30 @@ powershell -ExecutionPolicy Bypass -File push-github.ps1
 powershell -ExecutionPolicy Bypass -File push-github.ps1 mydealz-ua public
 ```
 
-### Option B — Manual
+### Option B — Manual (no gh CLI)
 
-Create a new repo on [GitHub](https://github.com/new) (no README), then:
+1. Create an empty repo at [github.com/new](https://github.com/new) named `dealua` (no README)
+2. Run:
 
 ```powershell
-git remote add origin https://github.com/YOUR_USERNAME/dealua.git
+powershell -ExecutionPolicy Bypass -File push-git-manual.ps1
+```
+
+Or step by step:
+
+```powershell
+git remote add origin https://github.com/martinochs/dealua.git
 git push -u origin main
 ```
+
+Git will open a browser to sign in if needed.
 
 ## 2. Deploy on Vercel
 
 ### Option A — Import from GitHub (recommended)
 
 1. Go to [vercel.com](https://vercel.com) and sign in
-2. **Add New Project** → import your GitHub repo
+2. **Add New Project** → import **`martinochs/dealua`** from GitHub
 3. Framework: **Next.js** (auto-detected)
 4. Click **Deploy**
 
