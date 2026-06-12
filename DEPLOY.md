@@ -12,6 +12,9 @@
 
 Git is already initialized on branch `main` with all commits.
 
+**Tip:** If `git` is not recognized, restart Cursor after installing Git, or use the full path:
+`C:\Program Files\Git\bin\git.exe`
+
 ### Option A — GitHub CLI (recommended)
 
 GitHub CLI is installed. Log in once, then push:

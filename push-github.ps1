@@ -2,6 +2,9 @@
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
+# Git/gh often missing from PATH until Cursor is restarted after install
+$env:Path = "C:\Program Files\Git\bin;C:\Program Files\GitHub CLI;" + $env:Path
+
 function Find-Gh {
   $paths = @("gh", "C:\Program Files\GitHub CLI\gh.exe")
   foreach ($p in $paths) {
@@ -35,8 +38,13 @@ if (-not $gh) {
 
 Write-Host "=== DealUA → GitHub ===" -ForegroundColor Cyan
 
-$auth = & $gh auth status 2>&1
-if ($LASTEXITCODE -ne 0) {
+$authOk = $false
+try {
+  $null = & $gh auth status 2>$null
+  if ($LASTEXITCODE -eq 0) { $authOk = $true }
+} catch {}
+
+if (-not $authOk) {
   Write-Host ""
   Write-Host "Not logged in to GitHub. Run this first (opens browser):" -ForegroundColor Yellow
   Write-Host "  gh auth login" -ForegroundColor White

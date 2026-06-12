@@ -1,6 +1,7 @@
 # DealUA setup helper — run in PowerShell from the project folder
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
+$env:Path = "C:\Program Files\Git\bin;C:\Program Files\GitHub CLI;" + $env:Path
 
 Write-Host "=== DealUA Setup ===" -ForegroundColor Cyan
 
