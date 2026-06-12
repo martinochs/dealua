@@ -18,8 +18,9 @@ A MyDealz-style deal-sharing platform for Ukraine. **Ready to run locally** with
 | SQL migrations + seed files | Done |
 | Build + lint | Passes |
 | Deploy docs | [DEPLOY.md](DEPLOY.md) |
-| **Git init / Vercel deploy** | Needs Git installed on your PC |
-| **Live Supabase DB** | Needs your Supabase project + env vars |
+| Git repo (branch `main`, initial commit) | Done |
+| **GitHub push + Vercel deploy** | Needs your GitHub account — see [DEPLOY.md](DEPLOY.md) |
+| **Live Supabase DB** | Needs your Supabase project + env vars — see [SUPABASE.md](SUPABASE.md) |
 
 ## Quick start
 

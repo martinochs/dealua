@@ -1,17 +1,10 @@
 # Deploy DealUA to Vercel
 
-## 1. Initialize Git (if not done)
+## 1. Push to GitHub
 
-Install [Git for Windows](https://git-scm.com/download/win) if `git` is not recognized, then:
+Git is already initialized with an initial commit on branch `main`.
 
-```powershell
-cd "C:\Users\marti\OneDrive\OneDrive - Steuerplus\DATA\03 NWB Steuer geschäftlich\Ochs, Martin\Mydealz"
-git init
-git add .
-git commit -m "DealUA MVP with Supabase dual-mode support"
-```
-
-Create a repo on [GitHub](https://github.com/new), then:
+Create a new repo on [GitHub](https://github.com/new) (no README), then:
 
 ```powershell
 git remote add origin https://github.com/YOUR_USERNAME/dealua.git
