@@ -62,5 +62,5 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Host ""
 Write-Host "Done! Repo pushed to GitHub." -ForegroundColor Green
-Write-Host "Next: deploy on Vercel — see DEPLOY.md section 2" -ForegroundColor Cyan
+Write-Host "Next: connect GitHub in Vercel settings (see DEPLOY.md)" -ForegroundColor Cyan
 & $gh repo view --web 2>$null
