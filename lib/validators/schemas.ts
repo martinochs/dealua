@@ -1,0 +1,60 @@
+import { z } from "zod";
+
+export const loginSchema = z.object({
+  email: z.string().email("Невірний email"),
+  password: z.string().min(6, "Мінімум 6 символів"),
+});
+
+export const registerSchema = z.object({
+  email: z.string().email("Невірний email"),
+  password: z.string().min(6, "Мінімум 6 символів"),
+  username: z
+    .string()
+    .min(3, "Мінімум 3 символи")
+    .max(30, "Максимум 30 символів")
+    .regex(/^[a-zA-Z0-9_]+$/, "Лише латиниця, цифри та _"),
+});
+
+export const submitDealSchema = z.object({
+  title: z.string().min(5, "Мінімум 5 символів").max(200),
+  description: z.string().min(20, "Мінімум 20 символів").max(5000),
+  price_uah: z.coerce.number().positive("Ціна має бути більше 0"),
+  original_price_uah: z
+    .union([z.coerce.number().positive(), z.literal(""), z.undefined()])
+    .optional()
+    .transform((v) => (v === "" || v === undefined ? undefined : v)),
+  external_url: z.string().url("Невірне посилання").refine(
+    (url) => url.startsWith("https://"),
+    "Посилання має бути https://"
+  ),
+  affiliate_url: z
+    .union([
+      z.string().url().refine((url) => url.startsWith("https://"), "Посилання має бути https://"),
+      z.literal(""),
+      z.undefined(),
+    ])
+    .optional()
+    .transform((v) => (v === "" || v === undefined ? undefined : v)),
+  image_url: z
+    .union([z.string().url(), z.literal(""), z.undefined()])
+    .optional()
+    .transform((v) => (v === "" || v === undefined ? undefined : v)),
+  category_id: z.string().min(1, "Оберіть категорію"),
+  merchant_id: z.string().min(1, "Оберіть магазин"),
+});
+
+export const commentSchema = z.object({
+  deal_id: z.string().min(1),
+  body: z.string().min(1, "Коментар не може бути порожнім").max(2000),
+});
+
+export const voteSchema = z.object({
+  deal_id: z.string().min(1),
+  vote_type: z.enum(["hot", "cold"]),
+});
+
+export type LoginInput = z.infer<typeof loginSchema>;
+export type RegisterInput = z.infer<typeof registerSchema>;
+export type SubmitDealInput = z.infer<typeof submitDealSchema>;
+export type CommentInput = z.infer<typeof commentSchema>;
+export type VoteInput = z.infer<typeof voteSchema>;

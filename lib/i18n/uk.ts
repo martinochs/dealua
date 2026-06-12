@@ -1,0 +1,123 @@
+const uk = {
+  site: {
+    name: "DealUA",
+    tagline: "Найкращі пропозиції для України",
+  },
+  nav: {
+    home: "Головна",
+    submit: "Додати пропозицію",
+    login: "Увійти",
+    register: "Реєстрація",
+    logout: "Вийти",
+    admin: "Адмін",
+    profile: "Профіль",
+    categories: "Категорії",
+  },
+  feed: {
+    hot: "Гарячі",
+    new: "Нові",
+    top: "Топ сьогодні",
+    empty: "Пропозицій поки немає",
+    loadMore: "Завантажити ще",
+    search: "Пошук пропозицій",
+    searchPlaceholder: "Samsung, Nike, кава...",
+    searchResults: "Результати пошуку",
+    noSearchResults: "Нічого не знайдено",
+  },
+  deals: {
+    goToOffer: "Перейти до пропозиції",
+    submit: "Опублікувати пропозицію",
+    pending: "На модерації",
+    approved: "Схвалено",
+    rejected: "Відхилено",
+    hot: "Гаряче",
+    cold: "Холодне",
+    votes: "голосів",
+    savings: "Економія",
+    originalPrice: "Була ціна",
+    currentPrice: "Ціна",
+    expired: "Завершено",
+    submittedBy: "Додав(ла)",
+    comments: "Коментарі",
+    noComments: "Коментарів поки немає",
+    addComment: "Написати коментар",
+    commentPlaceholder: "Ваш коментар...",
+    loginToVote: "Увійдіть, щоб голосувати",
+    loginToComment: "Увійдіть, щоб коментувати",
+  },
+  submit: {
+    title: "Додати пропозицію",
+    dealTitle: "Назва",
+    description: "Опис",
+    price: "Ціна (₴)",
+    originalPrice: "Стара ціна (₴)",
+    externalUrl: "Посилання на товар",
+    affiliateUrl: "Партнерське посилання (необов'язково)",
+    imageUrl: "URL зображення",
+    category: "Категорія",
+    merchant: "Магазин",
+    success: "Пропозицію надіслано на модерацію",
+    error: "Не вдалося надіслати пропозицію",
+  },
+  auth: {
+    login: "Увійти",
+    register: "Реєстрація",
+    email: "Email",
+    password: "Пароль",
+    username: "Ім'я користувача",
+    loginSuccess: "Ви успішно увійшли",
+    registerSuccess: "Акаунт створено",
+    loginError: "Невірний email або пароль",
+    registerError: "Не вдалося створити акаунт",
+    noAccount: "Немає акаунту?",
+    hasAccount: "Вже маєте акаунт?",
+  },
+  admin: {
+    title: "Панель адміністратора",
+    pendingDeals: "На модерації",
+    categories: "Категорії",
+    approve: "Схвалити",
+    reject: "Відхилити",
+    noPending: "Немає пропозицій на модерації",
+    accessDenied: "Доступ заборонено",
+  },
+  profile: {
+    deals: "Пропозиції користувача",
+    noDeals: "Користувач ще не додавав пропозицій",
+  },
+  footer: {
+    about: "Про нас",
+    rules: "Правила",
+    contact: "Контакт",
+    copyright: "© DealUA. Всі права захищені.",
+  },
+  errors: {
+    notFound: "Сторінку не знайдено",
+    generic: "Щось пішло не так",
+  },
+} as const;
+
+type NestedKeyOf<T, Prefix extends string = ""> = T extends object
+  ? {
+      [K in keyof T & string]: T[K] extends object
+        ? NestedKeyOf<T[K], Prefix extends "" ? K : `${Prefix}.${K}`>
+        : Prefix extends "" ? K : `${Prefix}.${K}`;
+    }[keyof T & string]
+  : never;
+
+export type TranslationKey = NestedKeyOf<typeof uk>;
+
+export function t(key: TranslationKey): string {
+  const keys = key.split(".");
+  let value: unknown = uk;
+  for (const k of keys) {
+    if (value && typeof value === "object" && k in value) {
+      value = (value as Record<string, unknown>)[k];
+    } else {
+      return key;
+    }
+  }
+  return typeof value === "string" ? value : key;
+}
+
+export { uk };

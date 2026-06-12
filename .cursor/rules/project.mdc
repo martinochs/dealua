@@ -1,0 +1,9 @@
+# DealUA project
+
+- **Primary workspace:** OneDrive folder (this repo)
+- **Mirror:** `C:\Users\marti\Projects\Mydealz` — keep in sync when editing
+- Stack: Next.js 15 App Router, TypeScript, Tailwind, dual-mode (mock + Supabase)
+- Mock mode: no env vars, auto-admin, in-memory data
+- Supabase mode: set `USE_MOCK=false` + Supabase env vars — see `SUPABASE.md`
+- Run: `npm install` then `npm run dev` (or `start-dev.bat`)
+- Build must pass before considering changes done: `npm run build`
