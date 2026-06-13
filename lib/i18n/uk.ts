@@ -6,8 +6,7 @@ const uk = {
   nav: {
     home: "Головна",
     submit: "Додати пропозицію",
-    submitCta: "Стань топ-мисливцем пропозицій",
-    submitCtaBenefit: "Додай deal — заробляй бали",
+    submitCta: "Поділись вигідною пропозицією",
     login: "Увійти",
     register: "Реєстрація",
     logout: "Вийти",
@@ -111,17 +110,8 @@ const uk = {
     hot: "ГАРЯЧЕ",
     new: "НОВА",
     mega: "МЕГА",
-    trending: "У ТРЕНДІ",
-    popular: "ПОПУЛЯРНА",
+    trending: "У тренді",
     trustedStore: "популярний",
-  },
-  heat: {
-    new: "Нова",
-    warm: "Тепла",
-    hot: "🔥 Гаряча",
-  },
-  referral: {
-    invite: "+ Запроси друга = +5 балів",
   },
 } as const;
 

@@ -1,13 +1,7 @@
----
-description: DealUA project workspace and conventions
-alwaysApply: true
----
-
 # DealUA project
 
-- **Primary workspace:** `C:\Users\marti\Desktop\Mydealz` — edit, build, commit, and run commands here
-- **Do not use OneDrive** (`…\Ochs, Martin\Mydealz`) for file edits unless the user explicitly asks
-- OneDrive copy may lag; sync via `git pull` on Desktop after remote pushes
+- **Primary workspace:** OneDrive folder (this repo)
+- **Mirror:** `C:\Users\marti\Projects\Mydealz` — keep in sync when editing
 - Stack: Next.js 15 App Router, TypeScript, Tailwind, dual-mode (mock + Supabase)
 - Mock mode: no env vars, auto-admin, in-memory data
 - Supabase mode: set `USE_MOCK=false` + Supabase env vars — see `SUPABASE.md`

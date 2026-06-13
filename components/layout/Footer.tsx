@@ -3,11 +3,8 @@ import { t } from "@/lib/i18n/uk";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t bg-card">
+    <footer className="mt-auto border-t">
       <div className="container mx-auto px-4 py-4">
-        <p className="mb-3 text-center text-xs font-semibold text-primary">
-          {t("referral.invite")}
-        </p>
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <p>{t("footer.copyright")}</p>
           <div className="flex gap-4">
