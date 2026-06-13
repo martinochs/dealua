@@ -3,8 +3,7 @@ import { DealFeed } from "@/components/deals/DealFeed";
 import { FeedTabs } from "@/components/deals/FeedTabs";
 import { LoadMore } from "@/components/deals/LoadMore";
 import { getCategories, getDeals, countDeals } from "@/lib/queries/deals";
-import { DEALS_PAGE_SIZE } from "@/lib/constants";
-import type { SortMode } from "@/types/database";
+import { DEALS_PAGE_SIZE, parseSortMode } from "@/lib/constants";
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
@@ -27,7 +26,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
   if (!category) notFound();
 
-  const sort = (["hot", "new", "top"].includes(queryParams.sort ?? "") ? queryParams.sort : "hot") as SortMode;
+  const sort = parseSortMode(queryParams.sort);
   const page = Math.max(1, parseInt(queryParams.page ?? "1", 10) || 1);
   const basePath = `/category/${slug}`;
 

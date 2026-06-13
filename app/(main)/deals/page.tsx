@@ -5,7 +5,7 @@ import { SearchBarWrapper } from "@/components/layout/SearchBarWrapper";
 import { getDeals, countDeals } from "@/lib/queries/deals";
 import { DEALS_PAGE_SIZE } from "@/lib/constants";
 import { t } from "@/lib/i18n/uk";
-import type { SortMode } from "@/types/database";
+import { parseSortMode } from "@/lib/constants";
 
 interface DealsPageProps {
   searchParams: Promise<{ sort?: string; q?: string; page?: string }>;
@@ -21,7 +21,7 @@ export async function generateMetadata({ searchParams }: DealsPageProps) {
 
 export default async function DealsPage({ searchParams }: DealsPageProps) {
   const params = await searchParams;
-  const sort = (["hot", "new", "top"].includes(params.sort ?? "") ? params.sort : "hot") as SortMode;
+  const sort = parseSortMode(params.sort);
   const query = params.q?.trim();
   const page = Math.max(1, parseInt(params.page ?? "1", 10) || 1);
 

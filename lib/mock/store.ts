@@ -111,7 +111,18 @@ export function getMockDeals(
     const cutoff = Date.now() - 24 * 3600000;
     deals = deals
       .filter((d) => new Date(d.created_at).getTime() >= cutoff)
-      .sort((a, b) => b.hot_count - a.hot_count);
+      .sort((a, b) => {
+        const scoreA = a.hot_count - a.cold_count;
+        const scoreB = b.hot_count - b.cold_count;
+        return scoreB - scoreA;
+      });
+  } else if (sort === "commented") {
+    const counts = getMockCommentCounts();
+    deals.sort((a, b) => {
+      const diff = (counts[b.id] ?? 0) - (counts[a.id] ?? 0);
+      if (diff !== 0) return diff;
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
   } else {
     deals.sort((a, b) => {
       const scoreA = a.hot_count - a.cold_count;
@@ -153,10 +164,29 @@ export function getMockUserVote(dealId: string, userId: string): "hot" | "cold" 
   return getStore().votes[`${dealId}:${userId}`] ?? null;
 }
 
+export function getMockUserVotes(
+  dealIds: string[],
+  userId: string
+): Record<string, "hot" | "cold" | null> {
+  const votes: Record<string, "hot" | "cold" | null> = {};
+  for (const dealId of dealIds) {
+    votes[dealId] = getMockUserVote(dealId, userId);
+  }
+  return votes;
+}
+
 export function getMockComments(dealId: string): CommentWithProfile[] {
   return getStore()
     .comments.filter((c) => c.deal_id === dealId)
     .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+}
+
+export function getMockCommentCounts(): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const comment of getStore().comments) {
+    counts[comment.deal_id] = (counts[comment.deal_id] ?? 0) + 1;
+  }
+  return counts;
 }
 
 export function getMockUserDeals(userId: string): DealWithRelations[] {

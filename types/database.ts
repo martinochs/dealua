@@ -229,4 +229,4 @@ export type CommentWithProfile = Comment & {
   profile: Pick<Profile, "username" | "avatar_url"> | null;
 };
 
-export type SortMode = "hot" | "new" | "top";
+export type SortMode = "hot" | "new" | "top" | "commented";

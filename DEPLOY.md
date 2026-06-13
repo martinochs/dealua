@@ -6,8 +6,8 @@
 |------|--------|
 | **Live site** | [https://dealua.vercel.app](https://dealua.vercel.app) (mock mode) |
 | **GitHub** | [github.com/martinochs/dealua](https://github.com/martinochs/dealua) — pushed |
-| **Vercel** | Logged in as `martinochs24-3931`, project `dealua` |
-| **Git ↔ Vercel** | Connect `martinochs/dealua` in Vercel → Settings → Git |
+| **Vercel** | Project `dealua`, auto-deploy from GitHub |
+| **Git ↔ Vercel** | Connected — pushes to `main` deploy automatically |
 
 ## 1. Push to GitHub
 

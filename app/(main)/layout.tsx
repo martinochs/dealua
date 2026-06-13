@@ -7,7 +7,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     <div className="flex min-h-screen flex-col">
       <MockBannerWrapper />
       <SiteHeader />
-      <main className="flex-1 container mx-auto px-4 py-6">{children}</main>
+      <main className="container mx-auto flex-1 px-4 py-1">{children}</main>
       <Footer />
     </div>
   );

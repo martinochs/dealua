@@ -61,6 +61,17 @@ export async function supabaseGetDeals(
   } else if (sort === "top") {
     const cutoff = new Date(Date.now() - 24 * 3600000).toISOString();
     dbQuery = dbQuery.gte("created_at", cutoff).order("hot_count", { ascending: false });
+  } else if (sort === "commented") {
+    const { data, error } = await dbQuery;
+    if (error) throw error;
+    const counts = await supabaseGetCommentCounts();
+    const deals = (data ?? []).map(mapDeal);
+    deals.sort((a, b) => {
+      const diff = (counts[b.id] ?? 0) - (counts[a.id] ?? 0);
+      if (diff !== 0) return diff;
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
+    return deals.slice(offset, offset + limit);
   } else {
     dbQuery = dbQuery.order("hot_count", { ascending: false }).order("created_at", { ascending: false });
   }
@@ -141,6 +152,37 @@ export async function supabaseGetUserVote(
     .eq("user_id", userId)
     .maybeSingle();
   return (data?.vote_type as "hot" | "cold" | undefined) ?? null;
+}
+
+export async function supabaseGetUserVotes(
+  dealIds: string[],
+  userId: string
+): Promise<Record<string, "hot" | "cold" | null>> {
+  if (dealIds.length === 0) return {};
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("votes")
+    .select("deal_id, vote_type")
+    .eq("user_id", userId)
+    .in("deal_id", dealIds);
+
+  const votes: Record<string, "hot" | "cold" | null> = {};
+  for (const dealId of dealIds) votes[dealId] = null;
+  for (const row of data ?? []) {
+    votes[row.deal_id] = row.vote_type as "hot" | "cold";
+  }
+  return votes;
+}
+
+export async function supabaseGetCommentCounts(): Promise<Record<string, number>> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("comments").select("deal_id");
+  if (error) throw error;
+  const counts: Record<string, number> = {};
+  for (const row of data ?? []) {
+    counts[row.deal_id] = (counts[row.deal_id] ?? 0) + 1;
+  }
+  return counts;
 }
 
 export async function supabaseGetComments(dealId: string): Promise<CommentWithProfile[]> {

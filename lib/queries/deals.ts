@@ -12,6 +12,8 @@ import {
   countMockDeals,
   getMockStats,
   getMockClickStats,
+  getMockCommentCounts,
+  getMockUserVotes,
 } from "@/lib/mock/store";
 import {
   supabaseGetCategories,
@@ -26,6 +28,8 @@ import {
   supabaseCountDeals,
   supabaseGetStats,
   supabaseGetClickStats,
+  supabaseGetCommentCounts,
+  supabaseGetUserVotes,
 } from "@/lib/supabase/queries/deals";
 import type { SortMode } from "@/types/database";
 
@@ -91,4 +95,14 @@ export async function getStats() {
 
 export async function getClickStats() {
   return isMockMode() ? getMockClickStats() : supabaseGetClickStats();
+}
+
+export async function getCommentCounts() {
+  return isMockMode() ? getMockCommentCounts() : supabaseGetCommentCounts();
+}
+
+export async function getUserVotes(dealIds: string[], userId: string) {
+  return isMockMode()
+    ? getMockUserVotes(dealIds, userId)
+    : supabaseGetUserVotes(dealIds, userId);
 }

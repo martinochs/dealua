@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { Flame, Snowflake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { voteAction } from "@/lib/actions/vote";
-import { getVoteScore } from "@/lib/utils";
+import { getTemperatureLevel } from "@/lib/deal-feed";
+import { cn, getVoteScore } from "@/lib/utils";
 import { t } from "@/lib/i18n/uk";
 import Link from "next/link";
 
@@ -15,6 +16,7 @@ interface VoteButtonsProps {
   coldCount: number;
   userVote: "hot" | "cold" | null;
   isLoggedIn: boolean;
+  compact?: boolean;
 }
 
 export function VoteButtons({
@@ -23,6 +25,7 @@ export function VoteButtons({
   coldCount: initialCold,
   userVote: initialVote,
   isLoggedIn,
+  compact = false,
 }: VoteButtonsProps) {
   const router = useRouter();
   const [hotCount, setHotCount] = useState(initialHot);
@@ -31,9 +34,11 @@ export function VoteButtons({
   const [isPending, startTransition] = useTransition();
 
   const score = getVoteScore(hotCount, coldCount);
-  const isHot = score >= 15;
+  const temp = getTemperatureLevel(score);
 
-  function handleVote(type: "hot" | "cold") {
+  function handleVote(type: "hot" | "cold", e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
     if (!isLoggedIn) return;
 
     startTransition(() => {
@@ -46,6 +51,80 @@ export function VoteButtons({
       });
     });
   }
+
+  const tempStyles = {
+    fire: "bg-hot/15 border-hot/30",
+    warm: "bg-hot/8 border-hot/20",
+    neutral: "bg-muted/50 border-border",
+    cold: "bg-cold/10 border-cold/25",
+  }[temp];
+
+  const scoreColor =
+    temp === "cold" ? "text-cold" : temp === "neutral" ? "text-foreground" : "text-hot";
+
+  if (compact) {
+    if (!isLoggedIn) {
+      return (
+        <div
+          className={cn(
+            "flex w-11 shrink-0 flex-col items-center justify-center gap-0 border-r px-0.5 py-1 sm:w-12",
+            tempStyles
+          )}
+        >
+          <Flame className={cn("h-3.5 w-3.5", scoreColor)} aria-hidden />
+          <span className={cn("text-base font-extrabold tabular-nums leading-none sm:text-lg", scoreColor)}>
+            {score}
+          </span>
+          <Link
+            href="/login"
+            onClick={(e) => e.stopPropagation()}
+            className="text-[9px] font-medium leading-none text-primary hover:underline text-center"
+          >
+            {t("deals.loginToVote")}
+          </Link>
+        </div>
+      );
+    }
+
+    return (
+      <div
+        className={cn(
+          "flex w-11 shrink-0 flex-col items-center justify-center gap-0 border-r px-0.5 py-1 sm:w-12",
+          tempStyles
+        )}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Button
+          variant={userVote === "hot" ? "hot" : "ghost"}
+          size="icon"
+          className="h-7 w-7 shrink-0"
+          onClick={(e) => handleVote("hot", e)}
+          disabled={isPending}
+          aria-label={t("deals.hot")}
+        >
+          <Flame className="h-3.5 w-3.5" />
+        </Button>
+        <span className={cn("text-base font-extrabold tabular-nums leading-none sm:text-lg", scoreColor)}>
+          {score}
+        </span>
+        <Button
+          variant={userVote === "cold" ? "cold" : "ghost"}
+          size="icon"
+          className="h-7 w-7 shrink-0"
+          onClick={(e) => handleVote("cold", e)}
+          disabled={isPending}
+          aria-label={t("deals.cold")}
+        >
+          <Snowflake className="h-3.5 w-3.5" />
+        </Button>
+        <span className="text-[9px] tabular-nums leading-none text-muted-foreground">
+          {hotCount}/{coldCount}
+        </span>
+      </div>
+    );
+  }
+
+  const isHot = score >= 15;
 
   if (!isLoggedIn) {
     return (
@@ -60,13 +139,11 @@ export function VoteButtons({
 
   return (
     <div className="flex flex-col items-center gap-2">
-      {isHot && (
-        <span className="text-xs font-medium text-hot">{t("deals.hot")}</span>
-      )}
+      {isHot && <span className="text-xs font-medium text-hot">{t("deals.hot")}</span>}
       <Button
         variant={userVote === "hot" ? "hot" : "outline"}
         size="icon"
-        onClick={() => handleVote("hot")}
+        onClick={(e) => handleVote("hot", e)}
         disabled={isPending}
         aria-label={t("deals.hot")}
       >
@@ -76,7 +153,7 @@ export function VoteButtons({
       <Button
         variant={userVote === "cold" ? "cold" : "outline"}
         size="icon"
-        onClick={() => handleVote("cold")}
+        onClick={(e) => handleVote("cold", e)}
         disabled={isPending}
         aria-label={t("deals.cold")}
       >
