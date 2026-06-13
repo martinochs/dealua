@@ -25,6 +25,10 @@ const config: Config = {
         ring: "hsl(var(--ring))",
         hot: "hsl(var(--hot))",
         cold: "hsl(var(--cold))",
+        "uk-yellow": {
+          DEFAULT: "hsl(var(--uk-yellow))",
+          foreground: "hsl(var(--uk-yellow-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

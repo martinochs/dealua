@@ -73,7 +73,7 @@ export function DealFeedCard({
             <div className="flex h-full items-center justify-center text-2xl">🛍️</div>
           )}
           {savings !== null && savings >= 20 && (
-            <span className="absolute left-0 top-0 rounded-br bg-hot px-1.5 py-px text-[10px] font-bold leading-tight text-white">
+            <span className="absolute left-0 top-0 rounded-br bg-uk-yellow px-1.5 py-px text-[10px] font-bold leading-tight text-uk-yellow-foreground">
               -{savings}%
             </span>
           )}
@@ -84,7 +84,7 @@ export function DealFeedCard({
             {badges.map((b) => (
               <Badge
                 key={b}
-                variant={b === "mega" || b === "hot" ? "hot" : "secondary"}
+                variant={b === "hot" ? "hot" : b === "mega" || b === "new" ? "yellow" : "secondary"}
                 className="px-1 py-0 text-[9px] font-bold uppercase leading-tight"
               >
                 {badgeLabels[b]}

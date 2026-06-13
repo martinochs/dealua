@@ -29,8 +29,8 @@ export function HomeCategoryBar({ categories, activeCategory, sort }: HomeCatego
         className={cn(
           "shrink-0 whitespace-nowrap rounded-full px-2.5 py-0.5 text-[11px] font-medium transition-colors",
           !activeCategory
-            ? "bg-foreground text-background"
-            : "border hover:bg-accent"
+            ? "bg-primary text-primary-foreground"
+            : "border hover:bg-uk-yellow/25 hover:text-uk-yellow-foreground"
         )}
       >
         {t("feed.allDeals")}
@@ -43,8 +43,8 @@ export function HomeCategoryBar({ categories, activeCategory, sort }: HomeCatego
           className={cn(
             "shrink-0 whitespace-nowrap rounded-full px-2.5 py-0.5 text-[11px] font-medium transition-colors",
             activeCategory === cat.slug
-              ? "bg-foreground text-background"
-              : "border hover:bg-accent"
+              ? "bg-primary text-primary-foreground"
+              : "border hover:bg-uk-yellow/25 hover:text-uk-yellow-foreground"
           )}
         >
           {cat.icon} {cat.name_uk}
