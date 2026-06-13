@@ -21,19 +21,22 @@ export function HomeCategoryBar({ categories, activeCategory, sort }: HomeCatego
     return qs ? `/?${qs}` : "/";
   }
 
+  const pillBase =
+    "flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-bold transition-all duration-200";
+
   return (
     <div
-      className="flex gap-2.5 overflow-x-auto py-3 scrollbar-none"
+      className="flex gap-3 overflow-x-auto py-4 scrollbar-none"
       aria-label={t("nav.categories")}
     >
       <Link
         href={href()}
         aria-current={!activeCategory ? "page" : undefined}
         className={cn(
-          "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-all",
+          pillBase,
           !activeCategory
-            ? "bg-primary text-primary-foreground shadow-md"
-            : "border bg-card text-foreground shadow-sm hover:border-primary/30 hover:shadow"
+            ? "bg-primary text-primary-foreground shadow-lg ring-2 ring-primary/30"
+            : "border border-border/60 bg-card text-foreground shadow-sm hover:border-primary/40 hover:shadow-md"
         )}
       >
         {t("feed.allDeals")}
@@ -44,13 +47,13 @@ export function HomeCategoryBar({ categories, activeCategory, sort }: HomeCatego
           href={href(cat.slug)}
           aria-current={activeCategory === cat.slug ? "page" : undefined}
           className={cn(
-            "flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-all",
+            pillBase,
             activeCategory === cat.slug
-              ? "bg-primary text-primary-foreground shadow-md"
-              : "border bg-card text-foreground shadow-sm hover:border-primary/30 hover:shadow"
+              ? "bg-primary text-primary-foreground shadow-lg ring-2 ring-primary/30"
+              : "border border-border/60 bg-card text-foreground shadow-sm hover:border-primary/40 hover:shadow-md"
           )}
         >
-          <span className="text-lg leading-none" aria-hidden>
+          <span className="text-xl leading-none" aria-hidden>
             {cat.icon}
           </span>
           {cat.name_uk}

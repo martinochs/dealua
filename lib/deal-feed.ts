@@ -3,7 +3,7 @@ import type { DealWithRelations } from "@/types/database";
 
 export type DealFeedBadge = "new" | "hot" | "mega";
 
-export type ScoreHeat = "red" | "orange" | "amber" | "green";
+export type ScoreHeat = "cold" | "low" | "medium" | "high";
 
 export function getDealFeedBadges(deal: DealWithRelations): DealFeedBadge[] {
   const score = getVoteScore(deal.hot_count, deal.cold_count);
@@ -29,35 +29,35 @@ export function getSavingsAmount(
   return original - price;
 }
 
-/** Score heat: red (cold) → orange → amber → green (hot) */
+/** low = grey/red, medium = orange, high = strong orange/red */
 export function getTemperatureLevel(score: number): ScoreHeat {
-  if (score < 0) return "red";
-  if (score < 15) return "orange";
-  if (score < 35) return "amber";
-  return "green";
+  if (score < 0) return "cold";
+  if (score < 15) return "low";
+  if (score < 35) return "medium";
+  return "high";
 }
 
 export function getScoreHeatStyles(heat: ScoreHeat) {
   return {
-    red: {
+    cold: {
       box: "bg-red-50 border-red-200",
-      score: "text-red-600",
+      score: "text-red-700",
       icon: "text-red-500",
     },
-    orange: {
-      box: "bg-orange-50 border-orange-200",
-      score: "text-orange-600",
-      icon: "text-orange-500",
+    low: {
+      box: "bg-slate-100 border-slate-200",
+      score: "text-slate-600",
+      icon: "text-slate-500",
     },
-    amber: {
-      box: "bg-amber-50 border-amber-200",
-      score: "text-amber-700",
-      icon: "text-amber-600",
+    medium: {
+      box: "bg-orange-100 border-orange-300",
+      score: "text-orange-700",
+      icon: "text-orange-600",
     },
-    green: {
-      box: "bg-emerald-50 border-emerald-200",
-      score: "text-emerald-700",
-      icon: "text-emerald-600",
+    high: {
+      box: "bg-gradient-to-b from-orange-200 to-red-100 border-orange-400",
+      score: "text-red-700",
+      icon: "text-orange-600",
     },
   }[heat];
 }

@@ -10,12 +10,15 @@ interface FeedTabsProps {
   currentSort: SortMode;
   basePath?: string;
   category?: string;
+  embedded?: boolean;
 }
 
-export function FeedTabs({ currentSort, basePath = "/", category }: FeedTabsProps) {
+export function FeedTabs({ currentSort, basePath = "/", category, embedded = false }: FeedTabsProps) {
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    if (embedded) return;
+
     function syncStickyTop() {
       const chrome = document.getElementById("site-chrome");
       const nav = navRef.current;
@@ -26,7 +29,7 @@ export function FeedTabs({ currentSort, basePath = "/", category }: FeedTabsProp
     syncStickyTop();
     window.addEventListener("resize", syncStickyTop);
     return () => window.removeEventListener("resize", syncStickyTop);
-  }, []);
+  }, [embedded]);
 
   const sorts: { value: SortMode; label: string }[] = [
     { value: "hot", label: t("feed.hot") },
@@ -49,10 +52,14 @@ export function FeedTabs({ currentSort, basePath = "/", category }: FeedTabsProp
   return (
     <nav
       ref={navRef}
-      className="feed-sort-nav sticky z-30 -mx-4 border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/90"
+      className={cn(
+        "feed-sort-nav",
+        !embedded &&
+          "sticky z-30 -mx-4 border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/90"
+      )}
       aria-label="Сортування пропозицій"
     >
-      <div className="flex gap-1 overflow-x-auto py-2 scrollbar-none">
+      <div className="flex gap-1.5 overflow-x-auto py-2 scrollbar-none">
         {sorts.map((sort) => (
           <Link
             key={sort.value}
@@ -60,10 +67,10 @@ export function FeedTabs({ currentSort, basePath = "/", category }: FeedTabsProp
             aria-current={currentSort === sort.value ? "page" : undefined}
             scroll={false}
             className={cn(
-              "whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-semibold transition-all",
+              "whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200",
               currentSort === sort.value
-                ? "bg-primary text-primary-foreground shadow-sm"
-                : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "text-muted-foreground hover:bg-white hover:text-foreground hover:shadow-sm"
             )}
           >
             {sort.label}

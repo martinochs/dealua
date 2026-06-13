@@ -1,7 +1,6 @@
-import { FeedTabs } from "@/components/deals/FeedTabs";
 import { InfiniteDealFeed } from "@/components/deals/InfiniteDealFeed";
 import { FeedToolbar } from "@/components/home/FeedToolbar";
-import { HomeCategoryBar } from "@/components/home/HomeCategoryBar";
+import { StickyFeedNav } from "@/components/home/StickyFeedNav";
 import { HOME_PAGE_SIZE, parseSortMode } from "@/lib/constants";
 import { getProfile } from "@/lib/auth/session";
 import {
@@ -47,13 +46,12 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         sort={sort}
         categoryName={activeCategory?.name_uk}
       />
-      <HomeCategoryBar
+      <StickyFeedNav
         categories={categories}
         activeCategory={categorySlug}
         sort={sort}
       />
-      <FeedTabs currentSort={sort} category={categorySlug} />
-      <div className="pt-3">
+      <div className="pt-4">
         <InfiniteDealFeed
           initialDeals={deals}
           initialCommentCounts={commentCounts}

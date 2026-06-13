@@ -25,6 +25,7 @@ const config: Config = {
         ring: "hsl(var(--ring))",
         hot: "hsl(var(--hot))",
         cold: "hsl(var(--cold))",
+        price: "hsl(var(--price))",
         "uk-yellow": {
           DEFAULT: "hsl(var(--uk-yellow))",
           foreground: "hsl(var(--uk-yellow-foreground))",
