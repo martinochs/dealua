@@ -1,6 +1,6 @@
 export function DealCardSkeleton() {
   return (
-    <div className="flex overflow-hidden rounded-md border bg-card animate-pulse">
+    <div className="flex overflow-hidden rounded-md border border-border/80 bg-card shadow-sm animate-pulse">
       <div className="w-11 shrink-0 border-r bg-muted sm:w-12" />
       <div className="h-20 w-20 shrink-0 bg-muted sm:h-[5.5rem] sm:w-[7rem]" />
       <div className="flex flex-1 flex-col justify-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-2">

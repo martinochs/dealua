@@ -46,7 +46,7 @@ export function DealFeedCard({
   return (
     <article
       className={cn(
-        "group flex overflow-hidden rounded-md border bg-card transition-colors hover:border-primary/35 hover:bg-accent/20",
+        "group flex overflow-hidden rounded-md border border-border/80 bg-card shadow-sm transition-colors hover:border-primary/35 hover:shadow-md",
         rank !== undefined && rank % 2 === 1 && "bg-muted/15"
       )}
     >
@@ -91,7 +91,7 @@ export function DealFeedCard({
               </Badge>
             ))}
             {deal.merchant && (
-              <span className="rounded border bg-background px-1 py-px text-[10px] font-semibold uppercase leading-tight text-muted-foreground">
+              <span className="rounded border border-border/70 bg-muted/40 px-1 py-px text-[10px] font-semibold uppercase leading-tight text-muted-foreground">
                 {deal.merchant.name}
               </span>
             )}
@@ -137,7 +137,7 @@ export function DealFeedCard({
 
 export function FeedSubmitPrompt() {
   return (
-    <div className="flex items-center justify-between gap-2 rounded-md border border-dashed bg-muted/25 px-2.5 py-2">
+    <div className="flex items-center justify-between gap-2 rounded-md border border-dashed border-border bg-card px-2.5 py-2 shadow-sm">
       <p className="text-xs text-muted-foreground">{t("feed.submitPrompt")}</p>
       <Button asChild size="sm" className="h-7 shrink-0 px-2 text-xs">
         <Link href="/submit">
