@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Plus, User, LogOut, Shield, List, Grid3X3 } from "lucide-react";
+import { Menu, User, LogOut, Shield, List, Grid3X3 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { logoutAction } from "@/lib/actions/auth";
@@ -41,14 +41,6 @@ export function MobileNav({ profile, pendingCount = 0 }: MobileNavProps) {
             >
               <Grid3X3 className="h-4 w-4" />
               {t("nav.categories")}
-            </Link>
-            <Link
-              href="/submit"
-              className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm hover:bg-accent min-h-[44px]"
-              onClick={() => setOpen(false)}
-            >
-              <Plus className="h-4 w-4" />
-              {t("nav.submit")}
             </Link>
 
             {profile ? (

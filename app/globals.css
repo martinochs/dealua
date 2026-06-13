@@ -1,65 +1,61 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root {
-    /* Page: #F7FAFC */
-    --background: 210 28% 98%;
-    --foreground: 215 35% 15%;
-    /* Cards: #FFFFFF */
-    --card: 0 0% 100%;
-    --card-foreground: 215 35% 15%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 35% 15%;
-    /* Ukrainian blue (#0057B8) */
-    --primary: 211 100% 36%;
-    --primary-foreground: 0 0% 100%;
-    /* Ukrainian yellow (#FFDD00) */
-    --uk-yellow: 48 100% 50%;
-    --uk-yellow-foreground: 211 85% 22%;
-    --secondary: 210 25% 94%;
-    --secondary-foreground: 215 35% 15%;
-    --muted: 210 22% 93%;
-    --muted-foreground: 215 14% 42%;
-    --accent: 48 90% 92%;
-    --accent-foreground: 211 85% 22%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214 20% 88%;
-    --input: 214 20% 88%;
-    --ring: 211 100% 36%;
-    --radius: 0.625rem;
-    --hot: 0 84% 60%;
-    --cold: 211 70% 45%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground antialiased;
-  }
-}
-
-@layer utilities {
-  .scrollbar-none {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-none::-webkit-scrollbar {
-    display: none;
-  }
-  .uk-flag-stripe {
-    @apply flex h-1 w-full flex-col;
-  }
-  .uk-flag-stripe > span:first-child {
-    @apply flex-1 bg-primary;
-  }
-  .uk-flag-stripe > span:last-child {
-    @apply flex-1 bg-uk-yellow;
-  }
-}
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Airy light background */
+    --background: 210 25% 99%;
+    --foreground: 215 35% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 35% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 35% 15%;
+    --primary: 211 100% 36%;
+    --primary-foreground: 0 0% 100%;
+    --uk-yellow: 48 100% 50%;
+    --uk-yellow-foreground: 211 85% 22%;
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 215 35% 15%;
+    --muted: 210 18% 95%;
+    --muted-foreground: 215 14% 45%;
+    --accent: 48 90% 94%;
+    --accent-foreground: 211 85% 22%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 18% 90%;
+    --input: 214 18% 90%;
+    --ring: 211 100% 36%;
+    --radius: 0.75rem;
+    --hot: 0 84% 60%;
+    --cold: 211 70% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .uk-flag-stripe {
+    @apply flex h-1 w-full flex-col;
+  }
+  .uk-flag-stripe > span:first-child {
+    @apply flex-1 bg-primary;
+  }
+  .uk-flag-stripe > span:last-child {
+    @apply flex-1 bg-uk-yellow;
+  }
+}

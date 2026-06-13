@@ -53,7 +53,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         sort={sort}
       />
       <FeedTabs currentSort={sort} category={categorySlug} />
-      <div className="pt-1">
+      <div className="pt-3">
         <InfiniteDealFeed
           initialDeals={deals}
           initialCommentCounts={commentCounts}

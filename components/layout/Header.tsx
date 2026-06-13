@@ -2,25 +2,34 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { SearchBarWrapper } from "./SearchBarWrapper";
 import { Button } from "@/components/ui/button";
+import { t } from "@/lib/i18n/uk";
 
-export function Header() {
+interface HeaderProps {
+  actions?: React.ReactNode;
+}
+
+export function Header({ actions }: HeaderProps) {
   return (
     <header>
-      <div className="container mx-auto space-y-1 px-4 py-1.5">
-        <div className="flex h-8 items-center justify-between gap-2">
-          <Link href="/" className="flex shrink-0 items-center gap-1.5 font-bold text-base">
-            <span className="flex h-5 w-5 shrink-0 flex-col overflow-hidden rounded-sm shadow-sm" aria-hidden>
+      <div className="container mx-auto space-y-3 px-4 py-3">
+        <div className="flex items-center justify-between gap-3">
+          <Link href="/" className="flex shrink-0 items-center gap-2 font-bold text-lg">
+            <span className="flex h-6 w-6 shrink-0 flex-col overflow-hidden rounded-sm shadow-sm" aria-hidden>
               <span className="flex-1 bg-primary" />
               <span className="flex-1 bg-uk-yellow" />
             </span>
             <span className="text-primary">Deal</span>
-            <span className="rounded bg-uk-yellow px-1 text-uk-yellow-foreground">UA</span>
+            <span className="rounded bg-uk-yellow px-1.5 text-uk-yellow-foreground">UA</span>
           </Link>
-          <Button asChild size="sm" variant="outline" className="h-8 shrink-0 sm:hidden">
-            <Link href="/submit">
-              <Plus className="h-3.5 w-3.5" />
-            </Link>
-          </Button>
+          <div className="flex shrink-0 items-center gap-2">
+            <Button asChild size="default" className="shadow-md">
+              <Link href="/submit">
+                <Plus className="h-4 w-4" />
+                <span className="max-[380px]:sr-only">{t("nav.submit")}</span>
+              </Link>
+            </Button>
+            {actions}
+          </div>
         </div>
         <SearchBarWrapper />
       </div>

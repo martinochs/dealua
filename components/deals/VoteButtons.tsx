@@ -2,10 +2,10 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Flame, Snowflake } from "lucide-react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { voteAction } from "@/lib/actions/vote";
-import { getTemperatureLevel } from "@/lib/deal-feed";
+import { getScoreHeatStyles, getTemperatureLevel } from "@/lib/deal-feed";
 import { cn, getVoteScore } from "@/lib/utils";
 import { t } from "@/lib/i18n/uk";
 import Link from "next/link";
@@ -34,7 +34,8 @@ export function VoteButtons({
   const [isPending, startTransition] = useTransition();
 
   const score = getVoteScore(hotCount, coldCount);
-  const temp = getTemperatureLevel(score);
+  const heat = getTemperatureLevel(score);
+  const styles = getScoreHeatStyles(heat);
 
   function handleVote(type: "hot" | "cold", e: React.MouseEvent) {
     e.preventDefault();
@@ -52,33 +53,23 @@ export function VoteButtons({
     });
   }
 
-  const tempStyles = {
-    fire: "bg-hot/15 border-hot/30",
-    warm: "bg-hot/8 border-hot/20",
-    neutral: "bg-muted/50 border-border",
-    cold: "bg-cold/10 border-cold/25",
-  }[temp];
-
-  const scoreColor =
-    temp === "cold" ? "text-cold" : temp === "neutral" ? "text-foreground" : "text-hot";
-
   if (compact) {
     if (!isLoggedIn) {
       return (
         <div
           className={cn(
-            "flex w-11 shrink-0 flex-col items-center justify-center gap-0 border-r px-0.5 py-1 sm:w-12",
-            tempStyles
+            "flex w-14 shrink-0 flex-col items-center justify-center gap-1 border-r px-1 py-3 sm:w-16",
+            styles.box
           )}
         >
-          <Flame className={cn("h-3.5 w-3.5", scoreColor)} aria-hidden />
-          <span className={cn("text-base font-extrabold tabular-nums leading-none sm:text-lg", scoreColor)}>
+          <ChevronUp className={cn("h-5 w-5", styles.icon)} aria-hidden />
+          <span className={cn("text-xl font-extrabold tabular-nums leading-none sm:text-2xl", styles.score)}>
             {score}
           </span>
           <Link
             href="/login"
             onClick={(e) => e.stopPropagation()}
-            className="text-[9px] font-medium leading-none text-primary hover:underline text-center"
+            className="text-[10px] font-semibold leading-tight text-primary hover:underline text-center"
           >
             {t("deals.loginToVote")}
           </Link>
@@ -89,47 +80,48 @@ export function VoteButtons({
     return (
       <div
         className={cn(
-          "flex w-11 shrink-0 flex-col items-center justify-center gap-0 border-r px-0.5 py-1 sm:w-12",
-          tempStyles
+          "flex w-14 shrink-0 flex-col items-center justify-center gap-1 border-r px-1 py-2 sm:w-16",
+          styles.box
         )}
         onClick={(e) => e.stopPropagation()}
       >
         <Button
-          variant={userVote === "hot" ? "hot" : "ghost"}
+          variant={userVote === "hot" ? "default" : "outline"}
           size="icon"
-          className="h-7 w-7 shrink-0"
+          className={cn(
+            "h-9 w-9 shrink-0 border-2 shadow-sm",
+            userVote === "hot" ? "" : "border-orange-300 bg-white hover:bg-orange-50"
+          )}
           onClick={(e) => handleVote("hot", e)}
           disabled={isPending}
           aria-label={t("deals.hot")}
         >
-          <Flame className="h-3.5 w-3.5" />
+          <ChevronUp className="h-5 w-5 text-orange-600" strokeWidth={2.5} />
         </Button>
-        <span className={cn("text-base font-extrabold tabular-nums leading-none sm:text-lg", scoreColor)}>
+        <span className={cn("text-xl font-extrabold tabular-nums leading-none sm:text-2xl", styles.score)}>
           {score}
         </span>
         <Button
-          variant={userVote === "cold" ? "cold" : "ghost"}
+          variant={userVote === "cold" ? "default" : "outline"}
           size="icon"
-          className="h-7 w-7 shrink-0"
+          className={cn(
+            "h-9 w-9 shrink-0 border-2 shadow-sm",
+            userVote === "cold" ? "" : "border-slate-300 bg-white hover:bg-slate-50"
+          )}
           onClick={(e) => handleVote("cold", e)}
           disabled={isPending}
           aria-label={t("deals.cold")}
         >
-          <Snowflake className="h-3.5 w-3.5" />
+          <ChevronDown className="h-5 w-5 text-slate-500" strokeWidth={2.5} />
         </Button>
-        <span className="text-[9px] tabular-nums leading-none text-muted-foreground">
-          {hotCount}/{coldCount}
-        </span>
       </div>
     );
   }
 
-  const isHot = score >= 15;
-
   if (!isLoggedIn) {
     return (
       <div className="flex flex-col items-center gap-2">
-        <div className={`text-2xl font-bold ${score >= 0 ? "text-hot" : "text-cold"}`}>{score}</div>
+        <div className={cn("text-2xl font-bold", styles.score)}>{score}</div>
         <Link href="/login" className="text-sm text-muted-foreground hover:text-primary">
           {t("deals.loginToVote")}
         </Link>
@@ -139,31 +131,25 @@ export function VoteButtons({
 
   return (
     <div className="flex flex-col items-center gap-2">
-      {isHot && <span className="text-xs font-medium text-hot">{t("deals.hot")}</span>}
       <Button
-        variant={userVote === "hot" ? "hot" : "outline"}
+        variant={userVote === "hot" ? "default" : "outline"}
         size="icon"
         onClick={(e) => handleVote("hot", e)}
         disabled={isPending}
         aria-label={t("deals.hot")}
       >
-        <Flame className="h-5 w-5" />
+        <ChevronUp className="h-5 w-5" />
       </Button>
-      <div className={`text-xl font-bold ${score >= 0 ? "text-hot" : "text-cold"}`}>{score}</div>
+      <div className={cn("text-xl font-bold", styles.score)}>{score}</div>
       <Button
-        variant={userVote === "cold" ? "cold" : "outline"}
+        variant={userVote === "cold" ? "default" : "outline"}
         size="icon"
         onClick={(e) => handleVote("cold", e)}
         disabled={isPending}
         aria-label={t("deals.cold")}
       >
-        <Snowflake className="h-5 w-5" />
+        <ChevronDown className="h-5 w-5" />
       </Button>
-      <div className="text-xs text-muted-foreground text-center">
-        <span>{hotCount} 🔥</span>
-        <span className="mx-1">·</span>
-        <span>{coldCount} ❄️</span>
-      </div>
     </div>
   );
 }

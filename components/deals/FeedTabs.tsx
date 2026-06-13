@@ -52,7 +52,7 @@ export function FeedTabs({ currentSort, basePath = "/", category }: FeedTabsProp
       className="feed-sort-nav sticky z-30 -mx-4 border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/90"
       aria-label="Сортування пропозицій"
     >
-      <div className="flex gap-0.5 overflow-x-auto py-1 scrollbar-none">
+      <div className="flex gap-1 overflow-x-auto py-2 scrollbar-none">
         {sorts.map((sort) => (
           <Link
             key={sort.value}
@@ -60,7 +60,7 @@ export function FeedTabs({ currentSort, basePath = "/", category }: FeedTabsProp
             aria-current={currentSort === sort.value ? "page" : undefined}
             scroll={false}
             className={cn(
-              "whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-semibold transition-colors",
+              "whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-semibold transition-all",
               currentSort === sort.value
                 ? "bg-primary text-primary-foreground shadow-sm"
                 : "text-muted-foreground hover:bg-accent hover:text-foreground"

@@ -22,15 +22,18 @@ export function HomeCategoryBar({ categories, activeCategory, sort }: HomeCatego
   }
 
   return (
-    <div className="flex gap-1 overflow-x-auto pb-1 scrollbar-none" aria-label={t("nav.categories")}>
+    <div
+      className="flex gap-2.5 overflow-x-auto py-3 scrollbar-none"
+      aria-label={t("nav.categories")}
+    >
       <Link
         href={href()}
         aria-current={!activeCategory ? "page" : undefined}
         className={cn(
-          "shrink-0 whitespace-nowrap rounded-full px-2.5 py-0.5 text-[11px] font-medium transition-colors",
+          "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-all",
           !activeCategory
-            ? "bg-primary text-primary-foreground"
-            : "border hover:bg-uk-yellow/25 hover:text-uk-yellow-foreground"
+            ? "bg-primary text-primary-foreground shadow-md"
+            : "border bg-card text-foreground shadow-sm hover:border-primary/30 hover:shadow"
         )}
       >
         {t("feed.allDeals")}
@@ -41,13 +44,16 @@ export function HomeCategoryBar({ categories, activeCategory, sort }: HomeCatego
           href={href(cat.slug)}
           aria-current={activeCategory === cat.slug ? "page" : undefined}
           className={cn(
-            "shrink-0 whitespace-nowrap rounded-full px-2.5 py-0.5 text-[11px] font-medium transition-colors",
+            "flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-all",
             activeCategory === cat.slug
-              ? "bg-primary text-primary-foreground"
-              : "border hover:bg-uk-yellow/25 hover:text-uk-yellow-foreground"
+              ? "bg-primary text-primary-foreground shadow-md"
+              : "border bg-card text-foreground shadow-sm hover:border-primary/30 hover:shadow"
           )}
         >
-          {cat.icon} {cat.name_uk}
+          <span className="text-lg leading-none" aria-hidden>
+            {cat.icon}
+          </span>
+          {cat.name_uk}
         </Link>
       ))}
     </div>

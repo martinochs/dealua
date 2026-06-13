@@ -118,7 +118,7 @@ export function InfiniteDealFeed({
   }
 
   return (
-    <div className="space-y-1">
+    <div className="space-y-3">
       {deals.map((deal, index) => (
         <DealFeedCard
           key={deal.id}
@@ -135,7 +135,7 @@ export function InfiniteDealFeed({
       <div ref={sentinelRef} className="h-1" aria-hidden />
 
       {loading && (
-        <div className="space-y-1 pt-0.5">
+        <div className="space-y-3 pt-1">
           <DealCardSkeleton />
           <DealCardSkeleton />
         </div>

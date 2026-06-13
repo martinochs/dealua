@@ -3,6 +3,8 @@ import type { DealWithRelations } from "@/types/database";
 
 export type DealFeedBadge = "new" | "hot" | "mega";
 
+export type ScoreHeat = "red" | "orange" | "amber" | "green";
+
 export function getDealFeedBadges(deal: DealWithRelations): DealFeedBadge[] {
   const score = getVoteScore(deal.hot_count, deal.cold_count);
   const savings = getSavingsPercent(
@@ -27,9 +29,35 @@ export function getSavingsAmount(
   return original - price;
 }
 
-export function getTemperatureLevel(score: number): "fire" | "warm" | "neutral" | "cold" {
-  if (score >= 40) return "fire";
-  if (score >= 15) return "warm";
-  if (score >= 0) return "neutral";
-  return "cold";
+/** Score heat: red (cold) → orange → amber → green (hot) */
+export function getTemperatureLevel(score: number): ScoreHeat {
+  if (score < 0) return "red";
+  if (score < 15) return "orange";
+  if (score < 35) return "amber";
+  return "green";
+}
+
+export function getScoreHeatStyles(heat: ScoreHeat) {
+  return {
+    red: {
+      box: "bg-red-50 border-red-200",
+      score: "text-red-600",
+      icon: "text-red-500",
+    },
+    orange: {
+      box: "bg-orange-50 border-orange-200",
+      score: "text-orange-600",
+      icon: "text-orange-500",
+    },
+    amber: {
+      box: "bg-amber-50 border-amber-200",
+      score: "text-amber-700",
+      icon: "text-amber-600",
+    },
+    green: {
+      box: "bg-emerald-50 border-emerald-200",
+      score: "text-emerald-700",
+      icon: "text-emerald-600",
+    },
+  }[heat];
 }
