@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { MessageCircle, Star } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { VoteButtons } from "./VoteButtons";
 import { Badge } from "@/components/ui/badge";
 import {
   getDealFeedBadges,
   getSavingsAmount,
-  isExcitingDeal,
+  getTemperatureLevel,
   isTrustedMerchant,
 } from "@/lib/deal-feed";
 import { formatUAH, formatRelativeTime, getSavingsPercent, getVoteScore } from "@/lib/utils";
@@ -25,27 +25,6 @@ interface DealFeedCardProps {
   rank?: number;
 }
 
-function MerchantBadge({ name, slug }: { name: string; slug?: string | null }) {
-  const trusted = isTrustedMerchant(slug);
-
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-1 rounded-lg px-3 py-1 text-xs font-bold uppercase tracking-wide",
-        trusted ? "bg-primary/10 text-primary" : "bg-secondary text-foreground/75"
-      )}
-    >
-      {trusted && <Star className="h-3.5 w-3.5 fill-uk-yellow text-uk-yellow" aria-hidden />}
-      {name}
-      {trusted && (
-        <span className="hidden text-[10px] font-semibold normal-case opacity-80 sm:inline">
-          · {t("badges.trustedStore")}
-        </span>
-      )}
-    </span>
-  );
-}
-
 const badgeLabels: Record<DealFeedBadge, "badges.hot" | "badges.new" | "badges.mega" | "badges.trending"> = {
   new: "badges.new",
   hot: "badges.hot",
@@ -56,7 +35,7 @@ const badgeLabels: Record<DealFeedBadge, "badges.hot" | "badges.new" | "badges.m
 function DealBadge({ type }: { type: DealFeedBadge }) {
   if (type === "hot") {
     return (
-      <span className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-orange-600 to-red-600 px-4 py-1.5 text-sm font-black uppercase tracking-wide text-white shadow-md">
+      <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-orange-600 to-red-600 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
         🔥 {t(badgeLabels.hot)}
       </span>
     );
@@ -64,7 +43,7 @@ function DealBadge({ type }: { type: DealFeedBadge }) {
 
   if (type === "trending") {
     return (
-      <Badge variant="accent" className="border-0 px-3 py-1 text-xs font-bold uppercase">
+      <Badge variant="accent" className="rounded-full border-0 px-2.5 py-0.5 text-[11px] font-bold uppercase">
         📈 {t(badgeLabels.trending)}
       </Badge>
     );
@@ -73,9 +52,9 @@ function DealBadge({ type }: { type: DealFeedBadge }) {
   return (
     <Badge
       variant={type === "mega" ? "green" : "accent"}
-      className={cn("border-0 px-3 py-1 text-xs font-bold uppercase", type === "mega" && "text-sm")}
+      className="rounded-full border-0 px-2.5 py-0.5 text-[11px] font-bold uppercase"
     >
-      {type === "mega" ? `💛 ${t(badgeLabels.mega)}` : t(badgeLabels.new)}
+      {type === "mega" ? t(badgeLabels.mega) : t(badgeLabels.new)}
     </Badge>
   );
 }
@@ -95,14 +74,14 @@ export function DealFeedCard({
     deal.original_price_uah ? Number(deal.original_price_uah) : null
   );
   const badges = getDealFeedBadges(deal, commentCount);
-  const exciting = isExcitingDeal(deal, commentCount);
   const score = getVoteScore(deal.hot_count, deal.cold_count);
+  const heat = getTemperatureLevel(score);
 
   return (
     <article
       className={cn(
-        "deal-card group flex overflow-hidden rounded-2xl transition-all duration-300 ease-out hover:-translate-y-0.5",
-        exciting && "hover:shadow-[0_20px_48px_rgba(249,115,22,0.1)]"
+        "deal-card group flex overflow-hidden rounded-xl transition-all duration-200 ease-out",
+        heat === "high" && "shadow-[0_2px_12px_rgba(234,88,12,0.1),0_8px_24px_rgba(15,23,42,0.06)]"
       )}
     >
       <VoteButtons
@@ -116,78 +95,77 @@ export function DealFeedCard({
 
       <Link
         href={`/deal/${deal.id}`}
-        className="flex min-w-0 flex-1 gap-4 p-5 transition-opacity hover:opacity-[0.98] sm:gap-6 sm:p-6"
+        className="flex min-w-0 flex-1 gap-3 p-3 transition-opacity active:opacity-90 sm:gap-4 sm:p-3.5"
       >
-        <div className="relative h-40 w-40 shrink-0 overflow-hidden rounded-2xl bg-muted sm:h-44 sm:w-44">
+        <div className="relative h-[7.25rem] w-[7.25rem] shrink-0 overflow-hidden rounded-lg bg-muted sm:h-36 sm:w-36">
           {deal.image_url ? (
             <Image
               src={deal.image_url}
               alt={deal.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-              sizes="176px"
+              className="object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+              sizes="(max-width: 640px) 116px, 144px"
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-4xl">🛍️</div>
+            <div className="flex h-full items-center justify-center text-2xl">🛍️</div>
           )}
           {savings !== null && savings >= 10 && (
-            <span className="absolute left-0 top-0 rounded-br-xl bg-emerald-600 px-3 py-1 text-sm font-extrabold text-white shadow-md">
+            <span className="absolute left-0 top-0 rounded-br-lg bg-emerald-600 px-2 py-1 text-xs font-extrabold text-white">
               −{savings}%
             </span>
           )}
         </div>
 
-        <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5">
-          <div className="flex flex-wrap items-center gap-2">
-            {deal.merchant && (
-              <MerchantBadge name={deal.merchant.name} slug={deal.merchant.slug} />
-            )}
-            {badges.map((b) => (
-              <DealBadge key={b} type={b} />
-            ))}
-          </div>
+        <div className="flex min-w-0 flex-1 flex-col justify-center gap-1">
+          {badges.length > 0 && (
+            <div className="flex flex-wrap items-center gap-1.5">
+              {badges.map((b) => (
+                <DealBadge key={b} type={b} />
+              ))}
+            </div>
+          )}
 
-          <h2 className="line-clamp-2 text-xl font-extrabold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
+          <h2 className="line-clamp-2 text-[15px] font-bold leading-snug text-foreground transition-colors group-hover:text-primary sm:text-base">
             {deal.title}
           </h2>
 
-          <div className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-2">
-            <span
-              className={cn(
-                "font-black text-price",
-                exciting ? "text-[2rem] leading-none sm:text-[2.125rem]" : "text-[1.75rem] leading-none sm:text-[1.875rem]"
-              )}
-            >
+          <div className="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+            <span className="text-[1.625rem] font-black leading-none text-price sm:text-[1.75rem]">
               {formatUAH(Number(deal.price_uah))}
             </span>
             {deal.original_price_uah && (
-              <span className="text-base text-muted-foreground/60 line-through decoration-2 sm:text-lg">
+              <span className="text-xs text-muted-foreground/50 line-through decoration-1">
                 {formatUAH(Number(deal.original_price_uah))}
               </span>
             )}
             {savingsAmount !== null && (
-              <span className="rounded-lg bg-emerald-600 px-3.5 py-1.5 text-base font-extrabold text-white shadow-sm">
+              <span className="rounded-md bg-emerald-600 px-2 py-0.5 text-sm font-extrabold text-white">
                 −{formatUAH(savingsAmount)}
               </span>
             )}
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-2">
-            {deal.category && (
-              <span className="text-sm text-foreground/65">{deal.category.icon} {deal.category.name_uk}</span>
-            )}
-            {score >= 20 && (
-              <span className="hidden text-xs font-bold text-orange-600 sm:inline">
-                🔥 {score} {t("deals.votes")}
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 pt-0.5 text-xs text-muted-foreground/55">
+            {deal.merchant && (
+              <span
+                className={cn(
+                  "font-medium uppercase tracking-wide",
+                  isTrustedMerchant(deal.merchant.slug) ? "text-primary/70" : "text-muted-foreground/60"
+                )}
+              >
+                {deal.merchant.name}
               </span>
             )}
-            <span className="inline-flex items-center gap-2 text-base font-bold text-foreground">
-              <MessageCircle className="h-5 w-5 text-primary" aria-hidden />
+            {deal.category && (
+              <span>
+                {deal.category.icon} {deal.category.name_uk}
+              </span>
+            )}
+            <span className="inline-flex items-center gap-1">
+              <MessageCircle className="h-3.5 w-3.5" aria-hidden />
               {commentCount}
             </span>
-            <span className="ml-auto text-xs text-muted-foreground/50">
-              {formatRelativeTime(deal.created_at)}
-            </span>
+            <span className="ml-auto">{formatRelativeTime(deal.created_at)}</span>
           </div>
         </div>
       </Link>
@@ -197,7 +175,7 @@ export function DealFeedCard({
 
 export function FeedSubmitPrompt() {
   return (
-    <p className="deal-card rounded-2xl px-5 py-4 text-center text-sm text-muted-foreground">
+    <p className="deal-card rounded-xl px-4 py-3 text-center text-sm text-muted-foreground">
       {t("feed.submitPrompt")}{" "}
       <Link href="/submit" className="font-semibold text-primary hover:underline">
         {t("nav.submitCta")} →

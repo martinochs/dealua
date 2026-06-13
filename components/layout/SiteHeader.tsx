@@ -11,7 +11,7 @@ export async function SiteHeader() {
   return (
     <div
       id="site-chrome"
-      className="sticky top-0 z-50 border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90"
+      className="sticky top-0 z-50 border-b border-border/50 bg-white shadow-sm"
     >
       <div className="uk-accent-line" aria-hidden />
       <div className="uk-header-bg">

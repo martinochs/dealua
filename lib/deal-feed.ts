@@ -11,6 +11,13 @@ export function isTrustedMerchant(slug?: string | null): boolean {
   return slug ? TRUSTED_UA_MERCHANTS.has(slug) : false;
 }
 
+const BADGE_PRIORITY: Record<DealFeedBadge, number> = {
+  hot: 4,
+  mega: 3,
+  new: 2,
+  trending: 1,
+};
+
 export function getDealFeedBadges(
   deal: DealWithRelations,
   commentCount = 0
@@ -21,14 +28,19 @@ export function getDealFeedBadges(
     deal.original_price_uah ? Number(deal.original_price_uah) : null
   );
   const ageMs = Date.now() - new Date(deal.created_at).getTime();
-  const badges: DealFeedBadge[] = [];
+  const candidates: DealFeedBadge[] = [];
 
-  if (ageMs < 2 * 60 * 60 * 1000) badges.push("new");
-  if (score >= 30) badges.push("hot");
-  if (score >= 20 || commentCount >= 3) badges.push("trending");
-  if (savings !== null && savings >= 30) badges.push("mega");
+  if (savings !== null && savings >= 30) candidates.push("mega");
+  if (score >= 20) {
+    candidates.push("hot");
+  } else if (commentCount >= 3) {
+    candidates.push("trending");
+  }
+  if (ageMs < 2 * 60 * 60 * 1000) candidates.push("new");
 
-  return badges;
+  return candidates
+    .sort((a, b) => BADGE_PRIORITY[b] - BADGE_PRIORITY[a])
+    .slice(0, 2);
 }
 
 export function isExcitingDeal(
@@ -40,7 +52,7 @@ export function isExcitingDeal(
     Number(deal.price_uah),
     deal.original_price_uah ? Number(deal.original_price_uah) : null
   );
-  return score >= 35 || (savings !== null && savings >= 25) || commentCount >= 5;
+  return score >= 60 || (savings !== null && savings >= 25) || commentCount >= 5;
 }
 
 export function getSavingsAmount(
@@ -51,10 +63,11 @@ export function getSavingsAmount(
   return original - price;
 }
 
+/** 0–19 grey · 20–59 orange · 60+ strong orange/red */
 export function getTemperatureLevel(score: number): ScoreHeat {
   if (score < 0) return "cold";
-  if (score < 15) return "low";
-  if (score < 35) return "medium";
+  if (score < 20) return "low";
+  if (score < 60) return "medium";
   return "high";
 }
 
@@ -62,27 +75,27 @@ export function getScoreHeatStyles(heat: ScoreHeat) {
   return {
     cold: {
       box: "bg-red-50",
-      score: "text-red-700",
-      icon: "text-red-500",
-      pulse: false,
+      score: "text-red-700 font-semibold",
+      icon: "text-red-400",
+      column: "w-[3.25rem]",
     },
     low: {
       box: "bg-slate-100",
-      score: "text-slate-600",
-      icon: "text-slate-500",
-      pulse: false,
+      score: "text-slate-600 font-semibold",
+      icon: "text-slate-400",
+      column: "w-[3.25rem]",
     },
     medium: {
-      box: "bg-orange-100",
-      score: "text-orange-700 font-black",
-      icon: "text-orange-600",
-      pulse: false,
+      box: "bg-orange-500",
+      score: "text-white font-semibold",
+      icon: "text-orange-50",
+      column: "w-[3.75rem]",
     },
     high: {
-      box: "bg-gradient-to-b from-orange-200 via-orange-100 to-red-100",
-      score: "text-red-600 font-black",
-      icon: "text-orange-600",
-      pulse: false,
+      box: "bg-gradient-to-b from-orange-500 to-red-600",
+      score: "text-white font-semibold",
+      icon: "text-orange-100",
+      column: "w-[4rem]",
     },
   }[heat];
 }

@@ -36,6 +36,7 @@ export function VoteButtons({
   const score = getVoteScore(hotCount, coldCount);
   const heat = getTemperatureLevel(score);
   const styles = getScoreHeatStyles(heat);
+  const isHotColumn = heat === "medium" || heat === "high";
 
   function handleVote(type: "hot" | "cold", e: React.MouseEvent) {
     e.preventDefault();
@@ -54,26 +55,26 @@ export function VoteButtons({
   }
 
   const columnClass = cn(
-    "flex w-[4.5rem] shrink-0 flex-col items-center justify-center gap-1.5 border-r border-border/40 px-1.5 py-4 sm:w-20",
+    "flex shrink-0 flex-col items-center justify-center gap-1 border-r border-black/[0.05] px-0.5 py-2.5 sm:py-3",
     styles.box,
-    heat === "high" && "shadow-inner"
+    styles.column
   );
+
+  const scoreSize = cn(
+    "tabular-nums leading-none",
+    heat === "high" ? "text-xl font-bold" : heat === "medium" ? "text-lg font-bold" : "text-base font-semibold",
+    styles.score
+  );
+
+  const iconSize = cn("shrink-0", heat === "high" || heat === "medium" ? "h-5 w-5" : "h-4 w-4", styles.icon);
 
   if (compact) {
     if (!isLoggedIn) {
       return (
         <div className={columnClass}>
-          <ChevronUp className={cn("h-7 w-7", styles.icon)} strokeWidth={3} aria-hidden />
-          <span className={cn("text-[1.75rem] font-black tabular-nums leading-none sm:text-3xl", styles.score)}>
-            {score}
-          </span>
-          <Link
-            href="/login"
-            onClick={(e) => e.stopPropagation()}
-            className="text-[10px] font-semibold leading-tight text-primary hover:underline text-center"
-          >
-            {t("deals.loginToVote")}
-          </Link>
+          <ChevronUp className={iconSize} strokeWidth={2.5} aria-hidden />
+          <span className={scoreSize}>{score}</span>
+          <ChevronDown className={iconSize} strokeWidth={2.5} aria-hidden />
         </div>
       );
     }
@@ -84,30 +85,28 @@ export function VoteButtons({
           variant={userVote === "hot" ? "default" : "outline"}
           size="icon"
           className={cn(
-            "h-11 w-11 shrink-0 border-2 bg-white shadow-sm transition-all hover:scale-105",
-            userVote !== "hot" && "border-orange-400 hover:border-orange-500 hover:bg-orange-50"
+            "h-9 w-9 min-h-[36px] min-w-[36px] shrink-0 border-0 shadow-sm transition-all active:scale-95",
+            isHotColumn ? "bg-white/95 hover:bg-white" : "bg-white hover:bg-orange-50"
           )}
           onClick={(e) => handleVote("hot", e)}
           disabled={isPending}
           aria-label={t("deals.hot")}
         >
-          <ChevronUp className="h-7 w-7 text-orange-600" strokeWidth={3} />
+          <ChevronUp className="h-4 w-4 text-orange-600" strokeWidth={2.5} />
         </Button>
-        <span className={cn("text-[1.75rem] font-black tabular-nums leading-none sm:text-3xl", styles.score)}>
-          {score}
-        </span>
+        <span className={scoreSize}>{score}</span>
         <Button
           variant={userVote === "cold" ? "default" : "outline"}
           size="icon"
           className={cn(
-            "h-11 w-11 shrink-0 border-2 bg-white shadow-sm transition-all hover:scale-105",
-            userVote !== "cold" && "border-slate-300 hover:border-slate-400 hover:bg-slate-50"
+            "h-9 w-9 min-h-[36px] min-w-[36px] shrink-0 border-0 shadow-sm transition-all active:scale-95",
+            isHotColumn ? "bg-white/95 hover:bg-white" : "bg-white hover:bg-slate-50"
           )}
           onClick={(e) => handleVote("cold", e)}
           disabled={isPending}
           aria-label={t("deals.cold")}
         >
-          <ChevronDown className="h-7 w-7 text-slate-600" strokeWidth={3} />
+          <ChevronDown className="h-4 w-4 text-slate-500" strokeWidth={2.5} />
         </Button>
       </div>
     );
@@ -116,7 +115,7 @@ export function VoteButtons({
   if (!isLoggedIn) {
     return (
       <div className="flex flex-col items-center gap-2">
-        <div className={cn("text-2xl font-black", styles.score)}>{score}</div>
+        <div className={cn("text-xl font-bold", styles.score)}>{score}</div>
         <Link href="/login" className="text-sm text-muted-foreground hover:text-primary">
           {t("deals.loginToVote")}
         </Link>
@@ -127,11 +126,11 @@ export function VoteButtons({
   return (
     <div className="flex flex-col items-center gap-2">
       <Button variant={userVote === "hot" ? "default" : "outline"} size="icon" onClick={(e) => handleVote("hot", e)} disabled={isPending} aria-label={t("deals.hot")}>
-        <ChevronUp className="h-5 w-5" strokeWidth={3} />
+        <ChevronUp className="h-5 w-5" strokeWidth={2.5} />
       </Button>
-      <div className={cn("text-xl font-black", styles.score)}>{score}</div>
+      <div className={cn("text-lg font-bold", styles.score)}>{score}</div>
       <Button variant={userVote === "cold" ? "default" : "outline"} size="icon" onClick={(e) => handleVote("cold", e)} disabled={isPending} aria-label={t("deals.cold")}>
-        <ChevronDown className="h-5 w-5" strokeWidth={3} />
+        <ChevronDown className="h-5 w-5" strokeWidth={2.5} />
       </Button>
     </div>
   );

@@ -8,7 +8,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     <div className="flex min-h-screen flex-col">
       <MockBannerWrapper />
       <SiteHeader />
-      <main className="container mx-auto flex-1 px-4 py-5 pb-24">{children}</main>
+      <main className="container mx-auto flex-1 px-3 py-4 pb-24 sm:px-4 sm:py-5">{children}</main>
       <Footer />
       <StickySubmitCta />
     </div>
