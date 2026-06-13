@@ -36,7 +36,7 @@ export function HomeCategoryBar({ categories, activeCategory, sort }: HomeCatego
           pillBase,
           !activeCategory
             ? "bg-primary text-primary-foreground shadow-lg ring-2 ring-primary/30"
-            : "border border-border/60 bg-card text-foreground shadow-sm hover:border-primary/40 hover:shadow-md"
+            : "border border-border/60 bg-card text-foreground shadow-sm hover:border-uk-yellow/50 hover:shadow-md"
         )}
       >
         {t("feed.allDeals")}
@@ -50,7 +50,7 @@ export function HomeCategoryBar({ categories, activeCategory, sort }: HomeCatego
             pillBase,
             activeCategory === cat.slug
               ? "bg-primary text-primary-foreground shadow-lg ring-2 ring-primary/30"
-              : "border border-border/60 bg-card text-foreground shadow-sm hover:border-primary/40 hover:shadow-md"
+              : "border border-border/60 bg-card text-foreground shadow-sm hover:border-uk-yellow/50 hover:shadow-md"
           )}
         >
           <span className="text-xl leading-none" aria-hidden>

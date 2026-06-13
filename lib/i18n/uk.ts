@@ -6,6 +6,7 @@ const uk = {
   nav: {
     home: "Головна",
     submit: "Додати пропозицію",
+    submitCta: "Поділись вигідною пропозицією",
     login: "Увійти",
     register: "Реєстрація",
     logout: "Вийти",
@@ -27,7 +28,7 @@ const uk = {
     noSearchResults: "Нічого не знайдено",
     allDeals: "Усі пропозиції",
     dealsCount: "пропозицій",
-    submitPrompt: "Знайшли вигідну пропозицію? Додайте її для спільноти.",
+    submitPrompt: "Знайшли суперціну? 💛 Поділіться зі спільнотою — разом вигідніше.",
     loading: "Завантаження…",
     end: "Кінець стрічки",
     loadError: "Не вдалося завантажити. Спробуйте ще раз.",
@@ -72,7 +73,7 @@ const uk = {
   auth: {
     login: "Увійти",
     register: "Реєстрація",
-    email: "Email",
+    email: "Електронна пошта",
     password: "Пароль",
     username: "Ім'я користувача",
     loginSuccess: "Ви успішно увійшли",
@@ -104,6 +105,13 @@ const uk = {
   errors: {
     notFound: "Сторінку не знайдено",
     generic: "Щось пішло не так",
+  },
+  badges: {
+    hot: "ГАРЯЧЕ",
+    new: "НОВА",
+    mega: "МЕГА",
+    trending: "У тренді",
+    trustedStore: "популярний",
   },
 } as const;
 

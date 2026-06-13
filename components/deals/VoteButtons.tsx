@@ -59,7 +59,8 @@ export function VoteButtons({
         <div
           className={cn(
             "flex w-[4.25rem] shrink-0 flex-col items-center justify-center gap-1.5 border-r px-1 py-4 sm:w-[4.75rem]",
-            styles.box
+            styles.box,
+            styles.pulse && "ring-2 ring-orange-300/50"
           )}
         >
           <ChevronUp className={cn("h-6 w-6", styles.icon)} strokeWidth={3} aria-hidden />
@@ -81,7 +82,8 @@ export function VoteButtons({
       <div
         className={cn(
           "flex w-[4.25rem] shrink-0 flex-col items-center justify-center gap-1 border-r px-1 py-3 sm:w-[4.75rem]",
-          styles.box
+          styles.box,
+          styles.pulse && "ring-2 ring-orange-300/50"
         )}
         onClick={(e) => e.stopPropagation()}
       >
