@@ -5,8 +5,8 @@ import { t } from "@/lib/i18n/uk";
 
 export function StickySubmitCta() {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border/50 bg-card/95 p-3 shadow-[0_-6px_28px_rgba(15,23,42,0.1)] backdrop-blur-md">
-      <div className="container mx-auto max-w-6xl">
+    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border/50 bg-card/95 p-3 shadow-[0_-6px_28px_rgba(15,23,42,0.12)] backdrop-blur-md">
+      <div className="container mx-auto max-w-6xl space-y-1">
         <Button
           asChild
           size="lg"
@@ -17,6 +17,9 @@ export function StickySubmitCta() {
             {t("nav.submitCta")}
           </Link>
         </Button>
+        <p className="text-center text-[11px] font-semibold text-muted-foreground">
+          {t("nav.submitCtaBenefit")}
+        </p>
       </div>
     </div>
   );

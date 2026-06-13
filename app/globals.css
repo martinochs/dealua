@@ -63,13 +63,25 @@
   .deal-card {
     @apply border-0 bg-card;
     box-shadow:
-      0 1px 3px rgba(15, 23, 42, 0.05),
-      0 6px 20px rgba(15, 23, 42, 0.06);
+      0 1px 3px rgba(15, 23, 42, 0.06),
+      0 8px 24px rgba(15, 23, 42, 0.08);
   }
   .deal-card:hover {
+    transform: translateY(-2px);
     box-shadow:
-      0 4px 8px rgba(15, 23, 42, 0.06),
-      0 16px 40px rgba(15, 23, 42, 0.1);
+      0 6px 16px rgba(15, 23, 42, 0.08),
+      0 20px 48px rgba(15, 23, 42, 0.12);
+  }
+  .heat-column {
+    @apply transition-all duration-300;
+  }
+  @keyframes vote-pulse {
+    0%, 100% { transform: scale(1); }
+    40% { transform: scale(1.18); }
+    70% { transform: scale(0.95); }
+  }
+  .animate-vote-pulse {
+    animation: vote-pulse 0.45s ease-out;
   }
   .cta-glow {
     @apply shadow-lg shadow-primary/20 transition-all duration-200;
