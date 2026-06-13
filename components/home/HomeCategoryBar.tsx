@@ -22,10 +22,10 @@ export function HomeCategoryBar({ categories, activeCategory, sort }: HomeCatego
   }
 
   const pillBase =
-    "flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 text-sm font-semibold transition-all duration-200 min-h-[40px]";
+    "flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-full px-5 py-3 text-sm font-bold transition-all duration-200";
 
   return (
-    <div className="flex gap-2 overflow-x-auto py-2.5 scrollbar-none sm:gap-2.5 sm:py-3" aria-label={t("nav.categories")}>
+    <div className="flex gap-3 overflow-x-auto py-4 scrollbar-none" aria-label={t("nav.categories")}>
       <Link
         href={href()}
         aria-current={!activeCategory ? "page" : undefined}
@@ -50,7 +50,7 @@ export function HomeCategoryBar({ categories, activeCategory, sort }: HomeCatego
               : "bg-card text-foreground shadow-sm hover:-translate-y-px hover:shadow-md"
           )}
         >
-          <span className="text-xl leading-none sm:text-2xl" aria-hidden>
+          <span className="text-2xl leading-none" aria-hidden>
             {cat.icon}
           </span>
           {cat.name_uk}

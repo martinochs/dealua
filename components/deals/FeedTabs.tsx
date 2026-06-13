@@ -70,7 +70,7 @@ export function FeedTabs({ currentSort, basePath = "/", category, embedded = fal
               "whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200",
               currentSort === sort.value
                 ? "bg-primary text-primary-foreground shadow-md"
-                : "text-muted-foreground hover:bg-card hover:text-foreground hover:shadow-sm"
+                : "text-muted-foreground hover:bg-white hover:text-foreground hover:shadow-sm"
             )}
           >
             {sort.label}

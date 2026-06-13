@@ -23,7 +23,7 @@ const uk = {
     empty: "Пропозицій поки немає",
     loadMore: "Завантажити ще",
     search: "Пошук пропозицій",
-    searchPlaceholder: "Шукайте товари, бренди або магазини…",
+    searchPlaceholder: "Samsung, Nike, кава...",
     searchResults: "Результати пошуку",
     noSearchResults: "Нічого не знайдено",
     allDeals: "Усі пропозиції",
@@ -107,7 +107,7 @@ const uk = {
     generic: "Щось пішло не так",
   },
   badges: {
-    hot: "Гаряче",
+    hot: "ГАРЯЧЕ",
     new: "НОВА",
     mega: "МЕГА",
     trending: "У тренді",

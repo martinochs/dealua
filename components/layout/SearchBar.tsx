@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 import { useState, FormEvent } from "react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { t } from "@/lib/i18n/uk";
 
 interface SearchBarProps {
@@ -28,19 +29,21 @@ export function SearchBar({ className, defaultQuery = "" }: SearchBarProps) {
 
   return (
     <form onSubmit={handleSubmit} className={className}>
-      <div className="relative">
-        <Search
-          className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-primary/70"
-          aria-hidden
-        />
-        <Input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={t("feed.searchPlaceholder")}
-          className="h-10 rounded-full border-border/60 bg-[#F4F6F8] pl-10 text-sm shadow-sm transition-colors placeholder:text-muted-foreground/60 focus-visible:border-primary/30 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-primary/15"
-          aria-label={t("feed.search")}
-        />
+      <div className="flex gap-2">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={t("feed.searchPlaceholder")}
+            className="pl-9 min-h-[44px]"
+            aria-label={t("feed.search")}
+          />
+        </div>
+        <Button type="submit" variant="secondary" className="shrink-0">
+          {t("feed.search")}
+        </Button>
       </div>
     </form>
   );
