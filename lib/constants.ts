@@ -1,6 +1,6 @@
 import type { SortMode } from "@/types/database";
 
-export const DEALS_PAGE_SIZE = 12;
+export const DEALS_PAGE_SIZE = 16;
 export const HOME_PAGE_SIZE = 26;
 
 export const SORT_MODES = ["hot", "new", "top", "commented"] as const;

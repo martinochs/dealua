@@ -18,8 +18,8 @@ export function LoadMore({ hasMore, nextPage, basePath, params }: LoadMoreProps)
   sp.set("page", String(nextPage));
 
   return (
-    <div className="flex justify-center pt-4">
-      <Button asChild variant="outline" size="lg" className="min-w-[200px]">
+    <div className="flex justify-center pt-2 pb-1">
+      <Button asChild variant="outline" size="sm" className="min-w-[160px]">
         <Link href={`${basePath}?${sp.toString()}`}>{t("feed.loadMore")}</Link>
       </Button>
     </div>

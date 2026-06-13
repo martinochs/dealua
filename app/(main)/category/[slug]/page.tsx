@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import { DealFeed } from "@/components/deals/DealFeed";
 import { FeedTabs } from "@/components/deals/FeedTabs";
 import { LoadMore } from "@/components/deals/LoadMore";
-import { getCategories, getDeals, countDeals } from "@/lib/queries/deals";
+import { getProfile } from "@/lib/auth/session";
+import { getCategories, getDeals, countDeals, getCommentCounts, getUserVotes } from "@/lib/queries/deals";
 import { DEALS_PAGE_SIZE, parseSortMode } from "@/lib/constants";
 
 interface CategoryPageProps {
@@ -30,19 +31,36 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   const page = Math.max(1, parseInt(queryParams.page ?? "1", 10) || 1);
   const basePath = `/category/${slug}`;
 
-  const [deals, total] = await Promise.all([
+  const [deals, total, commentCounts, profile] = await Promise.all([
     getDeals(sort, slug, page * DEALS_PAGE_SIZE, 0),
     countDeals(sort, slug),
+    getCommentCounts(),
+    getProfile(),
   ]);
 
+  const userVotes = profile
+    ? await getUserVotes(
+        deals.map((d) => d.id),
+        profile.id
+      )
+    : {};
+
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">
-        {category.icon} {category.name_uk}
-      </h1>
-      <p className="text-muted-foreground">{total} пропозицій</p>
-      <FeedTabs currentSort={sort} basePath={basePath} />
-      <DealFeed deals={deals} />
+    <div className="mx-auto w-full max-w-6xl space-y-1">
+      <p className="py-1 text-xs text-muted-foreground sm:text-sm">
+        <span className="font-semibold text-foreground">
+          {category.icon} {category.name_uk}
+        </span>
+        {" · "}
+        {total} пропозицій
+      </p>
+      <FeedTabs currentSort={sort} basePath={basePath} category={slug} />
+      <DealFeed
+        deals={deals}
+        commentCounts={commentCounts}
+        userVotes={userVotes}
+        isLoggedIn={!!profile}
+      />
       <LoadMore hasMore={deals.length < total} nextPage={page + 1} basePath={basePath} params={{ sort }} />
     </div>
   );
