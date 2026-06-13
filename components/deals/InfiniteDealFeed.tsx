@@ -118,7 +118,7 @@ export function InfiniteDealFeed({
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {deals.map((deal, index) => (
         <DealFeedCard
           key={deal.id}

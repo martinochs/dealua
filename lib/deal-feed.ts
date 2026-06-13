@@ -61,28 +61,28 @@ export function getTemperatureLevel(score: number): ScoreHeat {
 export function getScoreHeatStyles(heat: ScoreHeat) {
   return {
     cold: {
-      box: "bg-red-50 border-red-200",
+      box: "bg-red-50",
       score: "text-red-700",
       icon: "text-red-500",
       pulse: false,
     },
     low: {
-      box: "bg-slate-50 border-slate-200",
+      box: "bg-slate-100",
       score: "text-slate-600",
       icon: "text-slate-500",
       pulse: false,
     },
     medium: {
-      box: "bg-orange-50 border-orange-300",
+      box: "bg-orange-100",
       score: "text-orange-700 font-black",
       icon: "text-orange-600",
       pulse: false,
     },
     high: {
-      box: "bg-gradient-to-b from-orange-100 via-orange-50 to-red-50 border-orange-400 shadow-inner",
-      score: "text-red-600 font-black drop-shadow-sm",
+      box: "bg-gradient-to-b from-orange-200 via-orange-100 to-red-100",
+      score: "text-red-600 font-black",
       icon: "text-orange-600",
-      pulse: true,
+      pulse: false,
     },
   }[heat];
 }

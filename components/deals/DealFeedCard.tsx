@@ -31,16 +31,14 @@ function MerchantBadge({ name, slug }: { name: string; slug?: string | null }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-bold uppercase tracking-wide transition-colors",
-        trusted
-          ? "border border-primary/25 bg-primary/5 text-primary ring-1 ring-primary/10"
-          : "bg-muted text-foreground/80 ring-1 ring-border"
+        "inline-flex items-center gap-1 rounded-lg px-3 py-1 text-xs font-bold uppercase tracking-wide",
+        trusted ? "bg-primary/10 text-primary" : "bg-secondary text-foreground/75"
       )}
     >
-      {trusted && <Star className="h-3 w-3 fill-uk-yellow text-uk-yellow" aria-hidden />}
+      {trusted && <Star className="h-3.5 w-3.5 fill-uk-yellow text-uk-yellow" aria-hidden />}
       {name}
       {trusted && (
-        <span className="hidden text-[10px] font-semibold normal-case text-primary/70 sm:inline">
+        <span className="hidden text-[10px] font-semibold normal-case opacity-80 sm:inline">
           · {t("badges.trustedStore")}
         </span>
       )}
@@ -58,7 +56,7 @@ const badgeLabels: Record<DealFeedBadge, "badges.hot" | "badges.new" | "badges.m
 function DealBadge({ type }: { type: DealFeedBadge }) {
   if (type === "hot") {
     return (
-      <span className="inline-flex animate-pulse items-center gap-1.5 rounded-lg bg-gradient-to-r from-orange-600 via-red-600 to-red-700 px-3.5 py-1.5 text-sm font-black uppercase tracking-wide text-white shadow-lg shadow-orange-500/30">
+      <span className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-orange-600 to-red-600 px-4 py-1.5 text-sm font-black uppercase tracking-wide text-white shadow-md">
         🔥 {t(badgeLabels.hot)}
       </span>
     );
@@ -66,7 +64,7 @@ function DealBadge({ type }: { type: DealFeedBadge }) {
 
   if (type === "trending") {
     return (
-      <Badge variant="accent" className="px-2.5 py-1 text-xs font-bold uppercase">
+      <Badge variant="accent" className="border-0 px-3 py-1 text-xs font-bold uppercase">
         📈 {t(badgeLabels.trending)}
       </Badge>
     );
@@ -75,7 +73,7 @@ function DealBadge({ type }: { type: DealFeedBadge }) {
   return (
     <Badge
       variant={type === "mega" ? "green" : "accent"}
-      className={cn("px-2.5 py-1 text-xs font-bold uppercase", type === "mega" && "text-sm")}
+      className={cn("border-0 px-3 py-1 text-xs font-bold uppercase", type === "mega" && "text-sm")}
     >
       {type === "mega" ? `💛 ${t(badgeLabels.mega)}` : t(badgeLabels.new)}
     </Badge>
@@ -103,10 +101,8 @@ export function DealFeedCard({
   return (
     <article
       className={cn(
-        "group flex overflow-hidden rounded-2xl border bg-card shadow-[0_4px_20px_rgba(0,87,183,0.07)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_14px_36px_rgba(0,87,183,0.14)]",
-        exciting
-          ? "border-uk-yellow/40 ring-2 ring-uk-yellow/25 hover:border-primary/30"
-          : "border-border/50 hover:border-primary/25"
+        "deal-card group flex overflow-hidden rounded-2xl transition-all duration-300 ease-out hover:-translate-y-0.5",
+        exciting && "hover:shadow-[0_20px_48px_rgba(249,115,22,0.1)]"
       )}
     >
       <VoteButtons
@@ -120,28 +116,28 @@ export function DealFeedCard({
 
       <Link
         href={`/deal/${deal.id}`}
-        className="flex min-w-0 flex-1 transition-opacity hover:opacity-[0.98]"
+        className="flex min-w-0 flex-1 gap-4 p-5 transition-opacity hover:opacity-[0.98] sm:gap-6 sm:p-6"
       >
-        <div className="relative m-4 h-36 w-36 shrink-0 overflow-hidden rounded-xl bg-muted sm:m-5 sm:h-40 sm:w-40">
+        <div className="relative h-40 w-40 shrink-0 overflow-hidden rounded-2xl bg-muted sm:h-44 sm:w-44">
           {deal.image_url ? (
             <Image
               src={deal.image_url}
               alt={deal.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
-              sizes="160px"
+              className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+              sizes="176px"
             />
           ) : (
             <div className="flex h-full items-center justify-center text-4xl">🛍️</div>
           )}
           {savings !== null && savings >= 10 && (
-            <span className="absolute left-0 top-0 rounded-br-lg bg-emerald-600 px-2.5 py-1 text-sm font-extrabold text-white shadow-md transition-transform group-hover:scale-105">
+            <span className="absolute left-0 top-0 rounded-br-xl bg-emerald-600 px-3 py-1 text-sm font-extrabold text-white shadow-md">
               −{savings}%
             </span>
           )}
         </div>
 
-        <div className="flex min-w-0 flex-1 flex-col justify-center gap-2 py-4 pr-4 sm:gap-2.5 sm:py-5 sm:pr-5">
+        <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5">
           <div className="flex flex-wrap items-center gap-2">
             {deal.merchant && (
               <MerchantBadge name={deal.merchant.name} slug={deal.merchant.slug} />
@@ -151,45 +147,45 @@ export function DealFeedCard({
             ))}
           </div>
 
-          <h2 className="line-clamp-2 text-lg font-extrabold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-xl">
+          <h2 className="line-clamp-2 text-xl font-extrabold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
             {deal.title}
           </h2>
 
           <div className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-2">
             <span
               className={cn(
-                "font-black text-price transition-transform group-hover:scale-[1.02]",
-                exciting ? "text-3xl sm:text-[2rem]" : "text-2xl sm:text-[1.75rem]"
+                "font-black text-price",
+                exciting ? "text-[2rem] leading-none sm:text-[2.125rem]" : "text-[1.75rem] leading-none sm:text-[1.875rem]"
               )}
             >
               {formatUAH(Number(deal.price_uah))}
             </span>
             {deal.original_price_uah && (
-              <span className="text-base font-medium text-muted-foreground/75 line-through decoration-2 sm:text-lg">
+              <span className="text-base text-muted-foreground/60 line-through decoration-2 sm:text-lg">
                 {formatUAH(Number(deal.original_price_uah))}
               </span>
             )}
             {savingsAmount !== null && (
-              <span className="rounded-lg bg-emerald-600 px-3 py-1.5 text-sm font-extrabold text-white shadow-md transition-transform group-hover:scale-105 sm:text-base">
+              <span className="rounded-lg bg-emerald-600 px-3.5 py-1.5 text-base font-extrabold text-white shadow-sm">
                 −{formatUAH(savingsAmount)}
               </span>
             )}
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-2">
             {deal.category && (
-              <span className="text-sm text-foreground/70">{deal.category.icon} {deal.category.name_uk}</span>
+              <span className="text-sm text-foreground/65">{deal.category.icon} {deal.category.name_uk}</span>
             )}
             {score >= 20 && (
-              <span className="hidden text-xs font-semibold text-orange-600 sm:inline">
+              <span className="hidden text-xs font-bold text-orange-600 sm:inline">
                 🔥 {score} {t("deals.votes")}
               </span>
             )}
-            <span className="inline-flex items-center gap-2 text-base font-bold text-foreground transition-colors group-hover:text-primary">
+            <span className="inline-flex items-center gap-2 text-base font-bold text-foreground">
               <MessageCircle className="h-5 w-5 text-primary" aria-hidden />
               {commentCount}
             </span>
-            <span className="ml-auto text-xs font-normal text-muted-foreground/55">
+            <span className="ml-auto text-xs text-muted-foreground/50">
               {formatRelativeTime(deal.created_at)}
             </span>
           </div>
@@ -201,12 +197,9 @@ export function DealFeedCard({
 
 export function FeedSubmitPrompt() {
   return (
-    <p className="rounded-2xl border border-dashed border-primary/20 bg-card px-5 py-4 text-center text-sm text-muted-foreground shadow-sm">
+    <p className="deal-card rounded-2xl px-5 py-4 text-center text-sm text-muted-foreground">
       {t("feed.submitPrompt")}{" "}
-      <Link
-        href="/submit"
-        className="font-semibold text-primary transition-colors hover:text-primary/80 hover:underline"
-      >
+      <Link href="/submit" className="font-semibold text-primary hover:underline">
         {t("nav.submitCta")} →
       </Link>
     </p>
