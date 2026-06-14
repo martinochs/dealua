@@ -37,7 +37,7 @@ export function VoteButtons({
 
   const score = getVoteScore(hotCount, coldCount);
   const heat = getTemperatureLevel(score);
-  const styles = getScoreHeatStyles(featured && heat === "low" ? "medium" : heat === "cold" ? "medium" : heat);
+  const styles = getScoreHeatStyles(featured && (heat === "low" || heat === "cold") ? "medium" : heat);
 
   function handleVote(type: "hot" | "cold", e: React.MouseEvent) {
     e.preventDefault();
@@ -56,15 +56,15 @@ export function VoteButtons({
   }
 
   const columnClass = cn(
-    "flex shrink-0 flex-col items-center justify-center gap-1 border-r border-border/40 px-1 py-3 sm:gap-1.5 sm:px-1.5 sm:py-4",
-    featured ? "w-[3.75rem] sm:w-24" : "w-[3.25rem] sm:w-20",
+    "flex shrink-0 flex-col items-center justify-center gap-0.5 border-r border-border/40 px-1 py-2 sm:px-1.5 sm:py-2.5",
+    featured ? "w-[3.5rem] sm:w-[4.5rem]" : "w-[3rem] sm:w-[4rem]",
     styles.box,
-    (heat === "high" || featured) && "shadow-inner"
+    heat === "high" && "shadow-inner"
   );
 
   const scoreClass = cn(
-    "font-black tabular-nums leading-none",
-    featured ? "text-[1.75rem] sm:text-4xl" : "text-2xl sm:text-3xl",
+    "font-bold tabular-nums leading-none",
+    featured ? "text-xl sm:text-2xl" : "text-lg sm:text-xl",
     styles.score
   );
 

@@ -5,9 +5,8 @@ import Image from "next/image";
 import { MessageCircle, Star } from "lucide-react";
 import { VoteButtons } from "./VoteButtons";
 import { DealCardCta } from "./DealCardCta";
-import { SavingsHero } from "./SavingsHero";
+import { SavingsBadge } from "./SavingsBadge";
 import { SocialProof } from "./SocialProof";
-import { Badge } from "@/components/ui/badge";
 import {
   getDealFeedBadges,
   getSavingsAmount,
@@ -28,12 +27,12 @@ interface DealFeedCardProps {
   rank?: number;
 }
 
-function HotDealBanner({ pulse = true }: { pulse?: boolean }) {
+function HotDealBanner({ pulse = false }: { pulse?: boolean }) {
   return (
-    <div className="flex items-center justify-center bg-gradient-to-r from-orange-600 via-red-600 to-orange-600 px-4 py-2 sm:py-2.5">
+    <div className="flex items-center justify-center bg-gradient-to-r from-orange-600 to-red-600 px-3 py-1">
       <span
         className={cn(
-          "inline-flex items-center gap-2 text-sm font-black uppercase tracking-wider text-white sm:text-base",
+          "inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-white sm:text-xs",
           pulse && "animate-hot-pulse"
         )}
       >
@@ -49,7 +48,7 @@ function MerchantBadge({ name, slug, muted }: { name: string; slug?: string | nu
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide sm:rounded-lg sm:px-3 sm:py-1 sm:text-xs",
+        "inline-flex shrink-0 items-center gap-1 rounded px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide",
         muted
           ? "bg-secondary text-muted-foreground"
           : trusted
@@ -70,44 +69,14 @@ const badgeLabels: Record<DealFeedBadge, "badges.hot" | "badges.new" | "badges.m
   trending: "badges.trending",
 };
 
-function DealBadge({ type, subdued }: { type: DealFeedBadge; subdued?: boolean }) {
-  if (subdued) {
-    return (
-      <span className="inline-flex shrink-0 items-center rounded-md bg-secondary px-2 py-0.5 text-[10px] font-semibold uppercase text-muted-foreground sm:px-3 sm:py-1 sm:text-xs">
-        {type === "hot" && "🔥 "}
-        {type === "trending" && "📈 "}
-        {type === "mega" && "💛 "}
-        {t(badgeLabels[type])}
-      </span>
-    );
-  }
-
-  if (type === "hot") {
-    return (
-      <span className="inline-flex shrink-0 items-center gap-1 rounded-md bg-gradient-to-r from-orange-600 to-red-600 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-white shadow-sm sm:gap-1.5 sm:rounded-lg sm:px-3 sm:py-1 sm:text-xs">
-        🔥 {t(badgeLabels.hot)}
-      </span>
-    );
-  }
-
-  if (type === "trending") {
-    return (
-      <Badge variant="accent" className="shrink-0 border-0 px-2 py-0.5 text-[10px] font-bold uppercase sm:px-3 sm:py-1 sm:text-xs">
-        📈 {t(badgeLabels.trending)}
-      </Badge>
-    );
-  }
-
+function DealBadge({ type }: { type: DealFeedBadge }) {
   return (
-    <Badge
-      variant={type === "mega" ? "green" : "accent"}
-      className={cn(
-        "shrink-0 border-0 px-2 py-0.5 text-[10px] font-bold uppercase sm:px-3 sm:py-1 sm:text-xs",
-        type === "mega" && "sm:text-sm"
-      )}
-    >
-      {type === "mega" ? `💛 ${t(badgeLabels.mega)}` : t(badgeLabels.new)}
-    </Badge>
+    <span className="inline-flex shrink-0 items-center rounded bg-secondary px-1.5 py-0.5 text-[10px] font-semibold uppercase text-muted-foreground">
+      {type === "hot" && "🔥 "}
+      {type === "trending" && "📈 "}
+      {type === "mega" && "💛 "}
+      {t(badgeLabels[type])}
+    </span>
   );
 }
 
@@ -134,15 +103,15 @@ export function DealFeedCard({
   return (
     <article
       className={cn(
-        "deal-card group flex flex-col overflow-hidden transition-all duration-300 ease-out",
+        "deal-card group flex flex-col overflow-hidden transition-all duration-200 ease-out",
         featured
-          ? "deal-card-featured rounded-2xl sm:rounded-3xl"
+          ? "deal-card-featured rounded-xl sm:rounded-2xl"
           : hot
-            ? "deal-card-hot rounded-xl sm:rounded-2xl"
-            : "deal-card-standard rounded-xl sm:rounded-2xl"
+            ? "deal-card-hot rounded-xl"
+            : "deal-card-standard rounded-xl"
       )}
     >
-      {(featured || hot) && <HotDealBanner pulse={featured} />}
+      {featured && <HotDealBanner pulse />}
 
       <div className="flex min-h-0 flex-1">
         <VoteButtons
@@ -152,28 +121,18 @@ export function DealFeedCard({
           userVote={userVote}
           isLoggedIn={isLoggedIn}
           compact
-          featured={featured || hot}
+          featured={featured}
         />
 
-        <div
-          className={cn(
-            "flex min-w-0 flex-1 flex-col",
-            featured ? "p-3.5 sm:p-7" : "p-3 sm:p-6"
-          )}
-        >
+        <div className={cn("flex min-w-0 flex-1 flex-col", featured ? "p-2.5 sm:p-4" : "p-2.5 sm:p-3.5")}>
           <Link
             href={`/deal/${deal.id}`}
-            className={cn(
-              "flex min-w-0 transition-opacity active:opacity-90",
-              featured ? "gap-3 sm:gap-7" : "gap-2.5 sm:gap-6"
-            )}
+            className={cn("flex min-w-0 transition-opacity active:opacity-90", featured ? "gap-2.5 sm:gap-4" : "gap-2 sm:gap-4")}
           >
             <div
               className={cn(
-                "relative shrink-0 overflow-hidden rounded-xl bg-muted sm:rounded-2xl",
-                featured
-                  ? "h-[7.5rem] w-[7.5rem] sm:h-52 sm:w-52"
-                  : "h-[6.5rem] w-[6.5rem] sm:h-44 sm:w-44"
+                "relative shrink-0 overflow-hidden rounded-lg bg-muted",
+                featured ? "h-24 w-24 sm:h-36 sm:w-36" : "h-[5.75rem] w-[5.75rem] sm:h-32 sm:w-32"
               )}
             >
               {deal.image_url ? (
@@ -181,31 +140,26 @@ export function DealFeedCard({
                   src={deal.image_url}
                   alt={deal.title}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
-                  sizes={featured ? "(max-width: 640px) 120px, 208px" : "(max-width: 640px) 104px, 176px"}
+                  className="object-cover transition-transform duration-200 group-hover:scale-[1.03]"
+                  sizes={featured ? "(max-width: 640px) 96px, 144px" : "(max-width: 640px) 92px, 128px"}
                   priority={featured}
                 />
               ) : (
-                <div className="flex h-full items-center justify-center text-2xl sm:text-4xl">🛍️</div>
+                <div className="flex h-full items-center justify-center text-xl sm:text-2xl">🛍️</div>
               )}
               {savings !== null && savings >= 10 && (
-                <span
-                  className={cn(
-                    "absolute left-0 top-0 rounded-br-lg bg-emerald-600 font-extrabold text-white shadow-md sm:rounded-br-xl",
-                    featured ? "px-2.5 py-1 text-xs sm:px-3.5 sm:py-1.5 sm:text-base" : "px-1.5 py-0.5 text-[10px] sm:px-3 sm:py-1 sm:text-sm"
-                  )}
-                >
+                <span className="absolute left-0 top-0 rounded-br-md bg-emerald-600 px-1.5 py-0.5 text-[10px] font-extrabold text-white sm:text-xs">
                   −{savings}%
                 </span>
               )}
             </div>
 
-            <div className={cn("flex min-w-0 flex-1 flex-col justify-center", featured ? "gap-2 sm:gap-3" : "gap-1 sm:gap-2.5")}>
-              {!featured && (
-                <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none sm:flex-wrap sm:gap-2 sm:overflow-visible">
+            <div className={cn("flex min-w-0 flex-1 flex-col justify-center gap-0.5 sm:gap-1")}>
+              {!featured && (deal.merchant || badges.length > 0) && (
+                <div className="flex items-center gap-1 overflow-x-auto scrollbar-none">
                   {deal.merchant && <MerchantBadge name={deal.merchant.name} slug={deal.merchant.slug} muted />}
                   {badges.map((b) => (
-                    <DealBadge key={b} type={b} subdued />
+                    <DealBadge key={b} type={b} />
                   ))}
                 </div>
               )}
@@ -216,57 +170,40 @@ export function DealFeedCard({
 
               <h2
                 className={cn(
-                  "line-clamp-2 font-extrabold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary",
-                  featured ? "text-lg sm:text-2xl" : "text-[15px] sm:text-xl"
+                  "line-clamp-2 font-bold leading-snug text-foreground transition-colors group-hover:text-primary",
+                  featured ? "text-base sm:text-lg" : "text-[14px] sm:text-base"
                 )}
               >
                 {deal.title}
               </h2>
 
-              <div
-                className={cn(
-                  "flex flex-wrap items-baseline gap-x-2 gap-y-1",
-                  featured ? "sm:mt-1 sm:gap-x-4" : "sm:mt-2 sm:gap-x-3"
-                )}
-              >
-                <span className="w-full text-[10px] font-semibold uppercase tracking-wide text-muted-foreground sm:text-xs">
-                  {t("deals.priceLabel")}
-                </span>
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 pt-0.5">
                 <span
                   className={cn(
-                    "font-black leading-none",
-                    featured
-                      ? "featured-price text-[1.875rem] sm:text-[2.875rem]"
-                      : "text-price text-xl sm:text-[1.875rem]"
+                    "font-black leading-none text-price",
+                    featured ? "featured-price text-xl sm:text-[1.75rem]" : "text-lg sm:text-xl"
                   )}
                 >
                   {formatUAH(Number(deal.price_uah))}
                 </span>
                 {deal.original_price_uah && (
-                  <span
-                    className={cn(
-                      "text-muted-foreground/55 line-through decoration-2",
-                      featured ? "text-sm sm:text-xl" : "text-xs sm:text-lg"
-                    )}
-                  >
+                  <span className="text-[11px] text-muted-foreground/50 line-through sm:text-xs">
                     {formatUAH(Number(deal.original_price_uah))}
                   </span>
                 )}
+                {savingsAmount !== null && (
+                  <SavingsBadge amount={savingsAmount} featured={featured} />
+                )}
               </div>
 
-              <div
-                className={cn(
-                  "flex flex-wrap items-center gap-x-3 gap-y-0.5 text-muted-foreground/55",
-                  featured ? "text-xs sm:text-sm" : "text-[11px] sm:text-sm sm:text-foreground/65"
-                )}
-              >
+              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-0 text-[10px] text-muted-foreground/50 sm:text-[11px]">
                 {deal.category && (
                   <span className="truncate">
                     {deal.category.icon} {deal.category.name_uk}
                   </span>
                 )}
-                <span className="inline-flex items-center gap-1 font-medium sm:font-bold sm:text-foreground">
-                  <MessageCircle className="h-3.5 w-3.5 text-primary sm:h-5 sm:w-5" aria-hidden />
+                <span className="inline-flex items-center gap-0.5">
+                  <MessageCircle className="h-3 w-3 text-primary/70" aria-hidden />
                   {commentCount}
                 </span>
                 <span className="ml-auto shrink-0">{formatRelativeTime(deal.created_at)}</span>
@@ -274,13 +211,8 @@ export function DealFeedCard({
             </div>
           </Link>
 
-          <div className={cn("mt-2.5 flex flex-col gap-2.5 sm:mt-3 sm:gap-3", featured && "sm:mt-4")}>
-            {savingsAmount !== null && (
-              <SavingsHero amount={savingsAmount} featured={featured} />
-            )}
-
-            <SocialProof deal={deal} score={score} featured={featured} />
-
+          <div className={cn("mt-1.5 flex flex-col gap-1.5 sm:mt-2 sm:gap-2", featured && "sm:mt-2.5")}>
+            <SocialProof deal={deal} score={score} />
             <DealCardCta dealId={deal.id} featured={featured} />
           </div>
         </div>
@@ -291,7 +223,7 @@ export function DealFeedCard({
 
 export function FeedSubmitPrompt() {
   return (
-    <p className="deal-card deal-card-standard rounded-xl px-4 py-3 text-center text-sm text-muted-foreground sm:rounded-2xl sm:px-5 sm:py-4">
+    <p className="deal-card deal-card-standard rounded-xl px-3 py-2.5 text-center text-sm text-muted-foreground">
       {t("feed.submitPrompt")}{" "}
       <Link href="/submit" className="font-semibold text-primary hover:underline">
         {t("nav.submitCta")} →

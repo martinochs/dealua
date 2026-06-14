@@ -1,50 +1,40 @@
 import { formatUAH, getSavingsPercent } from "@/lib/utils";
-import { t } from "@/lib/i18n/uk";
-import { SavingsHero } from "./SavingsHero";
+import { SavingsBadge } from "./SavingsBadge";
 import { cn } from "@/lib/utils";
 
 interface PriceTagProps {
   price: number;
   originalPrice?: number | null;
   size?: "sm" | "lg";
-  showSavingsHero?: boolean;
 }
 
-export function PriceTag({ price, originalPrice, size = "sm", showSavingsHero = true }: PriceTagProps) {
+export function PriceTag({ price, originalPrice, size = "sm" }: PriceTagProps) {
   const savings = getSavingsPercent(price, originalPrice ?? null);
   const savingsAmount =
     originalPrice && originalPrice > price ? originalPrice - price : null;
 
   return (
-    <div className="flex flex-col gap-3">
-      {showSavingsHero && savingsAmount !== null && (
-        <SavingsHero amount={savingsAmount} featured />
-      )}
-
-      <div className="flex flex-col gap-1">
-        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          {t("deals.priceLabel")}
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span
+          className={cn(
+            "font-black leading-none text-price",
+            size === "lg" ? "text-2xl sm:text-3xl" : "text-lg"
+          )}
+        >
+          {formatUAH(price)}
         </span>
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <span
-            className={cn(
-              "font-black text-price leading-none",
-              size === "lg" ? "text-3xl sm:text-4xl" : "text-lg"
-            )}
-          >
-            {formatUAH(price)}
+        {originalPrice && originalPrice > price && (
+          <span className="text-sm text-muted-foreground/60 line-through sm:text-base">
+            {formatUAH(originalPrice)}
           </span>
-          {originalPrice && originalPrice > price && (
-            <span className="text-muted-foreground line-through text-base sm:text-lg">
-              {formatUAH(originalPrice)}
-            </span>
-          )}
-          {savings !== null && savings > 0 && (
-            <span className="rounded-md bg-emerald-600 px-2.5 py-1 text-sm font-extrabold text-white">
-              −{savings}%
-            </span>
-          )}
-        </div>
+        )}
+        {savingsAmount !== null && <SavingsBadge amount={savingsAmount} featured />}
+        {savings !== null && savings > 0 && !savingsAmount && (
+          <span className="rounded-md bg-emerald-600 px-2 py-0.5 text-xs font-extrabold text-white">
+            −{savings}%
+          </span>
+        )}
       </div>
     </div>
   );

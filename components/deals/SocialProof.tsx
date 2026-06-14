@@ -6,29 +6,26 @@ import type { DealWithRelations } from "@/types/database";
 interface SocialProofProps {
   deal: DealWithRelations;
   score: number;
-  featured?: boolean;
   className?: string;
 }
 
-export function SocialProof({ deal, score, featured = false, className }: SocialProofProps) {
+export function SocialProof({ deal, score, className }: SocialProofProps) {
   const views = getDealViewCount(deal);
 
   return (
-    <div
+    <p
       className={cn(
-        "flex flex-col gap-0.5 font-semibold text-orange-700/90",
-        featured ? "text-sm" : "text-[11px] sm:text-xs",
+        "line-clamp-2 text-[10px] font-medium leading-snug text-orange-700/80 sm:line-clamp-1 sm:text-[11px]",
         className
       )}
     >
       {score > 0 && (
-        <span>
-          🔥 {score} {t("deals.usersLiked")}
-        </span>
+        <>
+          <span>🔥 {score} {t("deals.usersLiked")}</span>
+          <span className="mx-1.5 text-muted-foreground/40">·</span>
+        </>
       )}
-      <span>
-        👀 +{views} {t("deals.usersViewed")}
-      </span>
-    </div>
+      <span>👀 +{views} {t("deals.usersViewed")}</span>
+    </p>
   );
 }

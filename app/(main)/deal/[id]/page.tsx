@@ -105,12 +105,12 @@ export default async function DealPage({ params }: DealPageProps) {
             size="lg"
           />
 
-          <SocialProof deal={deal} score={score} featured />
+          <SocialProof deal={deal} score={score} />
 
           <p className="whitespace-pre-wrap text-base leading-relaxed">{deal.description}</p>
 
-          <div className="hidden flex-col gap-2 sm:flex">
-            <Button asChild size="lg" className="deal-cta cta-glow h-12 w-full font-bold sm:w-auto sm:min-w-[16rem]">
+          <div className="hidden sm:block">
+            <Button asChild size="default" className="deal-cta h-10 font-semibold sm:min-w-[14rem]">
               <a href={`/go/${deal.id}`} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4" />
                 {t("deals.ctaGo")}
@@ -133,7 +133,7 @@ export default async function DealPage({ params }: DealPageProps) {
           compact
           featured={hot}
         />
-        <Button asChild className="deal-cta cta-glow h-11 flex-1 font-bold">
+        <Button asChild className="deal-cta h-9 flex-1 text-sm font-semibold">
           <a href={`/go/${deal.id}`} target="_blank" rel="noopener noreferrer">
             <ExternalLink className="h-4 w-4" />
             {t("deals.ctaGo")}

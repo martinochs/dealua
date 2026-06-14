@@ -12,23 +12,26 @@ interface DealCardCtaProps {
 
 export function DealCardCta({ dealId, featured = false, className }: DealCardCtaProps) {
   return (
-    <div className={cn("flex flex-col gap-1.5", className)}>
+    <div className={cn("flex items-center gap-2", className)}>
       <Button
         asChild
-        size={featured ? "lg" : "default"}
-        className={cn("deal-cta w-full font-bold", featured && "cta-glow h-12 text-base")}
+        size="sm"
+        className={cn(
+          "deal-cta h-9 flex-1 text-sm font-semibold sm:h-9",
+          featured && "sm:flex-none sm:min-w-[10.5rem]"
+        )}
       >
         <a href={`/go/${dealId}`} target="_blank" rel="noopener noreferrer">
-          <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+          <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden />
           {t("deals.ctaGo")}
         </a>
       </Button>
       <Link
         href={`/deal/${dealId}`}
-        className="inline-flex items-center justify-center gap-1 text-xs font-semibold text-primary hover:underline sm:text-sm"
+        className="inline-flex shrink-0 items-center gap-0.5 text-[11px] font-medium text-primary hover:underline sm:text-xs"
       >
         {t("deals.ctaView")}
-        <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+        <ArrowRight className="h-3 w-3" aria-hidden />
       </Link>
     </div>
   );
