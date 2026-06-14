@@ -41,6 +41,7 @@ const uk = {
     ctaView: "Переглянути deal",
     youSave: "Ви економите",
     usersRecommend: "користувачів рекомендують",
+    usersRecommendDeal: "користувачів рекомендують цю пропозицію",
     usersLiked: "користувачів оцінили позитивно",
     usersViewed: "переглянули нещодавно",
     priceLabel: "Ціна",

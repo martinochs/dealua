@@ -124,8 +124,6 @@ export function InfiniteDealFeed({
           key={deal.id}
           deal={deal}
           commentCount={commentCounts[deal.id] ?? 0}
-          userVote={userVotes[deal.id] ?? null}
-          isLoggedIn={isLoggedIn}
           rank={index}
         />
       ))}

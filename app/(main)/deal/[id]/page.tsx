@@ -7,6 +7,7 @@ import { getDealById, getComments, getUserVote } from "@/lib/queries/deals";
 import { getSession } from "@/lib/auth/session";
 import { VoteButtons } from "@/components/deals/VoteButtons";
 import { PriceTag } from "@/components/deals/PriceTag";
+import { PopularityIndicator } from "@/components/deals/PopularityIndicator";
 import { SocialProof } from "@/components/deals/SocialProof";
 import { CommentList } from "@/components/comments/CommentList";
 import { CommentForm } from "@/components/comments/CommentForm";
@@ -105,7 +106,10 @@ export default async function DealPage({ params }: DealPageProps) {
             size="lg"
           />
 
-          <SocialProof deal={deal} score={score} />
+          <div className="flex flex-col gap-0.5">
+            <PopularityIndicator score={score} className="text-xs sm:text-sm" />
+            <SocialProof deal={deal} className="text-xs sm:text-sm" />
+          </div>
 
           <p className="whitespace-pre-wrap text-base leading-relaxed">{deal.description}</p>
 
