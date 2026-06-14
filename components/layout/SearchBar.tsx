@@ -37,11 +37,14 @@ export function SearchBar({ className, defaultQuery = "" }: SearchBarProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t("feed.searchPlaceholder")}
-            className="pl-9 min-h-[44px]"
+            className="min-h-[44px] pl-9"
             aria-label={t("feed.search")}
           />
         </div>
-        <Button type="submit" variant="secondary" className="shrink-0">
+        <Button type="submit" variant="secondary" size="icon" className="h-11 w-11 shrink-0 sm:hidden" aria-label={t("feed.search")}>
+          <Search className="h-4 w-4" />
+        </Button>
+        <Button type="submit" variant="secondary" className="hidden shrink-0 sm:inline-flex">
           {t("feed.search")}
         </Button>
       </div>

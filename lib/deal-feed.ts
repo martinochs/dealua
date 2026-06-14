@@ -25,10 +25,17 @@ export function getDealFeedBadges(
 
   if (ageMs < 2 * 60 * 60 * 1000) badges.push("new");
   if (score >= 30) badges.push("hot");
-  if (score >= 20 || commentCount >= 3) badges.push("trending");
+  else if (score >= 20 || commentCount >= 3) badges.push("trending");
   if (savings !== null && savings >= 30) badges.push("mega");
 
-  return badges;
+  const priority: Record<DealFeedBadge, number> = {
+    hot: 4,
+    mega: 3,
+    trending: 2,
+    new: 1,
+  };
+
+  return badges.sort((a, b) => priority[b] - priority[a]).slice(0, 2);
 }
 
 export function isExcitingDeal(
