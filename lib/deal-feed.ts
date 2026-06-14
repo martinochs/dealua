@@ -58,6 +58,25 @@ export function getSavingsAmount(
   return original - price;
 }
 
+function hashDealId(id: string): number {
+  let h = 0;
+  for (let i = 0; i < id.length; i++) {
+    h = (Math.imul(31, h) + id.charCodeAt(i)) >>> 0;
+  }
+  return h;
+}
+
+/** Deterministic view count for social proof (cold start) */
+export function getDealViewCount(deal: DealWithRelations): number {
+  const score = getVoteScore(deal.hot_count, deal.cold_count);
+  const h = hashDealId(deal.id);
+  return 80 + (h % 180) + score * 3;
+}
+
+export function isHotDeal(deal: DealWithRelations): boolean {
+  return getVoteScore(deal.hot_count, deal.cold_count) >= 30;
+}
+
 export function getTemperatureLevel(score: number): ScoreHeat {
   if (score < 0) return "cold";
   if (score < 15) return "low";

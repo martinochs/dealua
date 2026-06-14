@@ -4,10 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { MessageCircle, Star } from "lucide-react";
 import { VoteButtons } from "./VoteButtons";
+import { DealCardCta } from "./DealCardCta";
+import { SavingsHero } from "./SavingsHero";
+import { SocialProof } from "./SocialProof";
 import { Badge } from "@/components/ui/badge";
 import {
   getDealFeedBadges,
   getSavingsAmount,
+  isHotDeal,
   isTrustedMerchant,
 } from "@/lib/deal-feed";
 import { formatUAH, formatRelativeTime, getSavingsPercent, getVoteScore } from "@/lib/utils";
@@ -24,10 +28,15 @@ interface DealFeedCardProps {
   rank?: number;
 }
 
-function HotDealBanner() {
+function HotDealBanner({ pulse = true }: { pulse?: boolean }) {
   return (
     <div className="flex items-center justify-center bg-gradient-to-r from-orange-600 via-red-600 to-orange-600 px-4 py-2 sm:py-2.5">
-      <span className="animate-hot-pulse inline-flex items-center gap-2 text-sm font-black uppercase tracking-wider text-white sm:text-base">
+      <span
+        className={cn(
+          "inline-flex items-center gap-2 text-sm font-black uppercase tracking-wider text-white sm:text-base",
+          pulse && "animate-hot-pulse"
+        )}
+      >
         🔥 {t("badges.hotDeal")}
       </span>
     </div>
@@ -110,6 +119,7 @@ export function DealFeedCard({
   rank = 999,
 }: DealFeedCardProps) {
   const featured = rank === 0;
+  const hot = isHotDeal(deal);
   const savings = getSavingsPercent(
     Number(deal.price_uah),
     deal.original_price_uah ? Number(deal.original_price_uah) : null
@@ -127,10 +137,12 @@ export function DealFeedCard({
         "deal-card group flex flex-col overflow-hidden transition-all duration-300 ease-out",
         featured
           ? "deal-card-featured rounded-2xl sm:rounded-3xl"
-          : "deal-card-standard rounded-xl sm:rounded-2xl"
+          : hot
+            ? "deal-card-hot rounded-xl sm:rounded-2xl"
+            : "deal-card-standard rounded-xl sm:rounded-2xl"
       )}
     >
-      {featured && <HotDealBanner />}
+      {(featured || hot) && <HotDealBanner pulse={featured} />}
 
       <div className="flex min-h-0 flex-1">
         <VoteButtons
@@ -140,138 +152,138 @@ export function DealFeedCard({
           userVote={userVote}
           isLoggedIn={isLoggedIn}
           compact
-          featured={featured}
+          featured={featured || hot}
         />
 
-        <Link
-          href={`/deal/${deal.id}`}
+        <div
           className={cn(
-            "flex min-w-0 flex-1 transition-opacity active:opacity-90",
-            featured ? "gap-3 p-3.5 sm:gap-7 sm:p-7" : "gap-2.5 p-3 sm:gap-6 sm:p-6"
+            "flex min-w-0 flex-1 flex-col",
+            featured ? "p-3.5 sm:p-7" : "p-3 sm:p-6"
           )}
         >
-          <div
+          <Link
+            href={`/deal/${deal.id}`}
             className={cn(
-              "relative shrink-0 overflow-hidden rounded-xl bg-muted sm:rounded-2xl",
-              featured
-                ? "h-[7.5rem] w-[7.5rem] sm:h-52 sm:w-52"
-                : "h-[6.5rem] w-[6.5rem] sm:h-44 sm:w-44"
+              "flex min-w-0 transition-opacity active:opacity-90",
+              featured ? "gap-3 sm:gap-7" : "gap-2.5 sm:gap-6"
             )}
           >
-            {deal.image_url ? (
-              <Image
-                src={deal.image_url}
-                alt={deal.title}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
-                sizes={featured ? "(max-width: 640px) 120px, 208px" : "(max-width: 640px) 104px, 176px"}
-                priority={featured}
-              />
-            ) : (
-              <div className="flex h-full items-center justify-center text-2xl sm:text-4xl">🛍️</div>
-            )}
-            {savings !== null && savings >= 10 && (
-              <span
+            <div
+              className={cn(
+                "relative shrink-0 overflow-hidden rounded-xl bg-muted sm:rounded-2xl",
+                featured
+                  ? "h-[7.5rem] w-[7.5rem] sm:h-52 sm:w-52"
+                  : "h-[6.5rem] w-[6.5rem] sm:h-44 sm:w-44"
+              )}
+            >
+              {deal.image_url ? (
+                <Image
+                  src={deal.image_url}
+                  alt={deal.title}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+                  sizes={featured ? "(max-width: 640px) 120px, 208px" : "(max-width: 640px) 104px, 176px"}
+                  priority={featured}
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center text-2xl sm:text-4xl">🛍️</div>
+              )}
+              {savings !== null && savings >= 10 && (
+                <span
+                  className={cn(
+                    "absolute left-0 top-0 rounded-br-lg bg-emerald-600 font-extrabold text-white shadow-md sm:rounded-br-xl",
+                    featured ? "px-2.5 py-1 text-xs sm:px-3.5 sm:py-1.5 sm:text-base" : "px-1.5 py-0.5 text-[10px] sm:px-3 sm:py-1 sm:text-sm"
+                  )}
+                >
+                  −{savings}%
+                </span>
+              )}
+            </div>
+
+            <div className={cn("flex min-w-0 flex-1 flex-col justify-center", featured ? "gap-2 sm:gap-3" : "gap-1 sm:gap-2.5")}>
+              {!featured && (
+                <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none sm:flex-wrap sm:gap-2 sm:overflow-visible">
+                  {deal.merchant && <MerchantBadge name={deal.merchant.name} slug={deal.merchant.slug} muted />}
+                  {badges.map((b) => (
+                    <DealBadge key={b} type={b} subdued />
+                  ))}
+                </div>
+              )}
+
+              {featured && deal.merchant && (
+                <MerchantBadge name={deal.merchant.name} slug={deal.merchant.slug} />
+              )}
+
+              <h2
                 className={cn(
-                  "absolute left-0 top-0 rounded-br-lg bg-emerald-600 font-extrabold text-white shadow-md sm:rounded-br-xl",
-                  featured ? "px-2.5 py-1 text-xs sm:px-3.5 sm:py-1.5 sm:text-base" : "px-1.5 py-0.5 text-[10px] sm:px-3 sm:py-1 sm:text-sm"
+                  "line-clamp-2 font-extrabold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary",
+                  featured ? "text-lg sm:text-2xl" : "text-[15px] sm:text-xl"
                 )}
               >
-                −{savings}%
-              </span>
-            )}
-          </div>
+                {deal.title}
+              </h2>
 
-          <div className={cn("flex min-w-0 flex-1 flex-col justify-center", featured ? "gap-2 sm:gap-3" : "gap-1 sm:gap-2.5")}>
-            {!featured && (
-              <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none sm:flex-wrap sm:gap-2 sm:overflow-visible">
-                {deal.merchant && <MerchantBadge name={deal.merchant.name} slug={deal.merchant.slug} muted />}
-                {badges.map((b) => (
-                  <DealBadge key={b} type={b} subdued />
-                ))}
+              <div
+                className={cn(
+                  "flex flex-wrap items-baseline gap-x-2 gap-y-1",
+                  featured ? "sm:mt-1 sm:gap-x-4" : "sm:mt-2 sm:gap-x-3"
+                )}
+              >
+                <span className="w-full text-[10px] font-semibold uppercase tracking-wide text-muted-foreground sm:text-xs">
+                  {t("deals.priceLabel")}
+                </span>
+                <span
+                  className={cn(
+                    "font-black leading-none",
+                    featured
+                      ? "featured-price text-[1.875rem] sm:text-[2.875rem]"
+                      : "text-price text-xl sm:text-[1.875rem]"
+                  )}
+                >
+                  {formatUAH(Number(deal.price_uah))}
+                </span>
+                {deal.original_price_uah && (
+                  <span
+                    className={cn(
+                      "text-muted-foreground/55 line-through decoration-2",
+                      featured ? "text-sm sm:text-xl" : "text-xs sm:text-lg"
+                    )}
+                  >
+                    {formatUAH(Number(deal.original_price_uah))}
+                  </span>
+                )}
               </div>
-            )}
 
-            {featured && deal.merchant && (
-              <MerchantBadge name={deal.merchant.name} slug={deal.merchant.slug} />
-            )}
-
-            <h2
-              className={cn(
-                "line-clamp-2 font-extrabold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary",
-                featured ? "text-lg sm:text-2xl" : "text-[15px] sm:text-xl"
-              )}
-            >
-              {deal.title}
-            </h2>
-
-            <div
-              className={cn(
-                "flex flex-wrap items-baseline gap-x-2 gap-y-1",
-                featured ? "mt-1 sm:mt-2 sm:gap-x-4" : "sm:mt-2 sm:gap-x-3 sm:gap-y-2"
-              )}
-            >
-              <span
+              <div
                 className={cn(
-                  "font-black leading-none",
-                  featured
-                    ? "featured-price text-[1.875rem] sm:text-[2.875rem]"
-                    : "text-price text-xl sm:text-[1.875rem]"
+                  "flex flex-wrap items-center gap-x-3 gap-y-0.5 text-muted-foreground/55",
+                  featured ? "text-xs sm:text-sm" : "text-[11px] sm:text-sm sm:text-foreground/65"
                 )}
               >
-                {formatUAH(Number(deal.price_uah))}
-              </span>
-              {deal.original_price_uah && (
-                <span
-                  className={cn(
-                    "text-muted-foreground/55 line-through decoration-2",
-                    featured ? "text-sm sm:text-xl" : "text-xs sm:text-lg"
-                  )}
-                >
-                  {formatUAH(Number(deal.original_price_uah))}
-                </span>
-              )}
-              {savingsAmount !== null && (
-                <span
-                  className={cn(
-                    "rounded-md bg-emerald-600 font-extrabold text-white shadow-sm sm:rounded-lg",
-                    featured ? "px-3 py-1 text-sm sm:px-4 sm:py-2 sm:text-lg" : "px-2 py-0.5 text-xs sm:px-3.5 sm:py-1.5 sm:text-base"
-                  )}
-                >
-                  −{formatUAH(savingsAmount)}
-                </span>
-              )}
-            </div>
-
-            <div
-              className={cn(
-                "flex flex-wrap items-center gap-x-3 gap-y-0.5 text-muted-foreground/55",
-                featured ? "pt-1 text-xs sm:gap-x-4 sm:text-sm" : "pt-0.5 text-[11px] sm:pt-2 sm:text-sm sm:text-foreground/65"
-              )}
-            >
-              {deal.category && (
-                <span className="truncate">
-                  {deal.category.icon} {deal.category.name_uk}
-                </span>
-              )}
-              {score >= 20 && (
-                <span className={cn("font-bold text-orange-600", !featured && "hidden sm:inline")}>
-                  🔥 {score} {t("deals.votes")}
-                </span>
-              )}
-              <span
-                className={cn(
-                  "inline-flex items-center gap-1 font-medium",
-                  featured ? "sm:font-bold sm:text-foreground" : "sm:gap-2 sm:text-base sm:font-bold sm:text-foreground"
+                {deal.category && (
+                  <span className="truncate">
+                    {deal.category.icon} {deal.category.name_uk}
+                  </span>
                 )}
-              >
-                <MessageCircle className={cn("text-primary", featured ? "h-4 w-4 sm:h-5 sm:w-5" : "h-3.5 w-3.5 sm:h-5 sm:w-5")} aria-hidden />
-                {commentCount}
-              </span>
-              <span className="ml-auto shrink-0">{formatRelativeTime(deal.created_at)}</span>
+                <span className="inline-flex items-center gap-1 font-medium sm:font-bold sm:text-foreground">
+                  <MessageCircle className="h-3.5 w-3.5 text-primary sm:h-5 sm:w-5" aria-hidden />
+                  {commentCount}
+                </span>
+                <span className="ml-auto shrink-0">{formatRelativeTime(deal.created_at)}</span>
+              </div>
             </div>
+          </Link>
+
+          <div className={cn("mt-2.5 flex flex-col gap-2.5 sm:mt-3 sm:gap-3", featured && "sm:mt-4")}>
+            {savingsAmount !== null && (
+              <SavingsHero amount={savingsAmount} featured={featured} />
+            )}
+
+            <SocialProof deal={deal} score={score} featured={featured} />
+
+            <DealCardCta dealId={deal.id} featured={featured} />
           </div>
-        </Link>
+        </div>
       </div>
     </article>
   );

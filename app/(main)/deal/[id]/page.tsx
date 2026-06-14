@@ -7,11 +7,13 @@ import { getDealById, getComments, getUserVote } from "@/lib/queries/deals";
 import { getSession } from "@/lib/auth/session";
 import { VoteButtons } from "@/components/deals/VoteButtons";
 import { PriceTag } from "@/components/deals/PriceTag";
+import { SocialProof } from "@/components/deals/SocialProof";
 import { CommentList } from "@/components/comments/CommentList";
 import { CommentForm } from "@/components/comments/CommentForm";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatRelativeTime } from "@/lib/utils";
+import { formatRelativeTime, getVoteScore } from "@/lib/utils";
+import { isHotDeal } from "@/lib/deal-feed";
 import { t } from "@/lib/i18n/uk";
 import type { CommentWithProfile } from "@/types/database";
 
@@ -47,8 +49,11 @@ export default async function DealPage({ params }: DealPageProps) {
     user ? getUserVote(id, user.id) : Promise.resolve(null),
   ]);
 
+  const score = getVoteScore(deal.hot_count, deal.cold_count);
+  const hot = isHotDeal(deal);
+
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="mx-auto max-w-3xl space-y-6 pb-28 sm:pb-6">
       <div className="flex gap-4">
         <div className="hidden sm:block">
           <VoteButtons
@@ -57,27 +62,33 @@ export default async function DealPage({ params }: DealPageProps) {
             coldCount={deal.cold_count}
             userVote={userVote}
             isLoggedIn={!!user}
+            featured={hot}
           />
         </div>
 
         <div className="flex-1 space-y-4">
           {deal.image_url && (
-            <div className="relative aspect-video rounded-lg overflow-hidden bg-muted">
+            <div className="relative aspect-video overflow-hidden rounded-lg bg-muted">
               <Image src={deal.image_url} alt={deal.title} fill className="object-cover" priority />
             </div>
           )}
 
           <div>
-            <div className="flex flex-wrap gap-2 mb-2">
+            <div className="mb-2 flex flex-wrap gap-2">
               {deal.category && (
                 <Link href={`/category/${deal.category.slug}`}>
                   <Badge variant="secondary">{deal.category.icon} {deal.category.name_uk}</Badge>
                 </Link>
               )}
               {deal.merchant && <Badge variant="outline">{deal.merchant.name}</Badge>}
+              {hot && (
+                <Badge className="border-0 bg-gradient-to-r from-orange-600 to-red-600 text-white">
+                  🔥 {t("badges.hotDeal")}
+                </Badge>
+              )}
             </div>
-            <h1 className="text-2xl font-bold">{deal.title}</h1>
-            <p className="text-sm text-muted-foreground mt-1">
+            <h1 className="text-2xl font-bold sm:text-3xl">{deal.title}</h1>
+            <p className="mt-1 text-sm text-muted-foreground">
               {t("deals.submittedBy")}{" "}
               {deal.profile ? (
                 <Link href={`/profile/${deal.profile.username}`} className="text-primary hover:underline">
@@ -94,33 +105,43 @@ export default async function DealPage({ params }: DealPageProps) {
             size="lg"
           />
 
-          <p className="text-base whitespace-pre-wrap leading-relaxed">{deal.description}</p>
+          <SocialProof deal={deal} score={score} featured />
 
-          <Button asChild size="lg" className="w-full sm:w-auto">
-            <a href={`/go/${deal.id}`} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="h-4 w-4" />
-              {t("deals.goToOffer")}
-            </a>
-          </Button>
+          <p className="whitespace-pre-wrap text-base leading-relaxed">{deal.description}</p>
+
+          <div className="hidden flex-col gap-2 sm:flex">
+            <Button asChild size="lg" className="deal-cta cta-glow h-12 w-full font-bold sm:w-auto sm:min-w-[16rem]">
+              <a href={`/go/${deal.id}`} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="h-4 w-4" />
+                {t("deals.ctaGo")}
+              </a>
+            </Button>
+            <p className="text-center text-sm text-muted-foreground sm:text-left">
+              {t("deals.ctaView")} — {t("deals.goToOffer")}
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 border-t bg-background p-3 flex items-center justify-between gap-4 z-40">
+      <div className="fixed bottom-0 left-0 right-0 z-40 flex items-center gap-3 border-t bg-card/95 p-3 shadow-[0_-6px_28px_rgba(15,23,42,0.1)] backdrop-blur-md sm:hidden">
         <VoteButtons
           dealId={deal.id}
           hotCount={deal.hot_count}
           coldCount={deal.cold_count}
           userVote={userVote}
           isLoggedIn={!!user}
+          compact
+          featured={hot}
         />
-        <Button asChild className="flex-1">
+        <Button asChild className="deal-cta cta-glow h-11 flex-1 font-bold">
           <a href={`/go/${deal.id}`} target="_blank" rel="noopener noreferrer">
-            {t("deals.goToOffer")}
+            <ExternalLink className="h-4 w-4" />
+            {t("deals.ctaGo")}
           </a>
         </Button>
       </div>
 
-      <section className="space-y-4 pb-20 sm:pb-0">
+      <section className="space-y-4">
         <h2 className="text-lg font-semibold">{t("deals.comments")}</h2>
         <CommentForm dealId={deal.id} isLoggedIn={!!user} />
         <CommentList comments={comments as CommentWithProfile[]} />

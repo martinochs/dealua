@@ -36,6 +36,12 @@ const uk = {
   },
   deals: {
     goToOffer: "Перейти до пропозиції",
+    ctaGo: "До пропозиції",
+    ctaView: "Переглянути deal",
+    youSave: "Ви економите",
+    usersLiked: "користувачів оцінили позитивно",
+    usersViewed: "переглянули цю пропозицію",
+    priceLabel: "Ціна",
     submit: "Опублікувати пропозицію",
     pending: "На модерації",
     approved: "Схвалено",
