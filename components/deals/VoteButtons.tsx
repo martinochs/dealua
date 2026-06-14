@@ -17,6 +17,7 @@ interface VoteButtonsProps {
   userVote: "hot" | "cold" | null;
   isLoggedIn: boolean;
   compact?: boolean;
+  featured?: boolean;
 }
 
 export function VoteButtons({
@@ -26,6 +27,7 @@ export function VoteButtons({
   userVote: initialVote,
   isLoggedIn,
   compact = false,
+  featured = false,
 }: VoteButtonsProps) {
   const router = useRouter();
   const [hotCount, setHotCount] = useState(initialHot);
@@ -35,7 +37,7 @@ export function VoteButtons({
 
   const score = getVoteScore(hotCount, coldCount);
   const heat = getTemperatureLevel(score);
-  const styles = getScoreHeatStyles(heat);
+  const styles = getScoreHeatStyles(featured && heat === "low" ? "medium" : heat === "cold" ? "medium" : heat);
 
   function handleVote(type: "hot" | "cold", e: React.MouseEvent) {
     e.preventDefault();
@@ -54,9 +56,16 @@ export function VoteButtons({
   }
 
   const columnClass = cn(
-    "flex w-[3.25rem] shrink-0 flex-col items-center justify-center gap-1 border-r border-border/40 px-1 py-3 sm:w-20 sm:gap-1.5 sm:px-1.5 sm:py-4",
+    "flex shrink-0 flex-col items-center justify-center gap-1 border-r border-border/40 px-1 py-3 sm:gap-1.5 sm:px-1.5 sm:py-4",
+    featured ? "w-[3.75rem] sm:w-24" : "w-[3.25rem] sm:w-20",
     styles.box,
-    heat === "high" && "shadow-inner"
+    (heat === "high" || featured) && "shadow-inner"
+  );
+
+  const scoreClass = cn(
+    "font-black tabular-nums leading-none",
+    featured ? "text-[1.75rem] sm:text-4xl" : "text-2xl sm:text-3xl",
+    styles.score
   );
 
   if (compact) {
@@ -64,9 +73,7 @@ export function VoteButtons({
       return (
         <div className={columnClass}>
           <ChevronUp className={cn("h-5 w-5 sm:h-7 sm:w-7", styles.icon)} strokeWidth={3} aria-hidden />
-          <span className={cn("text-2xl font-black tabular-nums leading-none sm:text-3xl", styles.score)}>
-            {score}
-          </span>
+          <span className={scoreClass}>{score}</span>
           <Link
             href="/login"
             onClick={(e) => e.stopPropagation()}
@@ -84,30 +91,30 @@ export function VoteButtons({
           variant={userVote === "hot" ? "default" : "outline"}
           size="icon"
           className={cn(
-            "h-9 w-9 shrink-0 border-2 bg-white shadow-sm transition-all active:scale-95 sm:h-11 sm:w-11 sm:hover:scale-105",
+            "shrink-0 border-2 bg-white shadow-sm transition-all active:scale-95 sm:hover:scale-105",
+            featured ? "h-10 w-10 sm:h-12 sm:w-12" : "h-9 w-9 sm:h-11 sm:w-11",
             userVote !== "hot" && "border-orange-400 hover:border-orange-500 hover:bg-orange-50"
           )}
           onClick={(e) => handleVote("hot", e)}
           disabled={isPending}
           aria-label={t("deals.hot")}
         >
-          <ChevronUp className="h-5 w-5 text-orange-600 sm:h-7 sm:w-7" strokeWidth={3} />
+          <ChevronUp className={cn("text-orange-600", featured ? "h-6 w-6 sm:h-7 sm:w-7" : "h-5 w-5 sm:h-7 sm:w-7")} strokeWidth={3} />
         </Button>
-        <span className={cn("text-2xl font-black tabular-nums leading-none sm:text-3xl", styles.score)}>
-          {score}
-        </span>
+        <span className={scoreClass}>{score}</span>
         <Button
           variant={userVote === "cold" ? "default" : "outline"}
           size="icon"
           className={cn(
-            "h-9 w-9 shrink-0 border-2 bg-white shadow-sm transition-all active:scale-95 sm:h-11 sm:w-11 sm:hover:scale-105",
+            "shrink-0 border-2 bg-white shadow-sm transition-all active:scale-95 sm:hover:scale-105",
+            featured ? "h-10 w-10 sm:h-12 sm:w-12" : "h-9 w-9 sm:h-11 sm:w-11",
             userVote !== "cold" && "border-slate-300 hover:border-slate-400 hover:bg-slate-50"
           )}
           onClick={(e) => handleVote("cold", e)}
           disabled={isPending}
           aria-label={t("deals.cold")}
         >
-          <ChevronDown className="h-5 w-5 text-slate-600 sm:h-7 sm:w-7" strokeWidth={3} />
+          <ChevronDown className={cn("text-slate-600", featured ? "h-6 w-6 sm:h-7 sm:w-7" : "h-5 w-5 sm:h-7 sm:w-7")} strokeWidth={3} />
         </Button>
       </div>
     );

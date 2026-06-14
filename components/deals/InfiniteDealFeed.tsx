@@ -118,16 +118,17 @@ export function InfiniteDealFeed({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {deals.map((deal, index) => (
-        <DealFeedCard
-          key={deal.id}
+        <div key={deal.id} className={index === 0 ? "pb-1 sm:pb-2" : undefined}>
+          <DealFeedCard
           deal={deal}
           commentCount={commentCounts[deal.id] ?? 0}
           userVote={userVotes[deal.id] ?? null}
           isLoggedIn={isLoggedIn}
           rank={index}
         />
+        </div>
       ))}
 
       {deals.length >= 5 && deals.length < 12 && <FeedSubmitPrompt />}

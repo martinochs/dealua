@@ -108,6 +108,7 @@ const uk = {
   },
   badges: {
     hot: "ГАРЯЧЕ",
+    hotDeal: "Гаряча пропозиція",
     new: "НОВА",
     mega: "МЕГА",
     trending: "У тренді",
