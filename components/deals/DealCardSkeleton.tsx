@@ -1,18 +1,23 @@
 export function DealCardSkeleton() {
   return (
-    <div className="deal-card flex overflow-hidden rounded-xl animate-pulse">
-      <div className="w-[3rem] shrink-0 bg-muted sm:w-[4rem]" />
-      <div className="flex flex-1 flex-col p-2.5 sm:p-3.5">
-        <div className="flex gap-2 sm:gap-4">
-          <div className="h-[5.75rem] w-[5.75rem] shrink-0 rounded-lg bg-muted sm:h-32 sm:w-32" />
-          <div className="flex flex-1 flex-col justify-center gap-1.5">
-            <div className="h-3 w-20 rounded bg-muted" />
-            <div className="h-4 w-4/5 rounded bg-muted" />
-            <div className="h-5 w-1/3 rounded bg-muted" />
-            <div className="h-3 w-1/2 rounded bg-muted" />
+    <div className="deal-card flex animate-pulse flex-col overflow-hidden rounded-lg sm:rounded-xl">
+      <div className="flex flex-col p-2 sm:p-2.5">
+        <div className="flex gap-2 sm:gap-2.5">
+          <div className="h-[5rem] w-[5rem] shrink-0 rounded-md bg-muted sm:h-[6.25rem] sm:w-[6.25rem]" />
+          <div className="flex flex-1 flex-col gap-1.5">
+            <div className="flex justify-between">
+              <div className="h-2.5 w-16 rounded bg-muted" />
+              <div className="h-5 w-12 rounded-md bg-muted" />
+            </div>
+            <div className="h-3.5 w-full rounded bg-muted" />
+            <div className="h-3.5 w-4/5 rounded bg-muted" />
+            <div className="h-5 w-2/5 rounded bg-muted" />
+            <div className="h-2.5 w-3/5 rounded bg-muted" />
           </div>
         </div>
-        <div className="mt-2 h-9 w-full rounded-md bg-muted" />
+        <div className="mt-2 flex justify-end">
+          <div className="h-8 w-28 rounded-md bg-muted sm:h-9" />
+        </div>
       </div>
     </div>
   );

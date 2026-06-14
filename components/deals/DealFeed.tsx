@@ -24,7 +24,7 @@ export function DealFeed({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-2 sm:space-y-2.5">
       {deals.map((deal, index) => (
         <DealFeedCard
           key={deal.id}

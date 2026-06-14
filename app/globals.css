@@ -70,37 +70,38 @@
     @apply deal-card;
   }
   .deal-card-standard:hover {
+    transform: translateY(-1px);
     box-shadow:
-      0 4px 8px rgba(15, 23, 42, 0.06),
-      0 16px 40px rgba(15, 23, 42, 0.1);
+      0 3px 6px rgba(15, 23, 42, 0.06),
+      0 12px 28px rgba(15, 23, 42, 0.09);
   }
   .deal-card-featured {
     @apply deal-card;
     box-shadow:
-      0 0 0 1.5px rgba(249, 115, 22, 0.3),
-      0 2px 10px rgba(234, 88, 12, 0.1),
-      0 8px 24px rgba(15, 23, 42, 0.08);
+      0 0 0 1.5px rgba(0, 87, 183, 0.2),
+      0 2px 8px rgba(0, 87, 183, 0.08),
+      0 8px 22px rgba(15, 23, 42, 0.08);
   }
   .deal-card-featured:hover {
     transform: translateY(-2px);
     box-shadow:
-      0 0 0 1.5px rgba(249, 115, 22, 0.4),
-      0 6px 16px rgba(234, 88, 12, 0.14),
-      0 14px 32px rgba(15, 23, 42, 0.1);
+      0 0 0 1.5px rgba(0, 87, 183, 0.28),
+      0 4px 14px rgba(0, 87, 183, 0.12),
+      0 14px 30px rgba(15, 23, 42, 0.1);
   }
   .deal-card-hot {
     @apply deal-card;
     box-shadow:
-      0 0 0 1px rgba(249, 115, 22, 0.25),
-      0 2px 12px rgba(234, 88, 12, 0.1),
-      0 8px 28px rgba(15, 23, 42, 0.08);
+      0 0 0 1px rgba(234, 88, 12, 0.15),
+      0 2px 8px rgba(15, 23, 42, 0.05),
+      0 6px 20px rgba(15, 23, 42, 0.07);
   }
   .deal-card-hot:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     box-shadow:
-      0 0 0 1px rgba(249, 115, 22, 0.35),
-      0 6px 20px rgba(234, 88, 12, 0.15),
-      0 16px 40px rgba(15, 23, 42, 0.1);
+      0 0 0 1px rgba(234, 88, 12, 0.22),
+      0 4px 12px rgba(15, 23, 42, 0.07),
+      0 12px 28px rgba(15, 23, 42, 0.09);
   }
   .deal-cta {
     @apply bg-primary text-primary-foreground shadow-sm transition-all duration-200;
@@ -110,7 +111,7 @@
   }
   .featured-price {
     color: #004494;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    letter-spacing: -0.02em;
   }
   @keyframes hot-pulse {
     0%, 100% {
@@ -126,9 +127,7 @@
     animation: hot-pulse 2s ease-in-out infinite;
   }
   .deal-card:hover {
-    box-shadow:
-      0 4px 8px rgba(15, 23, 42, 0.06),
-      0 16px 40px rgba(15, 23, 42, 0.1);
+    transform: translateY(-1px);
   }
   .cta-glow {
     @apply shadow-lg shadow-primary/20 transition-all duration-200;
