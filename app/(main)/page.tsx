@@ -1,5 +1,5 @@
 import { InfiniteDealFeed } from "@/components/deals/InfiniteDealFeed";
-import { FeedToolbar } from "@/components/home/FeedToolbar";
+import { CommunityTipsBar } from "@/components/home/CommunityTipsBar";
 import { StickyFeedNav } from "@/components/home/StickyFeedNav";
 import { HOME_PAGE_SIZE, parseSortMode } from "@/lib/constants";
 import { getProfile } from "@/lib/auth/session";
@@ -35,23 +35,14 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       )
     : {};
 
-  const activeCategory = categorySlug
-    ? categories.find((c) => c.slug === categorySlug)
-    : undefined;
-
   return (
     <div className="mx-auto w-full max-w-6xl">
-      <FeedToolbar
-        total={total}
-        sort={sort}
-        categoryName={activeCategory?.name_uk}
-      />
       <StickyFeedNav
         categories={categories}
         activeCategory={categorySlug}
         sort={sort}
       />
-      <div className="pt-4">
+      <div className="pt-3 sm:pt-4">
         <InfiniteDealFeed
           initialDeals={deals}
           initialCommentCounts={commentCounts}
@@ -64,6 +55,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           isLoggedIn={!!profile}
         />
       </div>
+      <CommunityTipsBar />
     </div>
   );
 }

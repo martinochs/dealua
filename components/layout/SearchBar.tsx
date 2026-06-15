@@ -6,6 +6,7 @@ import { useState, FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { t } from "@/lib/i18n/uk";
+import { cn } from "@/lib/utils";
 
 interface SearchBarProps {
   className?: string;
@@ -28,24 +29,34 @@ export function SearchBar({ className, defaultQuery = "" }: SearchBarProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={className}>
+    <form onSubmit={handleSubmit} className={cn("w-full", className)}>
       <div className="flex gap-2">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t("feed.searchPlaceholder")}
-            className="min-h-[44px] pl-9"
+            className="h-12 rounded-xl border-border/80 bg-background pl-11 text-base shadow-sm sm:h-[3.25rem]"
             aria-label={t("feed.search")}
           />
         </div>
-        <Button type="submit" variant="secondary" size="icon" className="h-11 w-11 shrink-0 sm:hidden" aria-label={t("feed.search")}>
-          <Search className="h-4 w-4" />
-        </Button>
-        <Button type="submit" variant="secondary" className="hidden shrink-0 sm:inline-flex">
+        <Button
+          type="submit"
+          variant="secondary"
+          className="hidden h-12 shrink-0 rounded-xl px-5 font-semibold sm:inline-flex sm:h-[3.25rem]"
+        >
           {t("feed.search")}
+        </Button>
+        <Button
+          type="submit"
+          variant="secondary"
+          size="icon"
+          className="h-12 w-12 shrink-0 rounded-xl sm:hidden"
+          aria-label={t("feed.search")}
+        >
+          <Search className="h-4 w-4" />
         </Button>
       </div>
     </form>

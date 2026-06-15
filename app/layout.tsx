@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "VygodaUA — вигідні пропозиції щодня",
+    default: "VygodaUA — Знаходимо вигоду разом",
     template: "%s | VygodaUA",
   },
   description: "Вигідні пропозиції та знижки для України щодня",

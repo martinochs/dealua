@@ -60,6 +60,9 @@
   .text-price {
     color: #0057b7;
   }
+  .bg-uk-yellow {
+    background-color: #ffd700;
+  }
   .deal-card {
     @apply border-0 bg-card;
     box-shadow:

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { t } from "@/lib/i18n/uk";
 import type { SortMode } from "@/types/database";
@@ -67,12 +68,13 @@ export function FeedTabs({ currentSort, basePath = "/", category, embedded = fal
             aria-current={currentSort === sort.value ? "page" : undefined}
             scroll={false}
             className={cn(
-              "whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200",
+              "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200",
               currentSort === sort.value
                 ? "bg-primary text-primary-foreground shadow-md"
-                : "text-muted-foreground hover:bg-white hover:text-foreground hover:shadow-sm"
+                : "text-muted-foreground hover:bg-card hover:text-foreground hover:shadow-sm"
             )}
           >
+            {sort.value === "hot" && <Flame className="h-3.5 w-3.5" aria-hidden />}
             {sort.label}
           </Link>
         ))}

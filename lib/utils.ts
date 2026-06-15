@@ -32,6 +32,12 @@ export function getVoteScore(hot: number, cold: number): number {
   return hot - cold;
 }
 
+export function getRecommendPercent(hot: number, cold: number): number {
+  const total = hot + cold;
+  if (total === 0) return 0;
+  return Math.round((hot / total) * 100);
+}
+
 export function getSavingsPercent(price: number, original: number | null): number | null {
   if (!original || original <= price) return null;
   return Math.round(((original - price) / original) * 100);

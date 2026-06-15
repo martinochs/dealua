@@ -7,13 +7,15 @@ interface HeaderProps {
 
 export function Header({ actions }: HeaderProps) {
   return (
-    <header>
-      <div className="container mx-auto space-y-3 px-4 py-3">
-        <div className="flex items-center justify-between gap-3">
-          <Logo priority />
+    <header className="bg-card">
+      <div className="container mx-auto px-4 py-3 sm:py-4">
+        <div className="flex items-start justify-between gap-3">
+          <Logo priority showTagline />
           {actions}
         </div>
-        <SearchBarWrapper />
+        <div className="mt-3 sm:mt-4">
+          <SearchBarWrapper />
+        </div>
       </div>
     </header>
   );

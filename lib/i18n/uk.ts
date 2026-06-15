@@ -1,7 +1,7 @@
 const uk = {
   site: {
     name: "VygodaUA",
-    tagline: "вигідні пропозиції щодня",
+    tagline: "Знаходимо вигоду разом",
   },
   nav: {
     home: "Головна",
@@ -64,6 +64,13 @@ const uk = {
     commentPlaceholder: "Ваш коментар...",
     loginToVote: "Увійдіть, щоб голосувати",
     loginToComment: "Увійдіть, щоб коментувати",
+    usefulDeal: "Корисна пропозиція?",
+    recommendShort: "рекомендують",
+  },
+  community: {
+    notVoted: "Ще не голосували? Оцініть пропозицію",
+    voteHonestly: "Голосуйте чесно — допоможіть спільноті",
+    togetherStronger: "Разом ми знаходимо найкращі ціни",
   },
   submit: {
     title: "Додати пропозицію",

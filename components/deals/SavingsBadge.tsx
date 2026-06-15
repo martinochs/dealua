@@ -12,8 +12,8 @@ export function SavingsBadge({ amount, featured = false, className }: SavingsBad
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center rounded bg-emerald-50 font-semibold text-emerald-700 ring-1 ring-emerald-200/70",
-        featured ? "px-1.5 py-px text-[10px] sm:text-[11px]" : "px-1 py-px text-[9px] sm:text-[10px]",
+        "inline-flex shrink-0 items-center rounded-md bg-emerald-600 font-bold text-white",
+        featured ? "px-2 py-0.5 text-[10px] sm:text-[11px]" : "px-1.5 py-0.5 text-[9px] sm:text-[10px]",
         className
       )}
     >
