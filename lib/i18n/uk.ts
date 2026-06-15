@@ -1,7 +1,7 @@
 const uk = {
   site: {
-    name: "DealUA",
-    tagline: "Найкращі пропозиції для України",
+    name: "VygodaUA",
+    tagline: "вигідні пропозиції щодня",
   },
   nav: {
     home: "Головна",
@@ -109,7 +109,7 @@ const uk = {
     about: "Про нас",
     rules: "Правила",
     contact: "Контакт",
-    copyright: "© DealUA. Всі права захищені.",
+    copyright: "© VygodaUA. Всі права захищені.",
   },
   errors: {
     notFound: "Сторінку не знайдено",

@@ -8,18 +8,19 @@ export default function Icon() {
     (
       <div
         style={{
-          fontSize: 24,
-          background: "#ef4444",
           width: "100%",
           height: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           borderRadius: 8,
-          color: "white",
+          background: "linear-gradient(135deg, #0057B7 0%, #003d82 100%)",
+          color: "#FFD700",
+          fontSize: 18,
+          fontWeight: 800,
         }}
       >
-        🔥
+        %
       </div>
     ),
     { ...size }

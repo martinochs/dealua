@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, Flame } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/layout/Logo";
 import { t } from "@/lib/i18n/uk";
 
 interface HeroSectionProps {
@@ -13,11 +14,8 @@ export function HeroSection({ dealCount, categoryCount }: HeroSectionProps) {
     <section className="rounded-xl bg-gradient-to-br from-primary/10 via-background to-hot/5 border p-6 sm:p-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-hot">
-            <Flame className="h-5 w-5" />
-            <span className="text-sm font-medium">DealUA</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold">{t("site.tagline")}</h1>
+          <Logo link={false} heightClass="h-8 sm:h-9" />
+          <h1 className="text-2xl font-bold sm:text-3xl">{t("site.tagline")}</h1>
           <p className="text-muted-foreground text-sm sm:text-base">
             {dealCount} активних пропозицій · {categoryCount} категорій · голосуйте та економте
           </p>
