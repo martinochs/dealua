@@ -151,7 +151,7 @@ export function InfiniteDealFeed({
       )}
 
       {!hasMore && !loading && deals.length > 0 && (
-        <p className="py-3 text-center text-xs text-muted-foreground">{t("feed.end")}</p>
+        <p className="py-4 text-center text-sm font-medium text-muted-foreground">{t("feed.showMore")} ↓</p>
       )}
     </div>
   );

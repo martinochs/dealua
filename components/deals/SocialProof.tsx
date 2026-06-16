@@ -12,13 +12,8 @@ export function SocialProof({ deal, className }: SocialProofProps) {
   const views = getDealViewCount(deal);
 
   return (
-    <p
-      className={cn(
-        "text-[10px] leading-snug text-muted-foreground/55 sm:text-[11px]",
-        className
-      )}
-    >
-      +{views} {t("deals.usersViewed")}
+    <p className={cn("text-[10px] text-muted-foreground/55 sm:text-[11px]", className)}>
+      +{views} {t("deals.usersViewed24h")}
     </p>
   );
 }

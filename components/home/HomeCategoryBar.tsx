@@ -22,40 +22,94 @@ export function HomeCategoryBar({ categories, activeCategory, sort }: HomeCatego
   }
 
   const pillBase =
-    "flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-full px-5 py-3 text-sm font-bold transition-all duration-200";
+    "flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 text-sm font-bold transition-all duration-200";
+
+  const mobileItems = [
+    { slug: undefined, icon: "📦", label: t("feed.allDeals") },
+    ...categories.slice(0, 5).map((c) => ({ slug: c.slug, icon: c.icon, label: c.name_uk })),
+  ];
 
   return (
-    <div className="flex gap-3 overflow-x-auto py-4 scrollbar-none" aria-label={t("nav.categories")}>
-      <Link
-        href={href()}
-        aria-current={!activeCategory ? "page" : undefined}
-        className={cn(
-          pillBase,
-          !activeCategory
-            ? "bg-primary text-primary-foreground shadow-md"
-            : "bg-card text-foreground shadow-sm hover:-translate-y-px hover:shadow-md"
-        )}
+    <>
+      {/* Mobile: circular icon categories */}
+      <div
+        className="flex gap-4 overflow-x-auto py-3 scrollbar-none sm:hidden"
+        aria-label={t("nav.categories")}
       >
-        {t("feed.allDeals")}
-      </Link>
-      {categories.map((cat) => (
+        {mobileItems.map((item) => {
+          const active = item.slug ? activeCategory === item.slug : !activeCategory;
+          return (
+            <Link
+              key={item.slug ?? "all"}
+              href={href(item.slug)}
+              aria-current={active ? "page" : undefined}
+              className="flex w-[4.25rem] shrink-0 flex-col items-center gap-1.5"
+            >
+              <span
+                className={cn(
+                  "flex h-12 w-12 items-center justify-center rounded-full text-xl shadow-sm transition-all",
+                  active ? "bg-primary text-primary-foreground" : "bg-card text-foreground"
+                )}
+              >
+                {item.icon}
+              </span>
+              <span
+                className={cn(
+                  "line-clamp-2 text-center text-[10px] font-semibold leading-tight",
+                  active ? "text-primary" : "text-muted-foreground"
+                )}
+              >
+                {item.label}
+              </span>
+            </Link>
+          );
+        })}
+        {categories.length > 5 && (
+          <Link href="/categories" className="flex w-[4.25rem] shrink-0 flex-col items-center gap-1.5">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-card text-lg shadow-sm">
+              ···
+            </span>
+            <span className="text-center text-[10px] font-semibold text-muted-foreground">{t("feed.more")}</span>
+          </Link>
+        )}
+      </div>
+
+      {/* Desktop: pill categories */}
+      <div
+        className="hidden gap-2 overflow-x-auto py-3 scrollbar-none sm:flex"
+        aria-label={t("nav.categories")}
+      >
         <Link
-          key={cat.id}
-          href={href(cat.slug)}
-          aria-current={activeCategory === cat.slug ? "page" : undefined}
+          href={href()}
+          aria-current={!activeCategory ? "page" : undefined}
           className={cn(
             pillBase,
-            activeCategory === cat.slug
+            !activeCategory
               ? "bg-primary text-primary-foreground shadow-md"
-              : "bg-card text-foreground shadow-sm hover:-translate-y-px hover:shadow-md"
+              : "bg-card text-foreground shadow-sm hover:shadow-md"
           )}
         >
-          <span className="text-2xl leading-none" aria-hidden>
-            {cat.icon}
-          </span>
-          {cat.name_uk}
+          {t("feed.allDeals")}
         </Link>
-      ))}
-    </div>
+        {categories.map((cat) => (
+          <Link
+            key={cat.id}
+            href={href(cat.slug)}
+            aria-current={activeCategory === cat.slug ? "page" : undefined}
+            className={cn(
+              pillBase,
+              activeCategory === cat.slug
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "bg-card text-foreground shadow-sm hover:shadow-md"
+            )}
+          >
+            <span className="text-lg leading-none" aria-hidden>
+              {cat.icon}
+            </span>
+            {cat.name_uk}
+          </Link>
+        ))}
+      </div>
+    </>
   );
 }

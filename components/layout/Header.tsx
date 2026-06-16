@@ -1,17 +1,20 @@
 import { SearchBarWrapper } from "./SearchBarWrapper";
 import { Logo } from "./Logo";
+import { HeaderActions } from "./HeaderActions";
+import type { Profile } from "@/types/database";
 
 interface HeaderProps {
-  actions?: React.ReactNode;
+  profile: Profile | null;
+  pendingCount?: number;
 }
 
-export function Header({ actions }: HeaderProps) {
+export function Header({ profile, pendingCount = 0 }: HeaderProps) {
   return (
     <header className="bg-card">
       <div className="container mx-auto px-4 py-3 sm:py-4">
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex items-center justify-between gap-3">
           <Logo priority />
-          {actions}
+          <HeaderActions profile={profile} pendingCount={pendingCount} />
         </div>
         <div className="mt-3 sm:mt-4">
           <SearchBarWrapper />

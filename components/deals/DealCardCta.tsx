@@ -6,22 +6,37 @@ import { cn } from "@/lib/utils";
 interface DealCardCtaProps {
   dealId: string;
   featured?: boolean;
+  layout?: "default" | "side";
   className?: string;
 }
 
-export function DealCardCta({ dealId, featured = false, className }: DealCardCtaProps) {
+export function DealCardCta({
+  dealId,
+  featured = false,
+  layout = "default",
+  className,
+}: DealCardCtaProps) {
+  const side = layout === "side";
+
   return (
     <Button
       asChild
-      size="sm"
+      size={side ? "default" : "sm"}
       className={cn(
-        "deal-cta h-8 shrink-0 px-3.5 text-xs font-semibold sm:h-9 sm:px-4 sm:text-sm",
-        featured && "sm:min-w-[9.5rem]",
+        "deal-cta font-semibold",
+        side
+          ? "h-auto min-h-[4.75rem] w-full whitespace-normal px-3 py-3 text-center text-xs leading-snug sm:min-h-[5.25rem] sm:text-sm"
+          : "h-10 w-full px-4 text-sm sm:h-11",
         className
       )}
     >
-      <a href={`/go/${dealId}`} target="_blank" rel="noopener noreferrer">
-        <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden />
+      <a
+        href={`/go/${dealId}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(side && "flex flex-col items-center justify-center gap-1")}
+      >
+        <ExternalLink className={cn("shrink-0", side ? "mx-auto mb-1 h-4 w-4" : "h-3.5 w-3.5")} aria-hidden />
         {featured ? t("deals.ctaGoFeatured") : t("deals.ctaGo")}
       </a>
     </Button>

@@ -38,22 +38,20 @@ export function SearchBar({ className, defaultQuery = "" }: SearchBarProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t("feed.searchPlaceholder")}
-            className="h-12 rounded-xl border-border/80 bg-background pl-11 text-base shadow-sm sm:h-[3.25rem]"
+            className="h-11 rounded-xl border-border/80 bg-background pl-11 shadow-sm sm:h-12"
             aria-label={t("feed.search")}
           />
         </div>
         <Button
           type="submit"
-          variant="secondary"
-          className="hidden h-12 shrink-0 rounded-xl px-5 font-semibold sm:inline-flex sm:h-[3.25rem]"
+          className="deal-cta hidden h-11 shrink-0 rounded-xl px-5 font-semibold sm:inline-flex sm:h-12"
         >
           {t("feed.search")}
         </Button>
         <Button
           type="submit"
-          variant="secondary"
           size="icon"
-          className="h-12 w-12 shrink-0 rounded-xl sm:hidden"
+          className="deal-cta h-11 w-11 shrink-0 rounded-xl sm:hidden"
           aria-label={t("feed.search")}
         >
           <Search className="h-4 w-4" />
