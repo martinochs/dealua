@@ -1,7 +1,7 @@
 const uk = {
   site: {
-    name: "VygodaUA",
-    tagline: "Знаходимо вигоду разом",
+    name: "VyhodaDeal",
+    tagline: "Найкращі пропозиції. Щодня.",
   },
   nav: {
     home: "Головна",
@@ -116,7 +116,7 @@ const uk = {
     about: "Про нас",
     rules: "Правила",
     contact: "Контакт",
-    copyright: "© VygodaUA. Всі права захищені.",
+    copyright: "© VyhodaDeal. Всі права захищені.",
   },
   errors: {
     notFound: "Сторінку не знайдено",

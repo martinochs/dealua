@@ -10,7 +10,7 @@ export default function AboutPage() {
       <h1 className="text-2xl font-bold">{t("footer.about")}</h1>
       <div className="prose prose-sm max-w-none space-y-4 text-muted-foreground">
         <p>
-          <strong className="text-foreground">VygodaUA</strong> — спільнота вигідних пропозицій та знижок для України.
+          <strong className="text-foreground">VyhodaDeal</strong> — спільнота вигідних пропозицій та знижок для України.
           Користувачі діляться вигідними цінами, голосують за якість пропозицій та допомагають один одному економити.
         </p>
         <p>

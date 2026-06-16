@@ -10,7 +10,7 @@ export function Header({ actions }: HeaderProps) {
     <header className="bg-card">
       <div className="container mx-auto px-4 py-3 sm:py-4">
         <div className="flex items-start justify-between gap-3">
-          <Logo priority showTagline />
+          <Logo priority />
           {actions}
         </div>
         <div className="mt-3 sm:mt-4">

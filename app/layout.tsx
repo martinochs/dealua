@@ -6,19 +6,19 @@ const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "VygodaUA — Знаходимо вигоду разом",
-    template: "%s | VygodaUA",
+    default: "VyhodaDeal — Найкращі пропозиції. Щодня.",
+    template: "%s | VyhodaDeal",
   },
   description: "Вигідні пропозиції та знижки для України щодня",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   openGraph: {
     type: "website",
     locale: "uk_UA",
-    siteName: "VygodaUA",
+    siteName: "VyhodaDeal",
   },
   appleWebApp: {
     capable: true,
-    title: "VygodaUA",
+    title: "VyhodaDeal",
   },
 };
 

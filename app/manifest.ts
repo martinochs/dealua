@@ -2,13 +2,13 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "VygodaUA",
-    short_name: "VygodaUA",
-    description: "вигідні пропозиції щодня",
+    name: "VyhodaDeal",
+    short_name: "VyhodaDeal",
+    description: "Найкращі пропозиції. Щодня.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
-    theme_color: "#0057B7",
+    theme_color: "#16a34a",
     lang: "uk",
     icons: [
       {

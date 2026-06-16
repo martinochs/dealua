@@ -8,28 +8,29 @@ interface LogoProps {
   heightClass?: string;
   link?: boolean;
   priority?: boolean;
+  /** Hidden by default — tagline is baked into logo.png */
   showTagline?: boolean;
 }
 
 export function Logo({
   className,
-  heightClass = "h-8 sm:h-9",
+  heightClass = "h-10 sm:h-11",
   link = true,
   priority = false,
-  showTagline = true,
+  showTagline = false,
 }: LogoProps) {
   const content = (
-    <div className={cn("flex flex-col gap-0.5", className)}>
+    <div className={cn("flex flex-col", className)}>
       <Image
         src="/logo.png"
         alt={t("site.name")}
-        width={200}
-        height={56}
-        className={cn("w-auto max-w-[9.5rem] sm:max-w-[11rem]", heightClass)}
+        width={240}
+        height={72}
+        className={cn("w-auto max-w-[10.5rem] sm:max-w-[12.5rem]", heightClass)}
         priority={priority}
       />
       {showTagline && (
-        <span className="text-[10px] font-medium text-muted-foreground/80 sm:text-[11px]">
+        <span className="mt-0.5 text-[10px] font-medium text-muted-foreground/80 sm:text-[11px]">
           {t("site.tagline")}
         </span>
       )}
