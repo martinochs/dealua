@@ -56,7 +56,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     original_price_uah: 4398,
     external_url: "https://www.aliexpress.com/item/1005009567335272.html",
     affiliate_url:
-      "https://www.aliexpress.com/item/1005009567335272.html?spm=a2g0o.productlist.main.43.37d673e2CS69IP&algo_pvid=e426c7dc-f501-4f0c-9604-9176f5f9c100&algo_exp_id=e426c7dc-f501-4f0c-9604-9176f5f9c100-40&pdp_ext_f=%7B%22order%22%3A%22141%22%2C%22eval%22%3A%221%22%2C%22fromPage%22%3A%22search%22%7D&pdp_npi=6%40dis%21UAH%214398.36%212023.26%21%21%21602.30%21277.06%21%40211b65de17817021398846625e7b9b%2112000049483099719%21sea%21UA%210%21ABX%211%210%21n_tag%3A-29910%3Bd%3A70748a2b%3Bm03_new_user%3A-29895&curPageLogUid=UVkSVnX9zf6Z&utparam-url=scene%3Asearch%7Cquery_from%3A%7Cx_object_id%3A1005009567335272%7C_p_origin_prod%3A",
+      "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005009567335272.html%3Fspm%3Da2g0o.productlist.main.43.37d673e2CS69IP%26algo_pvid%3De426c7dc-f501-4f0c-9604-9176f5f9c100%26algo_exp_id%3De426c7dc-f501-4f0c-9604-9176f5f9c100-40%26pdp_ext_f%3D%257B%2522order%2522%253A%2522141%2522%252C%2522eval%2522%253A%25221%2522%252C%2522fromPage%2522%253A%2522search%2522%257D%26pdp_npi%3D6%2540dis%2521UAH%25214398.36%25212023.26%2521%2521%2521602.30%2521277.06%2521%2540211b65de17817021398846625e7b9b%252112000049483099719%2521sea%2521UA%25210%2521ABX%25211%25210%2521n_tag%253A-29910%253Bd%253A70748a2b%253Bm03_new_user%253A-29895%26curPageLogUid%3DUVkSVnX9zf6Z%26utparam-url%3Dscene%253Asearch%257Cquery_from%253A%257Cx_object_id%253A1005009567335272%257C_p_origin_prod%253A",
     image_url: "/deals/casio-watch.png",
     status: "approved",
     hot_count: 0,
