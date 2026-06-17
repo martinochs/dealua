@@ -136,6 +136,29 @@ export const MOCK_DEALS: DealWithRelations[] = [
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "dealmaster", avatar_url: null },
   },
+  {
+    id: "deal-5",
+    user_id: "user-1",
+    category_id: "cat-2",
+    merchant_id: "merch-4",
+    title: "Жіночий піжамний комплект — топ і шорти з принтом сердечок",
+    description:
+      "Зручний і стильний домашній комплект для жінок — ідеальний для сну, відпочинку вдома та повсякденного комфорту.\n\nОсобливості:\n\n• Комплект: топ + шорти\n• М'який приємний матеріал\n• V-подібний виріз\n• Модний принт із сердечками\n• Легкий і комфортний для дому\n• Підходить для сну та відпочинку\n\n💰 Вигідна ціна на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 244.42,
+    original_price_uah: 488.84,
+    external_url: "https://www.aliexpress.com/item/1005010348394629.html",
+    affiliate_url:
+      "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005010348394629.html%3Fspm%3Da2g0o.detail.pcDetailTopMoreOtherSeller.10.41c60U2N0U2NGu%26gps-id%3DpcDetailTopMoreOtherSeller%26scm%3D1007.40050.354490.0%26scm_id%3D1007.40050.354490.0%26scm-url%3D1007.40050.354490.0%26pvid%3D6bb477ee-ecf3-4e0e-bc2b-80d00766b773%26_t%3Dgps-id%253ApcDetailTopMoreOtherSeller%252Cscm-url%253A1007.40050.354490.0%252Cpvid%253A6bb477ee-ecf3-4e0e-bc2b-80d00766b773%252Ctpp_buckets%253A668%25232846%25238108%25231977%26pdp_ext_f%3D%257B%2522order%2522%253A%25225541%2522%252C%2522eval%2522%253A%25221%2522%252C%2522orig_sl_item_id%2522%253A%25221005010348394629%2522%252C%2522orig_item_id%2522%253A%25221005010487209576%2522%252C%2522sceneId%2522%253A%252230050%2522%252C%2522fromPage%2522%253A%2522recommend%2522%257D%26pdp_npi%3D6%2540dis%2521UAH%2521488.84%2521244.42%2521%2521%252166.94%252133.47%2521%25400b88ac1917817198888386275e0de4%252112000052069300906%2521rec%2521UA%25216069536835%2521XZ%25211%25210%2521n_tag%253A-29919%253Bd%253A70748a2b%253Bm03_new_user%253A-29895%26utparam-url%3Dscene%253ApcDetailTopMoreOtherSeller%257Cquery_from%253A%257Cx_object_id%253A1005010348394629%257C_p_origin_prod%253A1005010487209576",
+    image_url: "/deals/womens-pajama-set.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.05),
+    category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "dealmaster", avatar_url: null },
+  },
 ];
 
 export const MOCK_COMMENTS: CommentWithProfile[] = [];
