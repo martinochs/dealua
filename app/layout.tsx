@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     capable: true,
     title: "VyhodaDeal",
   },
+  other: {
+    "verify-admitad": "d66b47c306",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
