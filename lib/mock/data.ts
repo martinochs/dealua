@@ -182,6 +182,29 @@ export const MOCK_DEALS: DealWithRelations[] = [
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "dealmaster", avatar_url: null },
   },
+  {
+    id: "deal-7",
+    user_id: "user-1",
+    category_id: "cat-2",
+    merchant_id: "merch-4",
+    title: "Комплект чоловічих боксерів — 4 штуки, бавовна",
+    description:
+      "Зручний комплект чоловічих боксерів — практичний вибір для щоденного носіння з м'якої бавовняної тканини.\n\nОсобливості:\n\n• Комплект із 4 штук\n• М'яка бавовняна тканина\n• Комфортна посадка\n• Підходять для щоденного носіння\n• Практичний набір на кожен день\n\n💰 Вигідна ціна на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 542.54,
+    original_price_uah: 673.37,
+    external_url: "https://www.aliexpress.com/item/32968499846.html",
+    affiliate_url:
+      "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F32968499846.html%3Fspm%3Da2g0o.productlist.main.26.7571c3Fwc3Fw06%26utparam-url%3Dscene%253Asearch%257Cquery_from%253Apc_back_same_best%257Cx_object_id%253A32968499846%257C_p_origin_prod%253A%26algo_pvid%3Dcfc82b9f-a778-41ea-a008-f9fc4a2a36cf%26algo_exp_id%3Dcfc82b9f-a778-41ea-a008-f9fc4a2a36cf%26pdp_ext_f%3D%257B%2522order%2522%253A%25226538%2522%252C%2522spu_best_type%2522%253A%2522price%2522%252C%2522fromPage%2522%253A%2522search%2522%257D%26pdp_npi%3D6%2540dis%2521UAH%2521762.61%2521631.76%2521%2521%2521104.43%252186.51%2521%2540211b679917817213595225103d01cc%252112000050317415190%2521sea%2521UA%25216069536835%2521X%25211%25210%2521n_tag%253A-29919%253Bd%253A70748a2b%253Bm03_new_user%253A-29895%253BpisId%253A5000000209636066",
+    image_url: "/deals/mens-boxer-shorts-set.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.01),
+    category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "dealmaster", avatar_url: null },
+  },
 ];
 
 export const MOCK_COMMENTS: CommentWithProfile[] = [];
