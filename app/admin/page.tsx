@@ -8,7 +8,7 @@ import { t } from "@/lib/i18n/uk";
 
 export default async function AdminPage() {
   if (!(await isAdmin())) {
-    redirect("/");
+    redirect("/login?next=/admin");
   }
 
   const [pendingDeals, categories] = await Promise.all([

@@ -1,12 +1,16 @@
 import type { Profile } from "@/types/database";
 import { isMockMode } from "@/lib/config";
-import { getMockProfile } from "@/lib/mock/store";
+import { getMockProfileById, getMockSessionUserId } from "@/lib/auth/mock-session";
 import { createClient } from "@/lib/supabase/server";
 import { supabaseGetProfile } from "@/lib/supabase/queries/deals";
 
 export async function getSession() {
   if (isMockMode()) {
-    return { id: getMockProfile().id, email: "demo@dealua.local" };
+    const userId = await getMockSessionUserId();
+    if (!userId) return null;
+    const profile = getMockProfileById(userId);
+    if (!profile) return null;
+    return { id: profile.id, email: "demo@dealua.local" };
   }
 
   const supabase = await createClient();
@@ -19,7 +23,9 @@ export async function getSession() {
 
 export async function getProfile(): Promise<Profile | null> {
   if (isMockMode()) {
-    return getMockProfile();
+    const userId = await getMockSessionUserId();
+    if (!userId) return null;
+    return getMockProfileById(userId);
   }
 
   const session = await getSession();

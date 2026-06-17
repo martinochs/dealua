@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { isAdmin } from "@/lib/auth/session";
 import { isMockMode } from "@/lib/config";
 import { mockApproveDeal, mockRejectDeal } from "@/lib/mock/store";
 import { supabaseApproveDeal, supabaseRejectDeal } from "@/lib/supabase/queries/deals";
@@ -8,6 +9,10 @@ import { supabaseApproveDeal, supabaseRejectDeal } from "@/lib/supabase/queries/
 export type AdminResult = { error?: string; success?: boolean };
 
 export async function approveDealAction(dealId: string): Promise<AdminResult> {
+  if (!(await isAdmin())) {
+    return { error: "Unauthorized" };
+  }
+
   if (isMockMode()) {
     mockApproveDeal(dealId);
   } else {
@@ -20,6 +25,10 @@ export async function approveDealAction(dealId: string): Promise<AdminResult> {
 }
 
 export async function rejectDealAction(dealId: string): Promise<AdminResult> {
+  if (!(await isAdmin())) {
+    return { error: "Unauthorized" };
+  }
+
   if (isMockMode()) {
     mockRejectDeal(dealId);
   } else {

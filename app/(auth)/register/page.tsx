@@ -8,16 +8,16 @@ import { t } from "@/lib/i18n/uk";
 export default function RegisterPage() {
   if (isMockMode()) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-muted/30">
+      <div className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
         <Card className="w-full max-w-md">
-          <CardContent className="pt-6 text-center space-y-4">
+          <CardContent className="space-y-4 pt-6 text-center">
             <p className="text-lg font-medium">{t("auth.register")}</p>
             <p className="text-sm text-muted-foreground">
-              Реєстрація буде доступна після підключення Supabase.
-              Зараз використовуйте демо-акаунт <strong>admin</strong>.
+              Реєстрація буде доступна після підключення Supabase. Для входу в адмін-панель
+              використовуйте логін адміністратора.
             </p>
             <Button asChild>
-              <Link href="/">{t("nav.home")}</Link>
+              <Link href="/login">{t("auth.login")}</Link>
             </Button>
           </CardContent>
         </Card>
@@ -26,7 +26,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-muted/30">
+    <div className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
       <RegisterForm />
     </div>
   );

@@ -5,6 +5,11 @@ export const loginSchema = z.object({
   password: z.string().min(6, "Мінімум 6 символів"),
 });
 
+export const mockLoginSchema = z.object({
+  username: z.string().min(1, "Введіть ім'я користувача"),
+  password: z.string().min(1, "Введіть пароль"),
+});
+
 export const registerSchema = z.object({
   email: z.string().email("Невірний email"),
   password: z.string().min(6, "Мінімум 6 символів"),

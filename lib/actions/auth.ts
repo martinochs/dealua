@@ -3,14 +3,48 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { isMockMode } from "@/lib/config";
+import {
+  clearMockSession,
+  getMockAdminProfile,
+  setMockSession,
+  verifyMockAdminLogin,
+} from "@/lib/auth/mock-session";
 import { createClient } from "@/lib/supabase/server";
-import { loginSchema, registerSchema } from "@/lib/validators/schemas";
+import { loginSchema, mockLoginSchema, registerSchema } from "@/lib/validators/schemas";
 
 export type ActionResult = { error?: string; success?: boolean };
 
+function safeRedirectPath(next: FormDataEntryValue | null): string {
+  if (typeof next === "string" && next.startsWith("/") && !next.startsWith("//")) {
+    return next;
+  }
+  return "/";
+}
+
 export async function loginAction(formData: FormData): Promise<ActionResult> {
+  const next = safeRedirectPath(formData.get("next"));
+
   if (isMockMode()) {
-    redirect("/");
+    const parsed = mockLoginSchema.safeParse({
+      username: formData.get("username"),
+      password: formData.get("password"),
+    });
+    if (!parsed.success) {
+      return { error: parsed.error.errors[0]?.message };
+    }
+
+    if (!verifyMockAdminLogin(parsed.data.username, parsed.data.password)) {
+      return { error: "Невірне ім'я користувача або пароль" };
+    }
+
+    const admin = getMockAdminProfile();
+    if (!admin) {
+      return { error: "Адміністратора не знайдено" };
+    }
+
+    await setMockSession(admin.id);
+    revalidatePath("/", "layout");
+    redirect(next);
   }
 
   const parsed = loginSchema.safeParse({
@@ -28,12 +62,12 @@ export async function loginAction(formData: FormData): Promise<ActionResult> {
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect(next);
 }
 
 export async function registerAction(formData: FormData): Promise<ActionResult> {
   if (isMockMode()) {
-    redirect("/");
+    redirect("/login");
   }
 
   const parsed = registerSchema.safeParse({
@@ -61,7 +95,10 @@ export async function registerAction(formData: FormData): Promise<ActionResult> 
 }
 
 export async function logoutAction() {
-  if (!isMockMode()) {
+  if (isMockMode()) {
+    await clearMockSession();
+    revalidatePath("/", "layout");
+  } else {
     const supabase = await createClient();
     await supabase.auth.signOut();
     revalidatePath("/", "layout");

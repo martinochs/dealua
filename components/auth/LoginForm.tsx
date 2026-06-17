@@ -9,7 +9,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { loginAction } from "@/lib/actions/auth";
 import { t } from "@/lib/i18n/uk";
 
-export function LoginForm() {
+interface LoginFormProps {
+  mockMode?: boolean;
+  next?: string;
+}
+
+export function LoginForm({ mockMode = false, next }: LoginFormProps) {
   const [state, formAction, isPending] = useActionState(
     async (_prev: { error?: string }, formData: FormData) => loginAction(formData),
     {}
@@ -22,26 +27,46 @@ export function LoginForm() {
       </CardHeader>
       <CardContent>
         <form action={formAction} className="space-y-4">
-          {state.error && (
-            <p className="text-sm text-destructive">{state.error}</p>
+          {next && <input type="hidden" name="next" value={next} />}
+          {state.error && <p className="text-sm text-destructive">{state.error}</p>}
+          {mockMode ? (
+            <div className="space-y-2">
+              <Label htmlFor="username">{t("auth.username")}</Label>
+              <Input
+                id="username"
+                name="username"
+                type="text"
+                required
+                autoComplete="username"
+              />
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <Label htmlFor="email">{t("auth.email")}</Label>
+              <Input id="email" name="email" type="email" required autoComplete="email" />
+            </div>
           )}
           <div className="space-y-2">
-            <Label htmlFor="email">{t("auth.email")}</Label>
-            <Input id="email" name="email" type="email" required autoComplete="email" />
-          </div>
-          <div className="space-y-2">
             <Label htmlFor="password">{t("auth.password")}</Label>
-            <Input id="password" name="password" type="password" required autoComplete="current-password" />
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              required
+              autoComplete="current-password"
+            />
           </div>
           <Button type="submit" className="w-full" disabled={isPending}>
             {t("auth.login")}
           </Button>
-          <p className="text-sm text-center text-muted-foreground">
-            {t("auth.noAccount")}{" "}
-            <Link href="/register" className="text-primary hover:underline">
-              {t("auth.register")}
-            </Link>
-          </p>
+          {!mockMode && (
+            <p className="text-center text-sm text-muted-foreground">
+              {t("auth.noAccount")}{" "}
+              <Link href="/register" className="text-primary hover:underline">
+                {t("auth.register")}
+              </Link>
+            </p>
+          )}
         </form>
       </CardContent>
     </Card>
