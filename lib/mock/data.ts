@@ -113,6 +113,29 @@ export const MOCK_DEALS: DealWithRelations[] = [
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "dealmaster", avatar_url: null },
   },
+  {
+    id: "deal-4",
+    user_id: "user-1",
+    category_id: "cat-2",
+    merchant_id: "merch-4",
+    title: "Жіночі спортивні шорти — для бігу, фітнесу та йоги",
+    description:
+      "Зручні жіночі спортивні шорти з високою талією — ідеальні для бігу, велоспорту, фітнесу та йоги.\n\nОсобливості:\n\n• Висока талія для комфортної посадки\n• Підходять для тренувань, бігу та повсякденного носіння\n• Еластичний матеріал, що не обмежує рух\n• Стильний спортивний дизайн\n• Підходять для залу, йоги та активного відпочинку\n\n💰 Вигідна ціна на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 164.60,
+    original_price_uah: 335.92,
+    external_url: "https://www.aliexpress.com/item/1005011627508581.html",
+    affiliate_url:
+      "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005011627508581.html%3Fspm%3Da2g0n.home.msiteJustForYou.13.30696278wIxoHp%26gps-id%3DmsiteJustForYou%26scm%3D1007.33107.376995.0%26scm_id%3D1007.33107.376995.0%26scm-url%3D1007.33107.376995.0%26pvid%3D34466abf-3be9-4ebd-8033-a1494d67ef32%26_t%3Dgps-id%253AmsiteJustForYou%252Cscm-url%253A1007.33107.376995.0%252Cpvid%253A34466abf-3be9-4ebd-8033-a1494d67ef32%252Ctpp_buckets%253A668%25232846%25238108%25231977%26pdp_ext_f%3D%257B%2522order%2522%253A%2522800%2522%252C%2522eval%2522%253A%25221%2522%252C%2522sceneId%2522%253A%252223107%2522%252C%2522fromPage%2522%253A%2522recommend%2522%257D%26pdp_npi%3D6%2540dis%2521UAH%2521335.92%2521164.60%2521%2521%252146.00%252122.54%2521%25400b88ac1917817198623105570e0de4%252112000056095228286%2521rec%2521UA%25216069536835%2521XZ%25211%25210%2521n_tag%253A-29919%253Bd%253A70748a2b%253Bm03_new_user%253A-29895%26utparam-url%3Dscene%253AmsiteJustForYou%257Cquery_from%253A%257Cx_object_id%253A1005011627508581%257C_p_origin_prod%253A%26curPageLogUid%3DLQUZVImdtQy1",
+    image_url: "/deals/womens-sport-shorts.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.1),
+    category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "dealmaster", avatar_url: null },
+  },
 ];
 
 export const MOCK_COMMENTS: CommentWithProfile[] = [];
