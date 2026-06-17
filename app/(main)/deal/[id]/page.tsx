@@ -69,8 +69,14 @@ export default async function DealPage({ params }: DealPageProps) {
 
         <div className="flex-1 space-y-4">
           {deal.image_url && (
-            <div className="relative aspect-video overflow-hidden rounded-lg bg-muted">
-              <Image src={deal.image_url} alt={deal.title} fill className="object-cover" priority />
+            <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-muted sm:aspect-[4/3]">
+              <Image
+                src={deal.image_url}
+                alt={deal.title}
+                fill
+                className="object-contain p-2"
+                priority
+              />
             </div>
           )}
 
