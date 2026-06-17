@@ -14,7 +14,7 @@ interface LogoProps {
 
 export function Logo({
   className,
-  heightClass = "h-10 sm:h-11",
+  heightClass = "h-14 sm:h-16",
   link = true,
   priority = false,
   showTagline = false,
@@ -24,9 +24,9 @@ export function Logo({
       <Image
         src="/logo.png"
         alt={t("site.name")}
-        width={240}
-        height={72}
-        className={cn("w-auto max-w-[10.5rem] sm:max-w-[12.5rem]", heightClass)}
+        width={320}
+        height={96}
+        className={cn("w-auto max-w-[14rem] sm:max-w-[17rem] md:max-w-[19rem]", heightClass)}
         priority={priority}
       />
       {showTagline && (
