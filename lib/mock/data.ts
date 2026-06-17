@@ -95,15 +95,15 @@ export const MOCK_DEALS: DealWithRelations[] = [
     user_id: "user-1",
     category_id: "cat-1",
     merchant_id: "merch-4",
-    title: "Вигідна пропозиція AliExpress",
+    title: "Casio World Time — чоловічий цифровий годинник зі шкіряним ремінцем",
     description:
-      "Актуальна знижка на AliExpress. Перейдіть за посиланням, щоб переглянути деталі товару та оформити замовлення.\n\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+      "Стильний цифровий годинник Casio World Time з бронзовим корпусом і коричневим шкіряним ремінцем. Ідеальний вибір для тих, хто цінує функціональність та класичний дизайн.\n\nОсобливості:\n\n• Функція World Time — світовий час і карта часових поясів\n• Водозахист до 100 метрів (WR100M)\n• Батарея на 10 років\n• Підсвітка Illuminator\n• Будильник, секундомір, таймер\n• Міцний корпус зі шкіряним ремінцем\n• Японська якість Casio\n\nПідходить для щоденного носіння, подорожей та активного способу життя.\n\n💰 Вигідна ціна на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
     price_uah: 2357.19,
     original_price_uah: 5219.17,
     external_url: "https://www.aliexpress.com/item/1005009966164200.html",
     affiliate_url:
       "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005009966164200.html%3FinvitationCode%3DQklkVC85UElNSm1RdEduR0pxVzB0ZVhmUHgxMG9PWHdzbEIwbTlFRmNvV2VQemFTZUJrNWVWT0s1MU1hdTAyWg%26srcSns%3Dsns_Copy%26spreadType%3DsocialShare%26social_params%3D61544444090%26bizType%3DProductDetail%26spreadCode%3DQklkVC85UElNSm1RdEduR0pxVzB0ZVhmUHgxMG9PWHdzbEIwbTlFRmNvV2VQemFTZUJrNWVWT0s1MU1hdTAyWg%26aff_fcid%3D0604f69f2d874cb0ba22a0ab411e3d43-1781705572919-03433-_EHKmguw%26tt%3DMG%26aff_fsk%3D_EHKmguw%26aff_platform%3Ddefault%26sk%3D_EHKmguw%26aff_trace_key%3D0604f69f2d874cb0ba22a0ab411e3d43-1781705572919-03433-_EHKmguw%26shareId%3D61544444090%26businessType%3DProductDetail%26platform%3DAE%26terminal_id%3D9958bfced5b34a7a95165046056e6ec1%26afSmartRedirect%3Dy%26gatewayAdapt%3Ddeu2glo",
-    image_url: "/deals/casio-watch.png",
+    image_url: "/deals/casio-world-time-watch.png",
     status: "approved",
     hot_count: 0,
     cold_count: 0,
