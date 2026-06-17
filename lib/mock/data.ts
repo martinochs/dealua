@@ -113,29 +113,6 @@ export const MOCK_DEALS: DealWithRelations[] = [
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "dealmaster", avatar_url: null },
   },
-  {
-    id: "deal-4",
-    user_id: "user-1",
-    category_id: "cat-1",
-    merchant_id: "merch-4",
-    title: "Xiaomi Redmi 8A — вживаний смартфон 4G, 64 ГБ, 5000 mAh",
-    description:
-      "Шукаєте недорогий смартфон для дзвінків, месенджерів та повсякденного використання? Xiaomi Redmi 8A залишається чудовим бюджетним варіантом завдяки великому акумулятору та надійній роботі.\n\n✅ 4 ГБ оперативної пам'яті\n✅ 64 ГБ вбудованої пам'яті\n✅ Акумулятор 5000 мАг\n✅ Екран 6.22\" HD+\n✅ Процесор Qualcomm Snapdragon 439\n✅ Камера 12 МП\n✅ Швидка зарядка 18 Вт\n✅ Розблокування по обличчю\n✅ Глобальна прошивка\n\n📦 Стан: б/у\n\n💡 Підійде як основний бюджетний смартфон, запасний телефон або пристрій для дитини чи літніх людей.",
-    price_uah: 2743.96,
-    original_price_uah: 6486.9,
-    external_url: "https://www.aliexpress.com/item/1005011840978096.html",
-    affiliate_url:
-      "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005011840978096.html%3Fspm%3Da2g0o.productlist.main.3.558cL2KqL2KqpP%26algo_pvid%3D63bbca83-b32e-4790-b271-a1dfb5979309%26algo_exp_id%3D63bbca83-b32e-4790-b271-a1dfb5979309-2%26pdp_ext_f%3D%257B%2522order%2522%253A%252224%2522%252C%2522eval%2522%253A%25221%2522%252C%2522fromPage%2522%253A%2522search%2522%257D%26pdp_npi%3D6%2540dis%2521UAH%25216486.90%25212743.96%2521%2521%2521888.30%2521375.75%2521%2540211b6c1717817188508268504ea7fb%252112000056751494006%2521sea%2521UA%25216069536835%2521X%25211%25210%2521n_tag%253A-29919%253Bd%253A70748a2b%253Bm03_new_user%253A-29895%253BpisId%253A5000000209620680%26curPageLogUid%3DbWPdPF90h388%26utparam-url%3Dscene%253Asearch%257Cquery_from%253A%257Cx_object_id%253A1005011840978096%257C_p_origin_prod%253A",
-    image_url: "/deals/xiaomi-redmi-8a.png",
-    status: "approved",
-    hot_count: 0,
-    cold_count: 0,
-    expires_at: null,
-    created_at: hoursAgo(0.1),
-    category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
-    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
-  },
 ];
 
 export const MOCK_COMMENTS: CommentWithProfile[] = [];
