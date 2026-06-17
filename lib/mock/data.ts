@@ -57,7 +57,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     external_url: "https://www.aliexpress.com/item/1005009567335272.html",
     affiliate_url:
       "https://www.aliexpress.com/item/1005009567335272.html?spm=a2g0o.productlist.main.43.37d673e2CS69IP&algo_pvid=e426c7dc-f501-4f0c-9604-9176f5f9c100&algo_exp_id=e426c7dc-f501-4f0c-9604-9176f5f9c100-40&pdp_ext_f=%7B%22order%22%3A%22141%22%2C%22eval%22%3A%221%22%2C%22fromPage%22%3A%22search%22%7D&pdp_npi=6%40dis%21UAH%214398.36%212023.26%21%21%21602.30%21277.06%21%40211b65de17817021398846625e7b9b%2112000049483099719%21sea%21UA%210%21ABX%211%210%21n_tag%3A-29910%3Bd%3A70748a2b%3Bm03_new_user%3A-29895&curPageLogUid=UVkSVnX9zf6Z&utparam-url=scene%3Asearch%7Cquery_from%3A%7Cx_object_id%3A1005009567335272%7C_p_origin_prod%3A",
-    image_url: "https://picsum.photos/seed/casio-watch/400/300",
+    image_url: "/deals/casio-watch.png",
     status: "approved",
     hot_count: 0,
     cold_count: 0,
