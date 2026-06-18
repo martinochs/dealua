@@ -228,6 +228,29 @@ export const MOCK_DEALS: DealWithRelations[] = [
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "dealmaster", avatar_url: null },
   },
+  {
+    id: "deal-9",
+    user_id: "user-1",
+    category_id: "cat-8",
+    merchant_id: "merch-4",
+    title: "Naturehike — надувний кемпінговий матрац R-Value 4.6, ультралегкий",
+    description:
+      "Naturehike — сучасний надувний кемпінговий матрац для походів, кемпінгу та відпочинку на природі. З високим показником теплоізоляції R-Value 4.6 для комфортного сну навіть у прохолодну погоду.\n\nОсобливості:\n\n• R-Value 4.6 — хороша теплоізоляція\n• Ультралегка конструкція для походів\n• Складна конструкція — зручно брати з собою\n• Підходить для кемпінгу, пікніків і пляжу\n• М'яка поверхня для комфортного сну\n• Компактне зберігання в поході\n\n💰 Вигідна ціна на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 2797.01,
+    original_price_uah: 6906.15,
+    external_url: "https://www.aliexpress.com/item/1005007500152556.html",
+    affiliate_url:
+      "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005007500152556.html%3FproductId%3D1005007500152556%26selectedSkuId%3D12000041039284580%26channel%3DdetailPageDealCombineFloor%26combineBizType%3DplatformFreeShipping%26intent_extra_sku_from%3Dfrom_add_to_shopcart%26type%3Dmergeorder%26pdp_npi%3D4%2540dis%2521UAH%25216906.15%25212797.01%2521%2521%2521947.06%2521383.56%2521%254021039eb717818102729964205e0ec2%252112000041039284580%2521fus%2521UA%25216069536835%2521X%26trackParams%3D%257B%2522businessScenario%2522%253A%2522choiceV2%2522%252C%2522activityType%2522%253A%2522CHOICE_FREE_SHIPPING%2522%257D%26spm%3Da2g0o.detail.fusionpage.0",
+    image_url: "/deals/naturehike-camping-mattress.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.001),
+    category: { slug: "podorozhi", name_uk: "Подорожі", icon: "✈️" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "dealmaster", avatar_url: null },
+  },
 ];
 
 export const MOCK_COMMENTS: CommentWithProfile[] = [];
