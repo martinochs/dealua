@@ -312,33 +312,36 @@ export async function supabaseVote(
     .eq("user_id", userId)
     .maybeSingle();
 
-  let hotCount = deal.hot_count;
-  let coldCount = deal.cold_count;
   let userVote: "hot" | "cold" | null = voteType;
 
   if (existing?.vote_type === voteType) {
-    await supabase.from("votes").delete().eq("id", existing.id);
-    if (voteType === "hot") hotCount--;
-    else coldCount--;
+    const { error } = await supabase.from("votes").delete().eq("id", existing.id);
+    if (error) return null;
     userVote = null;
   } else if (existing) {
-    await supabase.from("votes").update({ vote_type: voteType }).eq("id", existing.id);
-    if (existing.vote_type === "hot") {
-      hotCount--;
-      coldCount++;
-    } else {
-      coldCount--;
-      hotCount++;
-    }
+    const { error } = await supabase.from("votes").update({ vote_type: voteType }).eq("id", existing.id);
+    if (error) return null;
   } else {
-    await supabase.from("votes").insert({ deal_id: dealId, user_id: userId, vote_type: voteType });
-    if (voteType === "hot") hotCount++;
-    else coldCount++;
+    const { error } = await supabase.from("votes").insert({
+      deal_id: dealId,
+      user_id: userId,
+      vote_type: voteType,
+    });
+    if (error) return null;
   }
 
-  await supabase.from("deals").update({ hot_count: hotCount, cold_count: coldCount }).eq("id", dealId);
+  const { data: updated } = await supabase
+    .from("deals")
+    .select("hot_count, cold_count")
+    .eq("id", dealId)
+    .maybeSingle();
+  if (!updated) return null;
 
-  return { hot_count: hotCount, cold_count: coldCount, user_vote: userVote };
+  return {
+    hot_count: updated.hot_count,
+    cold_count: updated.cold_count,
+    user_vote: userVote,
+  };
 }
 
 export async function supabaseApproveDeal(dealId: string) {

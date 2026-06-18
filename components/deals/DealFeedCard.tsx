@@ -95,7 +95,7 @@ function DealCardImage({
             src={deal.image_url}
             alt={deal.title}
             fill
-            className="object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+            className="object-contain transition-transform duration-200 group-hover:scale-[1.02]"
             sizes="(max-width: 640px) 100vw, 128px"
             priority={featured}
           />

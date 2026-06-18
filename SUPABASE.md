@@ -18,13 +18,24 @@ In Supabase **SQL Editor**, run:
 
 ```
 supabase/migrations/20260101000000_initial_schema.sql
+supabase/migrations/20260102000000_sync_vote_counts.sql
 ```
+
+The second migration adds vote-count triggers so user votes persist correctly.
 
 Then seed categories and merchants (no auth users required):
 
 ```
 supabase/seed_categories_merchants.sql
 ```
+
+Import your live VyhodaDeal offers (Casio watches, AliExpress deals 1–7):
+
+```
+supabase/seed_vyhodadeal_deals.sql
+```
+
+Replace `YOUR_USER_UUID` in that file with your profile id from `SELECT id, username FROM profiles;` after registering.
 
 Optional full demo data (requires auth users with matching UUIDs):
 
