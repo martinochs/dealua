@@ -279,8 +279,8 @@ export async function supabaseGetClickStats(): Promise<
 
 export async function supabaseGetDealUrl(dealId: string): Promise<string | null> {
   const deal = await supabaseGetDealById(dealId);
-  if (!deal) return null;
-  return deal.affiliate_url ?? deal.external_url;
+  if (!deal?.affiliate_url) return null;
+  return deal.affiliate_url;
 }
 
 export async function supabaseLogClick(dealId: string, userId?: string | null) {

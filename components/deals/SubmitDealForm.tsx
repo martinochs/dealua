@@ -65,13 +65,15 @@ export function SubmitDealForm({ categories, merchants, showSuccess }: SubmitDea
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="external_url">{t("submit.externalUrl")}</Label>
-            <Input id="external_url" name="external_url" type="url" placeholder="https://" required />
-          </div>
-
-          <div className="space-y-2">
             <Label htmlFor="affiliate_url">{t("submit.affiliateUrl")}</Label>
-            <Input id="affiliate_url" name="affiliate_url" type="url" placeholder="https://" />
+            <Input
+              id="affiliate_url"
+              name="affiliate_url"
+              type="url"
+              placeholder="https://rzekl.com/g/..."
+              required
+            />
+            <p className="text-xs text-muted-foreground">{t("submit.affiliateUrlHint")}</p>
           </div>
 
           <div className="space-y-2">

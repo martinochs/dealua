@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { resolveDealLinksFromAffiliate } from "@/lib/affiliate-links";
 
 export const loginSchema = z.object({
   email: z.string().email("Невірний email"),
@@ -28,24 +29,25 @@ export const submitDealSchema = z.object({
     .union([z.coerce.number().positive(), z.literal(""), z.undefined()])
     .optional()
     .transform((v) => (v === "" || v === undefined ? undefined : v)),
-  external_url: z.string().url("Невірне посилання").refine(
-    (url) => url.startsWith("https://"),
-    "Посилання має бути https://"
-  ),
-  affiliate_url: z
-    .union([
-      z.string().url().refine((url) => url.startsWith("https://"), "Посилання має бути https://"),
-      z.literal(""),
-      z.undefined(),
-    ])
-    .optional()
-    .transform((v) => (v === "" || v === undefined ? undefined : v)),
+  affiliate_url: z.string().min(1, "Вставте партнерське посилання"),
   image_url: z
     .union([z.string().url(), z.literal(""), z.undefined()])
     .optional()
     .transform((v) => (v === "" || v === undefined ? undefined : v)),
   category_id: z.string().min(1, "Оберіть категорію"),
   merchant_id: z.string().min(1, "Оберіть магазин"),
+}).transform((data) => {
+  const links = resolveDealLinksFromAffiliate(data.affiliate_url);
+  if ("error" in links) {
+    throw new z.ZodError([
+      { code: "custom", message: links.error, path: ["affiliate_url"] },
+    ]);
+  }
+  return {
+    ...data,
+    affiliate_url: links.affiliate_url,
+    external_url: links.external_url,
+  };
 });
 
 export const commentSchema = z.object({

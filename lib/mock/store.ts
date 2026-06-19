@@ -280,8 +280,8 @@ export function mockLogClick(dealId: string) {
 
 export function mockGetDealUrl(dealId: string): string | null {
   const deal = getStore().deals.find((d) => d.id === dealId);
-  if (!deal || deal.status !== "approved") return null;
-  return deal.affiliate_url || deal.external_url;
+  if (!deal || deal.status !== "approved" || !deal.affiliate_url) return null;
+  return deal.affiliate_url;
 }
 
 export function getMockStats() {

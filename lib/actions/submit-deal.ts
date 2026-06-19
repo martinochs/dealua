@@ -12,7 +12,6 @@ export type SubmitDealResult = { error?: string; success?: boolean };
 
 export async function submitDealAction(formData: FormData): Promise<SubmitDealResult> {
   const originalPrice = formData.get("original_price_uah");
-  const affiliateUrl = formData.get("affiliate_url");
   const imageUrl = formData.get("image_url");
 
   const parsed = submitDealSchema.safeParse({
@@ -20,8 +19,7 @@ export async function submitDealAction(formData: FormData): Promise<SubmitDealRe
     description: formData.get("description"),
     price_uah: formData.get("price_uah"),
     original_price_uah: originalPrice || undefined,
-    external_url: formData.get("external_url"),
-    affiliate_url: affiliateUrl || undefined,
+    affiliate_url: formData.get("affiliate_url"),
     image_url: imageUrl || undefined,
     category_id: formData.get("category_id"),
     merchant_id: formData.get("merchant_id"),
@@ -42,7 +40,7 @@ export async function submitDealAction(formData: FormData): Promise<SubmitDealRe
       price_uah: parsed.data.price_uah,
       original_price_uah: parsed.data.original_price_uah ?? null,
       external_url: parsed.data.external_url,
-      affiliate_url: parsed.data.affiliate_url ?? null,
+      affiliate_url: parsed.data.affiliate_url,
       image_url: parsed.data.image_url ?? null,
       status: "pending",
       hot_count: 0,
