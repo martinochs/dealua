@@ -14,6 +14,8 @@ import {
   getMockClickStats,
   getMockCommentCounts,
   getMockUserVotes,
+  mockGetDealUrl,
+  mockLogClick,
 } from "@/lib/mock/store";
 import {
   supabaseGetCategories,
@@ -30,6 +32,8 @@ import {
   supabaseGetClickStats,
   supabaseGetCommentCounts,
   supabaseGetUserVotes,
+  supabaseGetDealUrl,
+  supabaseLogClick,
 } from "@/lib/supabase/queries/deals";
 import type { SortMode } from "@/types/database";
 
@@ -105,4 +109,16 @@ export async function getUserVotes(dealIds: string[], userId: string) {
   return isMockMode()
     ? getMockUserVotes(dealIds, userId)
     : supabaseGetUserVotes(dealIds, userId);
+}
+
+export async function getDealOutboundUrl(dealId: string) {
+  return isMockMode() ? mockGetDealUrl(dealId) : supabaseGetDealUrl(dealId);
+}
+
+export async function logDealClick(dealId: string, userId?: string | null) {
+  if (isMockMode()) {
+    mockLogClick(dealId);
+    return;
+  }
+  await supabaseLogClick(dealId, userId);
 }
