@@ -251,6 +251,29 @@ export const MOCK_DEALS: DealWithRelations[] = [
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "dealmaster", avatar_url: null },
   },
+  {
+    id: "deal-10",
+    user_id: "user-1",
+    category_id: "cat-7",
+    merchant_id: "merch-4",
+    title: "Гра «Піратська бочка» — весела настільна гра для дітей",
+    description:
+      "Весела гра «Піратська бочка» — класична настільна гра, де потрібно обережно вставляти мечі, не «пробудивши» пірата. Ідеальний подарунок для дітей та сімейного дозвілля.\n\nОсобливості:\n\n• Весела гра для дітей і всієї родини\n• Розвиває уважність і координацію\n• Компактна — зручно брати у гості\n• Чудовий подарунок на свято\n• Яскравий дизайн у піратському стилі\n• Підходить для дітей від 3 років\n\n💰 Знижка 71% на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 140.39,
+    original_price_uah: 484.5,
+    external_url: "https://www.aliexpress.com/item/1005005948757725.html",
+    affiliate_url:
+      "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005005948757725.html%3Fspm%3Da2g0o.cart.0.0.7e7a795dTyrK7L%26mp%3D1%26sourceType%3D570%26pdp_npi%3D6%2540dis%2521UAH%2521UAH%2B484.50%2521UAH%2B140.39%2521%2521UAH%2B140.39%2521%2521%2521%2540210389a017818616813356137e1117%252112000034982815781%2521ct%2521UA%25216069536835%2521%25211%25210%2521%26pdp_ext_f%3D%257B%2522cart2PdpParams%2522%253A%257B%2522sourceType%2522%253A%2522570%2522%252C%2522cartSource%2522%253A%2522main%2522%257D%257D",
+    image_url: "/deals/pirate-barrel-toy.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.0005),
+    category: { slug: "diti", name_uk: "Дитячі товари", icon: "🧸" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "dealmaster", avatar_url: null },
+  },
 ];
 
 export const MOCK_COMMENTS: CommentWithProfile[] = [];
