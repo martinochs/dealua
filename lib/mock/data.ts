@@ -16,6 +16,15 @@ const deal13Links = (() => {
   return links;
 })();
 
+const DEAL_14_AFFILIATE =
+  "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005011872113011.html%3Fspm%3Da2g0o.productlist.main.58.45c96sJn6sJnuC%26algo_pvid%3Dd69eebfe-fd79-43b0-8125-8e763fc2da7e%26algo_exp_id%3Dd69eebfe-fd79-43b0-8125-8e763fc2da7e-57%26pdp_ext_f%3D%257B%2522order%2522%253A%2522122%2522%252C%2522eval%2522%253A%25221%2522%252C%2522fromPage%2522%253A%2522search%2522%257D%26pdp_npi%3D6%2540dis%2521UAH%25213439.42%25211513.37%2521%2521%2521472.15%2521207.75%2521%25402103894417818892598344746e996c%252112000056845198081%2521sea%2521UA%25216069536835%2521X%25211%25210%2521n_tag%253A-29919%253Bd%253A70748a2b%253Bm03_new_user%253A-29895%26curPageLogUid%3Ddb2jN03O0GAl%26utparam-url%3Dscene%253Asearch%257Cquery_from%253A%257Cx_object_id%253A1005011872113011%257C_p_origin_prod%253A";
+
+const deal14Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_14_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -348,6 +357,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     cold_count: 0,
     expires_at: null,
     created_at: hoursAgo(0.00001),
+    category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "dealmaster", avatar_url: null },
+  },
+  {
+    id: "deal-14",
+    user_id: "user-1",
+    category_id: "cat-2",
+    merchant_id: "merch-4",
+    title: "Жіноча атласна сукня без бретелів — зі складками, відкриті плечі",
+    description:
+      "Елегантна атласна сукня без бретелів зі складками — стильний варіант для вечірок і святкових подій. Модель з відкритими плечима, відкритою спиною та високою талією.\n\nОсобливості:\n\n• Атласна тканина з елегантним блиском\n• Без бретелів, з відкритими плечима\n• Драпірування зі складками\n• Відкрита спина\n• Облягаючий силует з високою талією\n• Підходить для вечірок і урочистих подій\n\n💰 Знижка 56% на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 1513.37,
+    original_price_uah: 3439.42,
+    external_url: deal14Links.external_url,
+    affiliate_url: deal14Links.affiliate_url,
+    image_url: "/deals/womens-pleated-strapless-dress.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.000005),
     category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "dealmaster", avatar_url: null },
