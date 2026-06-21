@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AuthDivider } from "@/components/auth/AuthDivider";
 import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
+import { TelegramSignInButton } from "@/components/auth/TelegramSignInButton";
 import { loginAction } from "@/lib/actions/auth";
 import { t } from "@/lib/i18n/uk";
 
@@ -32,6 +33,7 @@ export function LoginForm({ mockMode = false, next, oauthError = false }: LoginF
         {!mockMode && (
           <>
             <GoogleSignInButton next={next} />
+            <TelegramSignInButton next={next} />
             <AuthDivider />
           </>
         )}

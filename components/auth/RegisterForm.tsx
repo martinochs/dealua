@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AuthDivider } from "@/components/auth/AuthDivider";
 import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
+import { TelegramSignInButton } from "@/components/auth/TelegramSignInButton";
 import { registerAction } from "@/lib/actions/auth";
 import { t } from "@/lib/i18n/uk";
 
@@ -24,6 +25,7 @@ export function RegisterForm() {
       </CardHeader>
       <CardContent className="space-y-4">
         <GoogleSignInButton />
+        <TelegramSignInButton />
         <AuthDivider />
         <form action={formAction} className="space-y-4">
           {state.error && (

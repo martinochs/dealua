@@ -89,7 +89,29 @@ supabase/migrations/20260103000000_oauth_profile_handling.sql
 
 Users can then click **«Продовжити з Google»** on login and register pages.
 
-## 7. What switches automatically
+## 7. Telegram sign-in (optional)
+
+Telegram uses the [Login Widget](https://core.telegram.org/widgets/login) — not a built-in Supabase provider.
+
+1. Create a bot via [@BotFather](https://t.me/BotFather) on Telegram.
+2. Run `/setdomain` in BotFather and set your domain to `vyhodadeal.com` (and `localhost` for local testing if supported).
+3. Add env vars locally and in Vercel:
+
+```env
+NEXT_PUBLIC_TELEGRAM_BOT_USERNAME=YourBotName
+TELEGRAM_BOT_TOKEN=123456:ABC...
+SUPABASE_SERVICE_ROLE_KEY=eyJ...
+```
+
+`SUPABASE_SERVICE_ROLE_KEY` is in Supabase **Project Settings → API** (keep secret — server only).
+
+Optional: `TELEGRAM_AUTH_SECRET` — separate HMAC secret for Telegram account passwords (defaults to the service role key).
+
+4. Ensure the OAuth profile migration from step 6 is applied (creates profiles for new Telegram users).
+
+Users will see the official **Log in with Telegram** button on login and register pages.
+
+## 8. What switches automatically
 
 | Feature | Mock | Supabase |
 |---------|------|----------|
@@ -102,6 +124,6 @@ Users can then click **«Продовжити з Google»** on login and registe
 
 No code changes needed — just env vars + migration.
 
-## 8. Deploy
+## 9. Deploy
 
 Add the same env vars in Vercel project settings. See [DEPLOY.md](DEPLOY.md).

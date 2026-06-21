@@ -91,6 +91,9 @@ Add these in Vercel → Project → Settings → Environment Variables:
 | `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anon key |
 | `NEXT_PUBLIC_SITE_URL` | `https://your-domain.vercel.app` |
+| `NEXT_PUBLIC_TELEGRAM_BOT_USERNAME` | (optional) Telegram bot username without `@` |
+| `TELEGRAM_BOT_TOKEN` | (optional) From [@BotFather](https://t.me/BotFather) — server only |
+| `SUPABASE_SERVICE_ROLE_KEY` | (optional) Required for Telegram sign-in — server only |
 
 Redeploy after adding env vars.
 
