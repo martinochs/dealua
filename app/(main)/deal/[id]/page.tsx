@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatRelativeTime, getVoteScore } from "@/lib/utils";
 import { isHotDeal } from "@/lib/deal-feed";
+import { shouldOpenDealInSameTab } from "@/lib/deal-outbound-overrides";
 import { t } from "@/lib/i18n/uk";
 import type { CommentWithProfile } from "@/types/database";
 
@@ -52,6 +53,10 @@ export default async function DealPage({ params }: DealPageProps) {
 
   const score = getVoteScore(deal.hot_count, deal.cold_count);
   const hot = isHotDeal(deal);
+  const sameTab = shouldOpenDealInSameTab(deal.id);
+  const outboundLinkProps = sameTab
+    ? {}
+    : ({ target: "_blank" as const, rel: "noopener noreferrer" });
 
   return (
     <div className="mx-auto max-w-3xl space-y-6 pb-28 sm:pb-6">
@@ -123,7 +128,7 @@ export default async function DealPage({ params }: DealPageProps) {
 
           <div className="hidden sm:block">
             <Button asChild size="default" className="deal-cta h-10 font-semibold sm:min-w-[14rem]">
-              <a href={`/go/${deal.id}`} target="_blank" rel="noopener noreferrer">
+              <a href={`/go/${deal.id}`} {...outboundLinkProps}>
                 <ExternalLink className="h-4 w-4" />
                 {t("deals.ctaGo")}
               </a>
@@ -146,7 +151,7 @@ export default async function DealPage({ params }: DealPageProps) {
           featured={hot}
         />
         <Button asChild className="deal-cta h-9 flex-1 text-sm font-semibold">
-          <a href={`/go/${deal.id}`} target="_blank" rel="noopener noreferrer">
+          <a href={`/go/${deal.id}`} {...outboundLinkProps}>
             <ExternalLink className="h-4 w-4" />
             {t("deals.ctaGo")}
           </a>
