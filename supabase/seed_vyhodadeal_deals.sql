@@ -564,5 +564,41 @@ INSERT INTO public.deals (
   0,
   0,
   now()
+),
+(
+  '44444444-4444-4444-4444-444444444516',
+  (
+    SELECT COALESCE(
+      (SELECT id FROM public.profiles WHERE role = 'admin' ORDER BY created_at LIMIT 1),
+      (SELECT id FROM public.profiles ORDER BY created_at LIMIT 1)
+    )
+  ),
+  '11111111-1111-1111-1111-111111111105',
+  '22222222-2222-2222-2222-222222222204',
+  'Жіночі спортивні легінси без швів — широка резинка',
+  $$Безшовні спортивні легінси з широкою резинкою — зручний варіант для тренувань, йоги та повсякденного носіння.
+
+Особливості:
+
+• Безшовна конструкція — комфорт під час руху
+• Широка резинка на талії
+• Підходять для фітнесу, йоги та бігу
+• Еластична тканина
+• Залишилося обмежена кількість
+
+💰 Знижка 50% на AliExpress
+👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.$$,
+  417.05,
+  834.17,
+  'https://www.aliexpress.com/item/' || (regexp_match(
+    'https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005008100613059.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000043746262168%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0',
+    'item%2F([0-9]+)'
+  ))[1] || '.html',
+  'https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005008100613059.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000043746262168%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0',
+  'https://vyhodadeal.com/deals/womens-seamless-sport-leggings.png',
+  'approved',
+  0,
+  0,
+  now()
 )
 ON CONFLICT (id) DO NOTHING;

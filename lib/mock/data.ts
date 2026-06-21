@@ -43,6 +43,15 @@ const deal15Links = (() => {
   return links;
 })();
 
+const DEAL_16_AFFILIATE =
+  "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005008100613059.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000043746262168%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0";
+
+const deal16Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_16_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -419,6 +428,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     expires_at: null,
     created_at: hoursAgo(0.000002),
     category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "dealmaster", avatar_url: null },
+  },
+  {
+    id: "deal-16",
+    user_id: "user-1",
+    category_id: "cat-5",
+    merchant_id: "merch-4",
+    title: "Жіночі спортивні легінси без швів — широка резинка",
+    description:
+      "Безшовні спортивні легінси з широкою резинкою — зручний варіант для тренувань, йоги та повсякденного носіння.\n\nОсобливості:\n\n• Безшовна конструкція — комфорт під час руху\n• Широка резинка на талії\n• Підходять для фітнесу, йоги та бігу\n• Еластична тканина\n• Залишилося обмежена кількість\n\n💰 Знижка 50% на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 417.05,
+    original_price_uah: 834.17,
+    external_url: deal16Links.external_url,
+    affiliate_url: deal16Links.affiliate_url,
+    image_url: "/deals/womens-seamless-sport-leggings.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.000001),
+    category: { slug: "sport", name_uk: "Спорт", icon: "⚽" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "dealmaster", avatar_url: null },
   },
