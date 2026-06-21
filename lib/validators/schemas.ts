@@ -16,9 +16,9 @@ export const registerSchema = z.object({
   password: z.string().min(6, "Мінімум 6 символів"),
   username: z
     .string()
-    .min(3, "Мінімум 3 символи")
     .max(30, "Максимум 30 символів")
-    .regex(/^[a-zA-Z0-9_]+$/, "Лише латиниця, цифри та _"),
+    .regex(/^[a-zA-Z0-9_]*$/, "Лише латиниця, цифри та _")
+    .optional(),
 });
 
 export const submitDealSchema = z.object({

@@ -67,17 +67,25 @@ export async function registerAction(formData: FormData): Promise<ActionResult> 
   const parsed = registerSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
-    username: formData.get("username"),
+    username: formData.get("username") || undefined,
   });
   if (!parsed.success) {
     return { error: parsed.error.errors[0]?.message };
   }
 
+  const derivedUsername =
+    parsed.data.username?.trim() ||
+    parsed.data.email
+      .split("@")[0]
+      .replace(/[^a-zA-Z0-9_]/g, "")
+      .slice(0, 30) ||
+    "user";
+
   const supabase = await createClient();
   const { error } = await supabase.auth.signUp({
     email: parsed.data.email,
     password: parsed.data.password,
-    options: { data: { username: parsed.data.username } },
+    options: { data: { username: derivedUsername } },
   });
 
   if (error) {

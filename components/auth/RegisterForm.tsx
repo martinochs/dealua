@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
+import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,46 +14,80 @@ import { registerAction } from "@/lib/actions/auth";
 import { t } from "@/lib/i18n/uk";
 
 export function RegisterForm() {
+  const [showPassword, setShowPassword] = useState(false);
   const [state, formAction, isPending] = useActionState(
     async (_prev: { error?: string }, formData: FormData) => registerAction(formData),
     {}
   );
 
   return (
-    <Card className="w-full max-w-md">
-      <CardHeader>
-        <CardTitle>{t("auth.register")}</CardTitle>
+    <Card className="w-full shadow-lg">
+      <CardHeader className="space-y-1 pb-4">
+        <CardTitle className="text-2xl">{t("auth.createAccount")}</CardTitle>
+        <p className="text-sm text-muted-foreground">{t("auth.createAccountSubtitle")}</p>
       </CardHeader>
       <CardContent className="space-y-4">
-        <GoogleSignInButton />
-        <TelegramSignInButton />
-        <AuthDivider />
         <form action={formAction} className="space-y-4">
-          {state.error && (
-            <p className="text-sm text-destructive">{state.error}</p>
-          )}
-          <div className="space-y-2">
-            <Label htmlFor="username">{t("auth.username")}</Label>
-            <Input id="username" name="username" required autoComplete="username" />
-          </div>
+          {state.error && <p className="text-sm text-destructive">{state.error}</p>}
+
           <div className="space-y-2">
             <Label htmlFor="email">{t("auth.email")}</Label>
-            <Input id="email" name="email" type="email" required autoComplete="email" />
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                className="pl-10"
+              />
+            </div>
           </div>
+
           <div className="space-y-2">
             <Label htmlFor="password">{t("auth.password")}</Label>
-            <Input id="password" name="password" type="password" required autoComplete="new-password" />
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                required
+                minLength={6}
+                autoComplete="new-password"
+                className="pl-10 pr-10"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((value) => !value)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
+            </div>
+            <p className="text-xs text-muted-foreground">{t("auth.passwordHint")}</p>
           </div>
-          <Button type="submit" className="w-full" disabled={isPending}>
+
+          <Button type="submit" className="w-full" size="lg" disabled={isPending}>
             {t("auth.register")}
           </Button>
-          <p className="text-sm text-center text-muted-foreground">
-            {t("auth.hasAccount")}{" "}
-            <Link href="/login" className="text-primary hover:underline">
-              {t("auth.login")}
-            </Link>
-          </p>
         </form>
+
+        <AuthDivider />
+
+        <div className="space-y-3">
+          <GoogleSignInButton />
+          <TelegramSignInButton />
+        </div>
+
+        <p className="text-center text-sm text-muted-foreground">
+          {t("auth.hasAccount")}{" "}
+          <Link href="/login" className="font-medium text-primary hover:underline">
+            {t("auth.login")}
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );
