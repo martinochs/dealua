@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AuthDivider } from "@/components/auth/AuthDivider";
+import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
 import { registerAction } from "@/lib/actions/auth";
 import { t } from "@/lib/i18n/uk";
 
@@ -20,7 +22,9 @@ export function RegisterForm() {
       <CardHeader>
         <CardTitle>{t("auth.register")}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-4">
+        <GoogleSignInButton />
+        <AuthDivider />
         <form action={formAction} className="space-y-4">
           {state.error && (
             <p className="text-sm text-destructive">{state.error}</p>

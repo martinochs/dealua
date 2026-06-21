@@ -10,19 +10,13 @@ import {
   verifyMockAdminLogin,
 } from "@/lib/auth/mock-session";
 import { createClient } from "@/lib/supabase/server";
+import { safeRedirectPath } from "@/lib/site-url";
 import { loginSchema, mockLoginSchema, registerSchema } from "@/lib/validators/schemas";
 
 export type ActionResult = { error?: string; success?: boolean };
 
-function safeRedirectPath(next: FormDataEntryValue | null): string {
-  if (typeof next === "string" && next.startsWith("/") && !next.startsWith("//")) {
-    return next;
-  }
-  return "/";
-}
-
 export async function loginAction(formData: FormData): Promise<ActionResult> {
-  const next = safeRedirectPath(formData.get("next"));
+  const next = safeRedirectPath(formData.get("next") as string | null);
 
   if (isMockMode()) {
     const parsed = mockLoginSchema.safeParse({

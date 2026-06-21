@@ -6,15 +6,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AuthDivider } from "@/components/auth/AuthDivider";
+import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
 import { loginAction } from "@/lib/actions/auth";
 import { t } from "@/lib/i18n/uk";
 
 interface LoginFormProps {
   mockMode?: boolean;
   next?: string;
+  oauthError?: boolean;
 }
 
-export function LoginForm({ mockMode = false, next }: LoginFormProps) {
+export function LoginForm({ mockMode = false, next, oauthError = false }: LoginFormProps) {
   const [state, formAction, isPending] = useActionState(
     async (_prev: { error?: string }, formData: FormData) => loginAction(formData),
     {}
@@ -25,10 +28,20 @@ export function LoginForm({ mockMode = false, next }: LoginFormProps) {
       <CardHeader>
         <CardTitle>{t("auth.login")}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-4">
+        {!mockMode && (
+          <>
+            <GoogleSignInButton next={next} />
+            <AuthDivider />
+          </>
+        )}
         <form action={formAction} className="space-y-4">
           {next && <input type="hidden" name="next" value={next} />}
-          {state.error && <p className="text-sm text-destructive">{state.error}</p>}
+          {(state.error || oauthError) && (
+            <p className="text-sm text-destructive">
+              {state.error ?? t("auth.oauthCallbackError")}
+            </p>
+          )}
           {mockMode ? (
             <div className="space-y-2">
               <Label htmlFor="username">{t("auth.username")}</Label>

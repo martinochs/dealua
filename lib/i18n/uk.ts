@@ -116,6 +116,11 @@ const uk = {
     registerError: "Не вдалося створити акаунт",
     noAccount: "Немає акаунту?",
     hasAccount: "Вже маєте акаунт?",
+    continueWithGoogle: "Продовжити з Google",
+    googleLoading: "Перенаправлення…",
+    googleError: "Не вдалося увійти через Google",
+    or: "або",
+    oauthCallbackError: "Не вдалося завершити вхід. Спробуйте ще раз.",
   },
   admin: {
     title: "Панель адміністратора",
