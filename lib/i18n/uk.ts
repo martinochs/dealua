@@ -61,7 +61,7 @@ const uk = {
     originalPrice: "Була ціна",
     currentPrice: "Ціна",
     expired: "Завершено",
-    submittedBy: "Додав(ла)",
+    submittedBy: "Від",
     comments: "Коментарі",
     noComments: "Коментарів поки немає",
     addComment: "Написати коментар",

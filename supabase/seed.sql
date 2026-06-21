@@ -25,7 +25,7 @@ ON CONFLICT (slug) DO NOTHING;
 -- UPDATE profiles SET role = 'admin' WHERE username = 'admin';
 INSERT INTO public.profiles (id, username, role) VALUES
   ('33333333-3333-3333-3333-333333333301', 'admin', 'admin'),
-  ('33333333-3333-3333-3333-333333333302', 'dealmaster', 'user')
+  ('33333333-3333-3333-3333-333333333302', 'VyhodaDeal Team', 'user')
 ON CONFLICT (id) DO NOTHING;
 
 -- Approved deals

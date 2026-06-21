@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { formatRelativeTime, getVoteScore } from "@/lib/utils";
 import { isHotDeal } from "@/lib/deal-feed";
 import { shouldOpenDealInSameTab } from "@/lib/deal-outbound-overrides";
+import { getDealAuthorDisplayName, isVyhodaDealTeamAuthor } from "@/lib/deal-author";
 import { t } from "@/lib/i18n/uk";
 import type { CommentWithProfile } from "@/types/database";
 
@@ -105,10 +106,18 @@ export default async function DealPage({ params }: DealPageProps) {
             <p className="mt-1 text-sm text-muted-foreground">
               {t("deals.submittedBy")}{" "}
               {deal.profile ? (
-                <Link href={`/profile/${deal.profile.username}`} className="text-primary hover:underline">
-                  {deal.profile.username}
-                </Link>
-              ) : "—"}{" "}
+                isVyhodaDealTeamAuthor(deal.profile.username) ? (
+                  <span className="font-medium text-primary">
+                    {getDealAuthorDisplayName(deal.profile.username)}
+                  </span>
+                ) : (
+                  <Link href={`/profile/${deal.profile.username}`} className="text-primary hover:underline">
+                    {deal.profile.username}
+                  </Link>
+                )
+              ) : (
+                "—"
+              )}{" "}
               · {formatRelativeTime(deal.created_at)}
             </p>
           </div>

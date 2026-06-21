@@ -55,7 +55,7 @@ const deal16Links = (() => {
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
-    username: "dealmaster",
+    username: "VyhodaDeal Team",
     avatar_url: null,
     role: "user",
     created_at: "2025-01-01T00:00:00Z",
@@ -111,7 +111,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(1),
     category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-2",
@@ -134,7 +134,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.5),
     category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-3",
@@ -157,7 +157,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.25),
     category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-4",
@@ -180,7 +180,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.1),
     category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-5",
@@ -203,7 +203,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.05),
     category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-6",
@@ -226,7 +226,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.02),
     category: { slug: "sport", name_uk: "Спорт", icon: "⚽" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-7",
@@ -248,7 +248,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.01),
     category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-8",
@@ -271,7 +271,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.005),
     category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-9",
@@ -294,7 +294,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.001),
     category: { slug: "podorozhi", name_uk: "Подорожі", icon: "✈️" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-10",
@@ -317,7 +317,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.0005),
     category: { slug: "diti", name_uk: "Дитячі товари", icon: "🧸" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-11",
@@ -340,7 +340,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.0001),
     category: { slug: "diti", name_uk: "Дитячі товари", icon: "🧸" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-12",
@@ -363,7 +363,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.00005),
     category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-13",
@@ -385,7 +385,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.00001),
     category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-14",
@@ -407,7 +407,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.000005),
     category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-15",
@@ -429,7 +429,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.000002),
     category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
   {
     id: "deal-16",
@@ -451,7 +451,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.000001),
     category: { slug: "sport", name_uk: "Спорт", icon: "⚽" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
-    profile: { username: "dealmaster", avatar_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
 ];
 

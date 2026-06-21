@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { approveDealAction, rejectDealAction } from "@/lib/actions/admin";
 import { formatUAH } from "@/lib/utils";
+import { getDealAuthorDisplayName } from "@/lib/deal-author";
 import { t } from "@/lib/i18n/uk";
 import type { DealWithRelations } from "@/types/database";
 
@@ -49,7 +50,7 @@ export function AdminDealQueue({ deals }: AdminDealQueueProps) {
                 <h3 className="font-semibold truncate">{deal.title}</h3>
                 <p className="text-sm text-muted-foreground">{formatUAH(Number(deal.price_uah))}</p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {deal.profile?.username} · {deal.merchant?.name}
+                  {getDealAuthorDisplayName(deal.profile?.username)} · {deal.merchant?.name}
                 </p>
               </div>
               <div className="flex flex-col gap-2 flex-shrink-0">
