@@ -61,6 +61,15 @@ const deal17Links = (() => {
   return links;
 })();
 
+const DEAL_18_AFFILIATE =
+  "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005009313552383.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000048715594442%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0";
+
+const deal18Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_18_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -481,6 +490,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     expires_at: null,
     created_at: hoursAgo(0.0000005),
     category: { slug: "diti", name_uk: "Дитячі товари", icon: "🧸" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-18",
+    user_id: "user-1",
+    category_id: "cat-2",
+    merchant_id: "merch-4",
+    title: "Чоловічі легкі літні капці EVA — для дому та відпочинку",
+    description:
+      "Легкі та м'які чоловічі капці з EVA — зручний варіант для дому, дачі та повсякденного відпочинку на свіжому повітрі.\n\nОсобливості:\n\n• М'який матеріал EVA — комфорт при тривалому носінні\n• Легка конструкція — не відчуваються на ногах\n• Підходять для дому та вулиці\n• Літній дизайн — зручно в спеку\n• Залишилося лише 10 пар\n\n💰 Знижка 56% на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 234.17,
+    original_price_uah: 532.19,
+    external_url: deal18Links.external_url,
+    affiliate_url: deal18Links.affiliate_url,
+    image_url: "/deals/mens-eva-summer-slippers.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.0000002),
+    category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
