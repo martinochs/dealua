@@ -1,4 +1,4 @@
-const AFFILIATE_HOSTS = ["rzekl.com", "admitad.com", "ad.admitad.com"];
+const AFFILIATE_HOSTS = ["rzekl.com", "wbbsv.com", "admitad.com", "ad.admitad.com"];
 
 export function isAffiliateUrl(url: string): boolean {
   try {
@@ -9,7 +9,7 @@ export function isAffiliateUrl(url: string): boolean {
   }
 }
 
-/** Extract a clean AliExpress product URL from an Admitad / rzekl affiliate link. */
+/** Extract a clean product URL from an Admitad / rzekl / wbbsv affiliate link. */
 export function extractExternalUrlFromAffiliate(affiliateUrl: string): string | null {
   try {
     const url = new URL(affiliateUrl);
@@ -17,7 +17,17 @@ export function extractExternalUrlFromAffiliate(affiliateUrl: string): string | 
     if (!ulp) return null;
 
     const decoded = decodeURIComponent(ulp);
-    return normalizeAliExpressProductUrl(decoded);
+    return normalizeAliExpressProductUrl(decoded) ?? normalizeExternalProductUrl(decoded);
+  } catch {
+    return null;
+  }
+}
+
+export function normalizeExternalProductUrl(url: string): string | null {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:") return null;
+    return parsed.origin + parsed.pathname;
   } catch {
     return null;
   }
@@ -54,12 +64,12 @@ export function resolveDealLinksFromAffiliate(affiliateUrl: string):
   }
 
   if (!isAffiliateUrl(trimmed)) {
-    return { error: "Використовуйте партнерське посилання Admitad (rzekl.com)" };
+    return { error: "Використовуйте партнерське посилання Admitad (rzekl.com / wbbsv.com)" };
   }
 
   const external_url = extractExternalUrlFromAffiliate(trimmed);
   if (!external_url) {
-    return { error: "У посиланні не знайдено URL товару AliExpress (ulp=)" };
+    return { error: "У посиланні не знайдено URL товару (ulp=)" };
   }
 
   return { affiliate_url: trimmed, external_url };

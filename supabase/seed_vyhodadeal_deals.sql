@@ -20,11 +20,23 @@ VALUES (
 )
 ON CONFLICT (slug) DO NOTHING;
 
+-- TOUCH merchant
+INSERT INTO public.merchants (id, name, slug, logo_url, affiliate_base_url)
+VALUES (
+  '22222222-2222-2222-2222-222222222205',
+  'TOUCH',
+  'touch',
+  null,
+  'https://touch.com.ua'
+)
+ON CONFLICT (slug) DO NOTHING;
+
 -- Category / merchant reference:
 --   elektronika  11111111-1111-1111-1111-111111111101
 --   odyag        11111111-1111-1111-1111-111111111102
 --   sport        11111111-1111-1111-1111-111111111105
 --   aliexpress   22222222-2222-2222-2222-222222222204
+--   touch        22222222-2222-2222-2222-222222222205
 
 INSERT INTO public.deals (
   id,
@@ -704,6 +716,40 @@ INSERT INTO public.deals (
   ))[1] || '.html',
   'https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005007619948310.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000041529798277%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0',
   'https://vyhodadeal.com/deals/baby-car-inflatable-swim-float.png',
+  'approved',
+  0,
+  0,
+  now()
+),
+(
+  '44444444-4444-4444-4444-444444444520',
+  (
+    SELECT COALESCE(
+      (SELECT id FROM public.profiles WHERE role = 'admin' ORDER BY created_at LIMIT 1),
+      (SELECT id FROM public.profiles ORDER BY created_at LIMIT 1)
+    )
+  ),
+  '11111111-1111-1111-1111-111111111101',
+  '22222222-2222-2222-2222-222222222205',
+  'Sony PlayStation 5 Slim 1TB + Call of Duty: Black Ops 6 — уцінка',
+  $$Ігрова консоль Sony PlayStation 5 Slim з накопичувачем 1 ТБ у комплекті з грою Call of Duty: Black Ops 6 — вигідна уцінка в TOUCH.
+
+Особливості:
+
+• PlayStation 5 Slim — компактний корпус, SSD 1 ТБ
+• У комплекті ваучер Call of Duty: Black Ops 6
+• Підтримка 4K, HDR та до 120 FPS
+• DualSense з тактильним зворотним зв'язком
+• Уцінка: легкі подряпини на корпусі — повна функціональність
+• Економія 2 900 ₴
+
+💰 Знижка 2 900 ₴ на TOUCH
+👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.$$,
+  29999,
+  32899,
+  'https://touch.com.ua/ua/item/igrovaya-konsol-sony-playstation-5-slim-1tb-call-of-duty-black-ops-6-bundle-1000049595-utsenka168364/',
+  'https://wbbsv.com/g/ynys1f2mjpd66b47c3060e81904d8b/?ulp=https%3A%2F%2Ftouch.com.ua%2Fua%2Fitem%2Figrovaya-konsol-sony-playstation-5-slim-1tb-call-of-duty-black-ops-6-bundle-1000049595-utsenka168364%2F',
+  'https://vyhodadeal.com/deals/ps5-slim-cod-bundle-touch.png',
   'approved',
   0,
   0,

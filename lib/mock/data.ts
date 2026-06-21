@@ -79,6 +79,15 @@ const deal19Links = (() => {
   return links;
 })();
 
+const DEAL_20_AFFILIATE =
+  "https://wbbsv.com/g/ynys1f2mjpd66b47c3060e81904d8b/?ulp=https%3A%2F%2Ftouch.com.ua%2Fua%2Fitem%2Figrovaya-konsol-sony-playstation-5-slim-1tb-call-of-duty-black-ops-6-bundle-1000049595-utsenka168364%2F";
+
+const deal20Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_20_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -112,6 +121,7 @@ export const MOCK_MERCHANTS: Merchant[] = [
   { id: "merch-2", name: "Prom", slug: "prom", logo_url: null, affiliate_base_url: "https://prom.ua" },
   { id: "merch-3", name: "Comfy", slug: "comfy", logo_url: null, affiliate_base_url: "https://comfy.ua" },
   { id: "merch-4", name: "AliExpress", slug: "aliexpress", logo_url: null, affiliate_base_url: "https://www.aliexpress.com" },
+  { id: "merch-5", name: "TOUCH", slug: "touch", logo_url: null, affiliate_base_url: "https://touch.com.ua" },
 ];
 
 const hoursAgo = (h: number) => new Date(Date.now() - h * 3600000).toISOString();
@@ -544,6 +554,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.0000001),
     category: { slug: "diti", name_uk: "Дитячі товари", icon: "🧸" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-20",
+    user_id: "user-1",
+    category_id: "cat-1",
+    merchant_id: "merch-5",
+    title: "Sony PlayStation 5 Slim 1TB + Call of Duty: Black Ops 6 — уцінка",
+    description:
+      "Ігрова консоль Sony PlayStation 5 Slim з накопичувачем 1 ТБ у комплекті з грою Call of Duty: Black Ops 6 — вигідна уцінка в TOUCH.\n\nОсобливості:\n\n• PlayStation 5 Slim — компактний корпус, SSD 1 ТБ\n• У комплекті ваучер Call of Duty: Black Ops 6\n• Підтримка 4K, HDR та до 120 FPS\n• DualSense з тактильним зворотним зв'язком\n• Уцінка: легкі подряпини на корпусі — повна функціональність\n• Економія 2 900 ₴\n\n💰 Знижка 2 900 ₴ на TOUCH\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 29999,
+    original_price_uah: 32899,
+    external_url: deal20Links.external_url,
+    affiliate_url: deal20Links.affiliate_url,
+    image_url: "/deals/ps5-slim-cod-bundle-touch.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.00000005),
+    category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
+    merchant: { name: "TOUCH", slug: "touch", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
 ];
