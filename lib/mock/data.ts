@@ -52,6 +52,15 @@ const deal16Links = (() => {
   return links;
 })();
 
+const DEAL_17_AFFILIATE =
+  "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005012276991058.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000057967448712%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0";
+
+const deal17Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_17_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -450,6 +459,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     expires_at: null,
     created_at: hoursAgo(0.000001),
     category: { slug: "sport", name_uk: "Спорт", icon: "⚽" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-17",
+    user_id: "user-1",
+    category_id: "cat-7",
+    merchant_id: "merch-4",
+    title: "Дитячий проектор-ліхтарик з мультфільмами — 10 карток, 80 зображень",
+    description:
+      "Креативний дитячий проектор-ліхтарик — іграшка для вечірніх казок і розваг перед сном. Набір із 10 карток та 80 мультяшних зображень.\n\nОсобливості:\n\n• 10 проекційних карток — 80 різних зображень\n• Мультяшні малюнки для вечірніх історій\n• Компактний формат — зручно брати з собою\n• Підходить для дітей від 3 років\n• Залишилося лише 10 штук\n\n💰 Знижка 56% на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 191.73,
+    original_price_uah: 431.89,
+    external_url: deal17Links.external_url,
+    affiliate_url: deal17Links.affiliate_url,
+    image_url: "/deals/kids-cartoon-projection-flashlight.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.0000005),
+    category: { slug: "diti", name_uk: "Дитячі товари", icon: "🧸" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
