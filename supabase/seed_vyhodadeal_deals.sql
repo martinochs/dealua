@@ -672,5 +672,41 @@ INSERT INTO public.deals (
   0,
   0,
   now()
+),
+(
+  '44444444-4444-4444-4444-444444444519',
+  (
+    SELECT COALESCE(
+      (SELECT id FROM public.profiles WHERE role = 'admin' ORDER BY created_at LIMIT 1),
+      (SELECT id FROM public.profiles ORDER BY created_at LIMIT 1)
+    )
+  ),
+  '11111111-1111-1111-1111-111111111107',
+  '22222222-2222-2222-2222-222222222204',
+  'Дитячий надувний плавзасіб у вигляді машинки — для басейну та пляжу',
+  $$Милий надувний плавзасіб у формі машинки — для малюків та дітей на басейн, пляж і літній відпочинок.
+
+Особливості:
+
+• Дизайн у вигляді автомобіля — дітям сподобається
+• Зручні ручки для безпечного утримання
+• Підходить для басейну, моря та пляжу
+• Легко надувається — зручно брати з собою
+• Залишилося лише 10 штук
+
+💰 Знижка 57% на AliExpress
+👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.$$,
+  237.75,
+  551.40,
+  'https://www.aliexpress.com/item/' || (regexp_match(
+    'https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005007619948310.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000041529798277%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0',
+    'item%2F([0-9]+)'
+  ))[1] || '.html',
+  'https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005007619948310.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000041529798277%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0',
+  'https://vyhodadeal.com/deals/baby-car-inflatable-swim-float.png',
+  'approved',
+  0,
+  0,
+  now()
 )
 ON CONFLICT (id) DO NOTHING;

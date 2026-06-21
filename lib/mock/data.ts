@@ -70,6 +70,15 @@ const deal18Links = (() => {
   return links;
 })();
 
+const DEAL_19_AFFILIATE =
+  "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005007619948310.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000041529798277%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0";
+
+const deal19Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_19_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -512,6 +521,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     expires_at: null,
     created_at: hoursAgo(0.0000002),
     category: { slug: "odyag", name_uk: "Одяг", icon: "👕" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-19",
+    user_id: "user-1",
+    category_id: "cat-7",
+    merchant_id: "merch-4",
+    title: "Дитячий надувний плавзасіб у вигляді машинки — для басейну та пляжу",
+    description:
+      "Милий надувний плавзасіб у формі машинки — для малюків та дітей на басейн, пляж і літній відпочинок.\n\nОсобливості:\n\n• Дизайн у вигляді автомобіля — дітям сподобається\n• Зручні ручки для безпечного утримання\n• Підходить для басейну, моря та пляжу\n• Легко надувається — зручно брати з собою\n• Залишилося лише 10 штук\n\n💰 Знижка 57% на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 237.75,
+    original_price_uah: 551.4,
+    external_url: deal19Links.external_url,
+    affiliate_url: deal19Links.affiliate_url,
+    image_url: "/deals/baby-car-inflatable-swim-float.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.0000001),
+    category: { slug: "diti", name_uk: "Дитячі товари", icon: "🧸" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
