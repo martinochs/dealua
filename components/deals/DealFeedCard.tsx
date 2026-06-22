@@ -90,7 +90,7 @@ function DealCardImage({
 
   return (
     <div className={cn("relative shrink-0 overflow-hidden rounded-xl bg-muted", className)}>
-      <Link href={`/deal/${deal.id}`} className="relative block h-full w-full transition-opacity active:opacity-90">
+      <div className="relative block h-full w-full">
         {deal.image_url ? (
           <Image
             src={deal.image_url}
@@ -103,13 +103,13 @@ function DealCardImage({
         ) : (
           <div className="flex h-full min-h-[5rem] w-full items-center justify-center text-3xl">🛍️</div>
         )}
-      </Link>
+      </div>
       {savings !== null && savings >= 1 && (
         <SavingsPercentBadge percent={savings} featured={featured} variant="overlay" minPercent={1} />
       )}
       <button
         type="button"
-        className="absolute right-2 top-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-sm transition-colors hover:bg-white"
+        className="pointer-events-auto absolute right-2 top-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-sm transition-colors hover:bg-white"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -157,16 +157,14 @@ function DealCardBody({
         <span className="shrink-0 text-[10px] text-muted-foreground/55">{formatRelativeTime(deal.created_at)}</span>
       </div>
 
-      <Link href={`/deal/${deal.id}`} className="min-w-0 transition-opacity active:opacity-90">
-        <h2
-          className={cn(
-            "line-clamp-2 font-bold leading-snug text-foreground transition-colors group-hover:text-primary",
-            featured ? "text-base sm:text-lg" : "text-sm sm:text-base"
-          )}
-        >
-          {deal.title}
-        </h2>
-      </Link>
+      <h2
+        className={cn(
+          "line-clamp-2 font-bold leading-snug text-foreground transition-colors group-hover:text-primary",
+          featured ? "text-base sm:text-lg" : "text-sm sm:text-base"
+        )}
+      >
+        {deal.title}
+      </h2>
 
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
         <span
@@ -185,7 +183,7 @@ function DealCardBody({
         {savingsAmount !== null && <SavingsBadge amount={savingsAmount} featured={featured} />}
       </div>
 
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+      <div className="pointer-events-auto relative z-[3] flex flex-wrap items-center gap-x-2 gap-y-1">
         <PopularityIndicator score={score} />
         <DealVoteInline
           dealId={deal.id}
@@ -250,6 +248,8 @@ export function DealFeedCard({
     score,
   };
 
+  const dealHref = `/deal/${deal.id}`;
+
   return (
     <article
       className={cn(
@@ -257,23 +257,41 @@ export function DealFeedCard({
         cardClass
       )}
     >
-      {featured && <FeaturedBanner />}
+      {featured && (
+        <Link href={dealHref} className="block transition-opacity active:opacity-90">
+          <FeaturedBanner />
+        </Link>
+      )}
 
       {/* Mobile: stacked vertical card */}
       <div className="flex flex-col gap-3 p-3 sm:hidden">
-        <DealCardImage
-          deal={deal}
-          featured={featured}
-          savings={savings}
-          className="aspect-[16/10] w-full"
-        />
-        <DealCardBody {...bodyProps} />
-        <DealCardCta dealId={deal.id} featured={featured} className="w-full" />
+        <div className="relative flex flex-col gap-3">
+          <Link
+            href={dealHref}
+            className="absolute inset-0 z-[1] rounded-xl"
+            aria-label={deal.title}
+          />
+          <div className="pointer-events-none relative z-[2] flex flex-col gap-3">
+            <DealCardImage
+              deal={deal}
+              featured={featured}
+              savings={savings}
+              className="aspect-[16/10] w-full"
+            />
+            <DealCardBody {...bodyProps} />
+          </div>
+        </div>
+        <DealCardCta dealId={deal.id} featured={featured} className="relative z-[2] w-full" />
       </div>
 
       {/* Desktop: image | content | CTA column */}
-      <div className="hidden gap-0 sm:flex sm:items-stretch">
-        <div className="p-3 pr-0">
+      <div className="relative hidden gap-0 sm:flex sm:items-stretch">
+        <Link
+          href={dealHref}
+          className="absolute inset-y-0 left-0 right-[8.5rem] z-[1] lg:right-[9rem]"
+          aria-label={deal.title}
+        />
+        <div className="pointer-events-none relative z-[2] p-3 pr-0">
           <DealCardImage
             deal={deal}
             featured={featured}
@@ -281,10 +299,10 @@ export function DealFeedCard({
             className="h-[7.5rem] w-[7.5rem] lg:h-[8rem] lg:w-[8rem]"
           />
         </div>
-        <div className="flex min-w-0 flex-1 flex-col justify-center p-3">
+        <div className="pointer-events-none relative z-[2] flex min-w-0 flex-1 flex-col justify-center p-3">
           <DealCardBody {...bodyProps} />
         </div>
-        <div className="flex w-[8.5rem] shrink-0 flex-col justify-center border-l border-border/40 p-3 lg:w-[9rem]">
+        <div className="relative z-[2] flex w-[8.5rem] shrink-0 flex-col justify-center border-l border-border/40 p-3 lg:w-[9rem]">
           <DealCardCta dealId={deal.id} featured={featured} layout="side" />
         </div>
       </div>
