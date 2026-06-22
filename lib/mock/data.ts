@@ -97,6 +97,15 @@ const deal21Links = (() => {
   return links;
 })();
 
+const DEAL_22_AFFILIATE =
+  "https://hxbok.com/g/h29o15jdr6d66b47c306a76d99edd2/?ulp=https%3A%2F%2Fanswear.ua%2Fp%2Fbigovi-krosivky-hoka-mafate-speed-2-kolir-chornyj-1126851-1538050";
+
+const deal22Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_22_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -131,6 +140,7 @@ export const MOCK_MERCHANTS: Merchant[] = [
   { id: "merch-3", name: "Comfy", slug: "comfy", logo_url: null, affiliate_base_url: "https://comfy.ua" },
   { id: "merch-4", name: "AliExpress", slug: "aliexpress", logo_url: null, affiliate_base_url: "https://www.aliexpress.com" },
   { id: "merch-5", name: "TOUCH", slug: "touch", logo_url: null, affiliate_base_url: "https://touch.com.ua" },
+  { id: "merch-6", name: "Answear", slug: "answear", logo_url: null, affiliate_base_url: "https://answear.ua" },
 ];
 
 const hoursAgo = (h: number) => new Date(Date.now() - h * 3600000).toISOString();
@@ -607,6 +617,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.00000002),
     category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
     merchant: { name: "TOUCH", slug: "touch", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-22",
+    user_id: "user-1",
+    category_id: "cat-5",
+    merchant_id: "merch-6",
+    title: "HOKA Mafate Speed 2 — чорні трейлові кросівки",
+    description:
+      "Трейлові кросівки HOKA Mafate Speed 2 у чорному кольорі — знижка на Answear з додатковим промокодом SALE (−5%).\n\nОсобливості:\n\n• Промокод SALE: 5 199 ₴ → 4 939 ₴\n• Підошва Vibram Megagrip — надійне зчеплення на різному покритті\n• Амортизація CMEVA та геометрія Meta-Rocker\n• Легка безшовна верхня частина SpeedFrame\n• Drop 4 mm — для технічних трейлів і довгих дистанцій\n• Доступні розміри: 43⅓, 44, 46\n• Економія 3 760 ₴ від 8 699 ₴\n\n💰 Знижка 43% на Answear (з кодом SALE)\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 4939,
+    original_price_uah: 8699,
+    external_url: deal22Links.external_url,
+    affiliate_url: deal22Links.affiliate_url,
+    image_url: "/deals/hoka-mafate-speed-2-answear.jpg",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.00000001),
+    category: { slug: "sport", name_uk: "Спорт", icon: "⚽" },
+    merchant: { name: "Answear", slug: "answear", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
 ];
