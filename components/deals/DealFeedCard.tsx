@@ -7,6 +7,7 @@ import { useState } from "react";
 import { DealCardCta } from "./DealCardCta";
 import { DealVoteInline } from "./DealVoteInline";
 import { SavingsBadge } from "./SavingsBadge";
+import { SavingsPercentBadge } from "./SavingsPercentBadge";
 import { PopularityIndicator } from "./PopularityIndicator";
 import { SocialProof } from "./SocialProof";
 import {
@@ -103,10 +104,8 @@ function DealCardImage({
           <div className="flex h-full min-h-[5rem] w-full items-center justify-center text-3xl">🛍️</div>
         )}
       </Link>
-      {savings !== null && savings >= 5 && (
-        <span className="absolute left-0 top-0 z-10 rounded-br-lg bg-emerald-600 px-2 py-0.5 text-[10px] font-bold text-white">
-          −{savings}%
-        </span>
+      {savings !== null && savings >= 1 && (
+        <SavingsPercentBadge percent={savings} featured={featured} variant="overlay" minPercent={1} />
       )}
       <button
         type="button"
@@ -134,6 +133,7 @@ function DealCardBody({
   isLoggedIn,
   featured,
   badges,
+  savings,
   savingsAmount,
   score,
 }: {
@@ -143,6 +143,7 @@ function DealCardBody({
   isLoggedIn: boolean;
   featured: boolean;
   badges: DealFeedBadge[];
+  savings: number | null;
   savingsAmount: number | null;
   score: number;
 }) {
@@ -169,7 +170,7 @@ function DealCardBody({
         </h2>
       </Link>
 
-      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
         <span
           className={cn(
             "font-black leading-none text-price",
@@ -178,8 +179,9 @@ function DealCardBody({
         >
           {formatUAH(Number(deal.price_uah))}
         </span>
+        <SavingsPercentBadge percent={savings} featured={featured} minPercent={1} />
         {deal.original_price_uah && (
-          <span className="text-xs text-muted-foreground/50 line-through">
+          <span className="text-xs text-muted-foreground/50 line-through sm:text-sm">
             {formatUAH(Number(deal.original_price_uah))}
           </span>
         )}
@@ -247,6 +249,7 @@ export function DealFeedCard({
     isLoggedIn,
     featured,
     badges,
+    savings,
     savingsAmount,
     score,
   };

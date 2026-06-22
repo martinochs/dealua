@@ -1,5 +1,6 @@
 import { formatUAH, getSavingsPercent } from "@/lib/utils";
 import { SavingsBadge } from "./SavingsBadge";
+import { SavingsPercentBadge } from "./SavingsPercentBadge";
 import { cn } from "@/lib/utils";
 
 interface PriceTagProps {
@@ -15,7 +16,7 @@ export function PriceTag({ price, originalPrice, size = "sm" }: PriceTagProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <span
           className={cn(
             "font-black leading-none text-price",
@@ -24,17 +25,17 @@ export function PriceTag({ price, originalPrice, size = "sm" }: PriceTagProps) {
         >
           {formatUAH(price)}
         </span>
+        <SavingsPercentBadge
+          percent={savings}
+          featured={size === "lg"}
+          minPercent={1}
+        />
         {originalPrice && originalPrice > price && (
           <span className="text-sm text-muted-foreground/60 line-through sm:text-base">
             {formatUAH(originalPrice)}
           </span>
         )}
-        {savingsAmount !== null && <SavingsBadge amount={savingsAmount} featured />}
-        {savings !== null && savings > 0 && !savingsAmount && (
-          <span className="rounded-md bg-emerald-600 px-2 py-0.5 text-xs font-extrabold text-white">
-            −{savings}%
-          </span>
-        )}
+        {savingsAmount !== null && <SavingsBadge amount={savingsAmount} featured={size === "lg"} />}
       </div>
     </div>
   );

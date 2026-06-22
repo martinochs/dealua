@@ -13,7 +13,7 @@ export function SavingsBadge({ amount, featured = false, className }: SavingsBad
     <span
       className={cn(
         "inline-flex shrink-0 items-center rounded-md bg-emerald-600 font-bold text-white",
-        featured ? "px-2 py-0.5 text-[10px] sm:text-[11px]" : "px-1.5 py-0.5 text-[9px] sm:text-[10px]",
+        featured ? "px-2.5 py-1 text-xs sm:text-sm" : "px-2 py-0.5 text-[10px] sm:text-xs",
         className
       )}
     >
