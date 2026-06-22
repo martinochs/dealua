@@ -1,6 +1,5 @@
-import { formatUAH, getSavingsPercent } from "@/lib/utils";
+import { formatUAH } from "@/lib/utils";
 import { SavingsBadge } from "./SavingsBadge";
-import { SavingsPercentBadge } from "./SavingsPercentBadge";
 import { cn } from "@/lib/utils";
 
 interface PriceTagProps {
@@ -10,7 +9,6 @@ interface PriceTagProps {
 }
 
 export function PriceTag({ price, originalPrice, size = "sm" }: PriceTagProps) {
-  const savings = getSavingsPercent(price, originalPrice ?? null);
   const savingsAmount =
     originalPrice && originalPrice > price ? originalPrice - price : null;
 
@@ -25,11 +23,6 @@ export function PriceTag({ price, originalPrice, size = "sm" }: PriceTagProps) {
         >
           {formatUAH(price)}
         </span>
-        <SavingsPercentBadge
-          percent={savings}
-          featured={size === "lg"}
-          minPercent={1}
-        />
         {originalPrice && originalPrice > price && (
           <span className="text-sm text-muted-foreground/60 line-through sm:text-base">
             {formatUAH(originalPrice)}

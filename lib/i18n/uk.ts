@@ -38,9 +38,9 @@ const uk = {
     showMore: "Показати ще пропозиції",
   },
   deals: {
-    goToOffer: "Перейти до пропозиції",
+    goToOffer: "Забрати зараз",
     ctaGo: "Забрати зараз",
-    ctaGoFeatured: "Отримати пропозицію",
+    ctaGoFeatured: "Забрати зараз",
     ctaView: "Переглянути deal",
     youSave: "Ви економите",
     usersRecommend: "користувачів рекомендують",
@@ -73,7 +73,7 @@ const uk = {
   },
   go: {
     title: "Перехід до магазину",
-    heading: "Перейти до пропозиції",
+    heading: "Забрати зараз",
     description: "Натисніть кнопку нижче, щоб відкрити товар у магазині.",
     openButton: "Відкрити на AliExpress",
     merchantNote: "Вас буде перенаправлено на сторонній сайт партнера.",

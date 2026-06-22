@@ -133,7 +133,6 @@ function DealCardBody({
   isLoggedIn,
   featured,
   badges,
-  savings,
   savingsAmount,
   score,
 }: {
@@ -143,7 +142,6 @@ function DealCardBody({
   isLoggedIn: boolean;
   featured: boolean;
   badges: DealFeedBadge[];
-  savings: number | null;
   savingsAmount: number | null;
   score: number;
 }) {
@@ -179,7 +177,6 @@ function DealCardBody({
         >
           {formatUAH(Number(deal.price_uah))}
         </span>
-        <SavingsPercentBadge percent={savings} featured={featured} minPercent={1} />
         {deal.original_price_uah && (
           <span className="text-xs text-muted-foreground/50 line-through sm:text-sm">
             {formatUAH(Number(deal.original_price_uah))}
@@ -249,7 +246,6 @@ export function DealFeedCard({
     isLoggedIn,
     featured,
     badges,
-    savings,
     savingsAmount,
     score,
   };
