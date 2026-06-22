@@ -62,7 +62,7 @@ SELECT
   8699,
   'https://answear.ua/p/bigovi-krosivky-hoka-mafate-speed-2-kolir-chornyj-1126851-1538050',
   d.affiliate_url,
-  'https://vyhodadeal.com/deals/hoka-mafate-speed-2-answear.jpg',
+  'https://vyhodadeal.com/deals/hoka-mafate-speed-2-answear.png',
   'approved',
   0,
   0,

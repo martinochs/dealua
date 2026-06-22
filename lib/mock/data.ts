@@ -631,7 +631,7 @@ export const MOCK_DEALS: DealWithRelations[] = [
     original_price_uah: 8699,
     external_url: deal22Links.external_url,
     affiliate_url: deal22Links.affiliate_url,
-    image_url: "/deals/hoka-mafate-speed-2-answear.jpg",
+    image_url: "/deals/hoka-mafate-speed-2-answear.png",
     status: "approved",
     hot_count: 0,
     cold_count: 0,
