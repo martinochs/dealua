@@ -624,9 +624,9 @@ export const MOCK_DEALS: DealWithRelations[] = [
     user_id: "user-1",
     category_id: "cat-5",
     merchant_id: "merch-6",
-    title: "HOKA Mafate Speed 2 — чорні трейлові кросівки",
+    title: "HOKA Mafate Speed 2 — чорні трейлові кросівки (чорний/синій)",
     description:
-      "Трейлові кросівки HOKA Mafate Speed 2 у чорному кольорі — знижка на Answear з додатковим промокодом SALE (−5%).\n\nОсобливості:\n\n• Промокод SALE: 5 199 ₴ → 4 939 ₴\n• Підошва Vibram Megagrip — надійне зчеплення на різному покритті\n• Амортизація CMEVA та геометрія Meta-Rocker\n• Легка безшовна верхня частина SpeedFrame\n• Drop 4 mm — для технічних трейлів і довгих дистанцій\n• Доступні розміри: 43⅓, 44, 46\n• Економія 3 760 ₴ від 8 699 ₴\n\n💰 Знижка 43% на Answear (з кодом SALE)\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+      "Трейлові кросівки HOKA Mafate Speed 2 у кольорі чорний/синій — знижка на Answear з додатковим промокодом SALE (−5%).\n\nОсобливості:\n\n• Промокод SALE: 5 199 ₴ → 4 939 ₴\n• Підошва Vibram Megagrip — надійне зчеплення на різному покритті\n• Амортизація CMEVA та геометрія Meta-Rocker\n• Легка безшовна верхня частина SpeedFrame\n• Drop 4 mm — для технічних трейлів і довгих дистанцій\n• Доступні розміри: 43⅓, 44, 46\n• Економія 3 760 ₴ від 8 699 ₴\n\n💰 Знижка 43% на Answear (з кодом SALE)\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
     price_uah: 4939,
     original_price_uah: 8699,
     external_url: deal22Links.external_url,
