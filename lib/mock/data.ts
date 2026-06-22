@@ -106,6 +106,15 @@ const deal22Links = (() => {
   return links;
 })();
 
+const DEAL_23_AFFILIATE =
+  "https://hxbok.com/g/h29o15jdr6d66b47c306a76d99edd2/?ulp=https%3A%2F%2Fanswear.ua%2Fp%2Fbigovi-krosivky-hoka-mafate-speed-2-kolir-zelenyj-1126851-1303762";
+
+const deal23Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_23_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -637,6 +646,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     cold_count: 0,
     expires_at: null,
     created_at: hoursAgo(0.00000001),
+    category: { slug: "sport", name_uk: "Спорт", icon: "⚽" },
+    merchant: { name: "Answear", slug: "answear", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-23",
+    user_id: "user-1",
+    category_id: "cat-5",
+    merchant_id: "merch-6",
+    title: "Бігові кросівки Hoka Mafate Speed 2 — 42⅔, 43⅓, 44⅔, 45⅓, 46, 46⅔ | зелений",
+    description:
+      "Бігові кросівки HOKA Mafate Speed 2 у зеленому кольорі — знижка на Answear з додатковим промокодом SALE (−5%).\n\nОсобливості:\n\n• Промокод SALE: 5 399 ₴ → 5 129 ₴\n• Підошва Vibram Megagrip — надійне зчеплення на різному покритті\n• Амортизація CMEVA та геометрія Meta-Rocker\n• Легка безшовна верхня частина SpeedFrame\n• Drop 4 mm — для технічних трейлів і довгих дистанцій\n• Доступні розміри: 42⅔, 43⅓, 44⅔, 45⅓, 46, 46⅔\n• Економія 2 570 ₴ від 7 699 ₴\n\n💰 Знижка 33% на Answear (з кодом SALE)\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 5129,
+    original_price_uah: 7699,
+    external_url: deal23Links.external_url,
+    affiliate_url: deal23Links.affiliate_url,
+    image_url: "/deals/hoka-mafate-speed-2-answear-green.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.000000005),
     category: { slug: "sport", name_uk: "Спорт", icon: "⚽" },
     merchant: { name: "Answear", slug: "answear", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
