@@ -88,6 +88,15 @@ const deal20Links = (() => {
   return links;
 })();
 
+const DEAL_21_AFFILIATE =
+  "https://wbbsv.com/g/ynys1f2mjpd66b47c3060e81904d8b/?ulp=https%3A%2F%2Ftouch.com.ua%2Fua%2Fitem%2Fnintendo-switch-oled-model-the-legend-of-zelda-tears-of-the-kingdom-edition-portativnaya-igrovaya-pr%2F";
+
+const deal21Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_21_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -574,6 +583,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     cold_count: 0,
     expires_at: null,
     created_at: hoursAgo(0.00000005),
+    category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
+    merchant: { name: "TOUCH", slug: "touch", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-21",
+    user_id: "user-1",
+    category_id: "cat-1",
+    merchant_id: "merch-5",
+    title: "Nintendo Switch OLED — The Legend of Zelda: Tears of the Kingdom Edition",
+    description:
+      "Портативна ігрова консоль Nintendo Switch OLED у спеціальному дизайні The Legend of Zelda: Tears of the Kingdom — вигідна ціна в TOUCH.\n\nОсобливості:\n\n• OLED-екран 7\" — яскраві кольори та контраст\n• Лімітоване оформлення Zelda: Tears of the Kingdom\n• Портативний та домашній режим гри\n• Joy-Con контролери в комплекті\n• Док-станція та кабель HDMI в комплекті\n• Економія 1 740 ₴\n\n💰 Знижка 1 740 ₴ на TOUCH\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 18059,
+    original_price_uah: 19799,
+    external_url: deal21Links.external_url,
+    affiliate_url: deal21Links.affiliate_url,
+    image_url: "/deals/nintendo-switch-oled-zelda-tears-touch.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.00000002),
     category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
     merchant: { name: "TOUCH", slug: "touch", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
