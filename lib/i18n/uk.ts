@@ -58,6 +58,7 @@ const uk = {
     votes: "голосів",
     savings: "Економія",
     save: "Економія",
+    moreOffers: "Ще пропозиції",
     originalPrice: "Була ціна",
     currentPrice: "Ціна",
     expired: "Завершено",

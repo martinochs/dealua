@@ -124,6 +124,23 @@ const deal24Links = (() => {
   return links;
 })();
 
+const DEAL_25_AFFILIATE = DEAL_23_AFFILIATE;
+
+const deal25Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_25_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
+const DEAL_26_AFFILIATE =
+  "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005005641392776.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000033860791952%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0";
+
+const deal26Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_26_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -701,6 +718,50 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.000000002),
     category: { slug: "sport", name_uk: "Спорт", icon: "⚽" },
     merchant: { name: "Answear", slug: "answear", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-25",
+    user_id: "user-1",
+    category_id: "cat-5",
+    merchant_id: "merch-6",
+    title: "Answear SALE — HOKA Mafate Speed 2 зелений + ще кросівки",
+    description:
+      "Підбірка знижок на кросівки в Answear — додаткові −5% з промокодом SALE на вже знижені ціни.\n\nГоловна пропозиція — HOKA Mafate Speed 2 у зеленому кольорі (розміри 42⅔–46⅔).\n\nОсобливості:\n\n• Промокод SALE: 5 399 ₴ → 5 129 ₴\n• Підошва Vibram Megagrip — надійне зчеплення\n• Амортизація CMEVA та Meta-Rocker\n• Економія 2 570 ₴ від 7 699 ₴\n\n💰 Знижка 33% на Answear (з кодом SALE)\n👉 Натисніть «Забрати зараз» для головної пропозиції\n\n🔥 Ще пропозиції:\n\n• HOKA Mafate Speed 2 чорний/синій — 4 939 ₴ → https://hxbok.com/g/h29o15jdr6d66b47c306a76d99edd2/?ulp=https%3A%2F%2Fanswear.ua%2Fp%2Fbigovi-krosivky-hoka-mafate-speed-2-kolir-chornyj-1126851-1538050\n• Жіночі adidas Rapidmove Pro Trainer білий — 4 749 ₴ → https://hxbok.com/g/h29o15jdr6d66b47c306a76d99edd2/?ulp=https%3A%2F%2Fanswear.ua%2Fp%2Fkrosivky-dlya-trenuvan-adidas-performance-rapidmove-pro-trainer-kolir-bilyj-jp8783-1686300",
+    price_uah: 5129,
+    original_price_uah: 7699,
+    external_url: deal25Links.external_url,
+    affiliate_url: deal25Links.affiliate_url,
+    image_url: "/deals/hoka-mafate-speed-2-answear-green.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.000000001),
+    category: { slug: "sport", name_uk: "Спорт", icon: "⚽" },
+    merchant: { name: "Answear", slug: "answear", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-26",
+    user_id: "user-1",
+    category_id: "cat-7",
+    merchant_id: "merch-4",
+    title: "Дитячий LED-дзигуш з музикою та світлом — іграшка-подарунок",
+    description:
+      "Класичний магічний дзигуш з LED-підсвіткою та музикою — яскрава іграшка для дітей, ідеальна як подарунок хлопчикам на день народження чи свято.\n\nОсобливості:\n\n• Натискаєш зверху — дзигуш крутиться\n• Світиться та грає музику під час обертання\n• Легкий і компактний — зручно брати з собою\n• Міцний корпус з ABS — безпечний для дітей\n• Приваблює увагу яскравим LED-ефектом\n• Чудовий подарунок для дітей від 3 років\n\n💰 Вигідна ціна на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 175.29,
+    original_price_uah: 412.8,
+    external_url: deal26Links.external_url,
+    affiliate_url: deal26Links.affiliate_url,
+    image_url: "/deals/kids-led-music-spinning-top.jpg",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.0000000005),
+    category: { slug: "diti", name_uk: "Дитячі товари", icon: "🧸" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
 ];

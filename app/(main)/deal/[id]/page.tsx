@@ -9,6 +9,7 @@ import { VoteButtons } from "@/components/deals/VoteButtons";
 import { PriceTag } from "@/components/deals/PriceTag";
 import { PopularityIndicator } from "@/components/deals/PopularityIndicator";
 import { SocialProof } from "@/components/deals/SocialProof";
+import { DealDescription } from "@/components/deals/DealDescription";
 import { CommentList } from "@/components/comments/CommentList";
 import { CommentForm } from "@/components/comments/CommentForm";
 import { Badge } from "@/components/ui/badge";
@@ -133,7 +134,7 @@ export default async function DealPage({ params }: DealPageProps) {
             <SocialProof deal={deal} className="text-xs sm:text-sm" />
           </div>
 
-          <p className="whitespace-pre-wrap text-base leading-relaxed">{deal.description}</p>
+          <DealDescription description={deal.description} />
 
           <div className="hidden sm:block">
             <Button asChild size="default" className="deal-cta h-10 font-semibold sm:min-w-[14rem]">
