@@ -159,6 +159,15 @@ const deal28Links = (() => {
   return links;
 })();
 
+const DEAL_29_AFFILIATE =
+  "https://dbnua.com/g/pevph8c9odd66b47c306f91bc6a472/?ulp=https%3A%2F%2Fflorium.ua%2Fua%2Ftov-zhorzhini-miks%2F";
+
+const deal29Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_29_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -194,6 +203,7 @@ export const MOCK_MERCHANTS: Merchant[] = [
   { id: "merch-4", name: "AliExpress", slug: "aliexpress", logo_url: null, affiliate_base_url: "https://www.aliexpress.com" },
   { id: "merch-5", name: "TOUCH", slug: "touch", logo_url: null, affiliate_base_url: "https://touch.com.ua" },
   { id: "merch-6", name: "Answear", slug: "answear", logo_url: null, affiliate_base_url: "https://answear.ua" },
+  { id: "merch-7", name: "Florium", slug: "florium", logo_url: null, affiliate_base_url: "https://florium.ua" },
 ];
 
 const hoursAgo = (h: number) => new Date(Date.now() - h * 3600000).toISOString();
@@ -824,6 +834,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.0000000001),
     category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-29",
+    user_id: "user-1",
+    category_id: "cat-4",
+    merchant_id: "merch-7",
+    title: "Florium — Жоржини Мікс + ще цибулини | мін. 300 ₴ · доставка 119 ₴ · безкоштовно від 2 000 ₴",
+    description:
+      "Підбірка цибулин і бульб від Florium.ua — головна пропозиція: Жоржини Мікс (бульби).\n\nУмови Florium:\n\n• Мінімальне замовлення: 300 ₴\n• Доставка: 119 ₴\n• Безкоштовна доставка від 2 000 ₴\n\nГоловна пропозиція — Жоржини Мікс для яскравих клумб і саду.\n\nОсобливості:\n\n• Яскравий мікс жоржин — ефектна клумба в сезон\n• Якісні бульби від перевіреного продавця\n• Ціна 440 ₴ (було 500 ₴)\n• Підходить для висадки в саду та на балконі\n\n💰 Знижка 12% на Florium\n👉 Натисніть «Забрати зараз» для головної пропозиції\n\n🔥 Ще пропозиції:\n\n• Фрезія Double Orange (цибулини) — 58 ₴ → https://dbnua.com/g/pevph8c9odd66b47c306f91bc6a472/?ulp=https%3A%2F%2Fflorium.ua%2Fua%2Ftov-frezija-double-orange%2F\n• Бегонія Махрова Мікс (бульби) — 262 ₴ → https://dbnua.com/g/pevph8c9odd66b47c306f91bc6a472/?ulp=https%3A%2F%2Fflorium.ua%2Fua%2Ftov-begonija-mahrova-miks%2F\n• Ранункулюс Aviv Mix (бульби) — 127 ₴ → https://dbnua.com/g/pevph8c9odd66b47c306f91bc6a472/?ulp=https%3A%2F%2Fflorium.ua%2Fua%2Ftov-ranunkuljus-ljutik-aviv-mix%2F\n• Бегонія Cascade Mix (бульби) — 262 ₴ → https://dbnua.com/g/pevph8c9odd66b47c306f91bc6a472/?ulp=https%3A%2F%2Fflorium.ua%2Fua%2Ftov-begonija-cascade-mix%2F\n• Конвалія Hardwick Hall (кореневища) — 112 ₴ → https://dbnua.com/g/pevph8c9odd66b47c306f91bc6a472/?ulp=https%3A%2F%2Fflorium.ua%2Fua%2Ftov-landysh-hardwick-hall%2F",
+    price_uah: 440,
+    original_price_uah: 500,
+    external_url: deal29Links.external_url,
+    affiliate_url: deal29Links.affiliate_url,
+    image_url: "/deals/florium-zhorzhini-miks.jpg",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.00000000005),
+    category: { slug: "dim-i-sad", name_uk: "Дім і сад", icon: "🏡" },
+    merchant: { name: "Florium", slug: "florium", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
 ];
