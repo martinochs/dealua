@@ -168,6 +168,15 @@ const deal29Links = (() => {
   return links;
 })();
 
+const DEAL_30_AFFILIATE =
+  "https://uuwgc.com/g/0g9p90quvgd66b47c3068fe15b50b6/?ulp=https%3A%2F%2Friel.ua%2F";
+
+const deal30Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_30_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -204,6 +213,7 @@ export const MOCK_MERCHANTS: Merchant[] = [
   { id: "merch-5", name: "TOUCH", slug: "touch", logo_url: null, affiliate_base_url: "https://touch.com.ua" },
   { id: "merch-6", name: "Answear", slug: "answear", logo_url: null, affiliate_base_url: "https://answear.ua" },
   { id: "merch-7", name: "Florium", slug: "florium", logo_url: null, affiliate_base_url: "https://florium.ua" },
+  { id: "merch-8", name: "RIEL", slug: "riel", logo_url: null, affiliate_base_url: "https://riel.ua" },
 ];
 
 const hoursAgo = (h: number) => new Date(Date.now() - h * 3600000).toISOString();
@@ -856,6 +866,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     created_at: hoursAgo(0.00000000005),
     category: { slug: "dim-i-sad", name_uk: "Дім і сад", icon: "🏡" },
     merchant: { name: "Florium", slug: "florium", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-30",
+    user_id: "user-1",
+    category_id: "cat-4",
+    merchant_id: "merch-8",
+    title: "🏢 Знижка 5% на квартири від RIEL + розтермінування від 30% першого внеску",
+    description:
+      "Компанія RIEL оновила умови придбання нерухомості у Львові та Києві.\n\n✅ Перший внесок від 30%\n✅ Знижка 5% на вартість квартири\n✅ Розтермінування від забудовника\n✅ Новобудови у Львові та Києві\n\nНаприклад, при вартості квартири 2 000 000 ₴ знижка 5% становить 100 000 ₴.\n\nДеталі та умови акції уточнюйте на сайті забудовника.\n\n👉 Натисніть «Забрати зараз», щоб перейти на сайт RIEL.",
+    price_uah: 1900000,
+    original_price_uah: 2000000,
+    external_url: deal30Links.external_url,
+    affiliate_url: deal30Links.affiliate_url,
+    image_url: "/deals/riel-apartments-5-percent.webp",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.00000000001),
+    category: { slug: "dim-i-sad", name_uk: "Дім і сад", icon: "🏡" },
+    merchant: { name: "RIEL", slug: "riel", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
 ];

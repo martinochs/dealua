@@ -1,4 +1,4 @@
-const AFFILIATE_HOSTS = ["rzekl.com", "wbbsv.com", "hxbok.com", "dbnua.com", "admitad.com", "ad.admitad.com"];
+const AFFILIATE_HOSTS = ["rzekl.com", "wbbsv.com", "hxbok.com", "dbnua.com", "uuwgc.com", "admitad.com", "ad.admitad.com"];
 
 export function isAffiliateUrl(url: string): boolean {
   try {
@@ -64,7 +64,7 @@ export function resolveDealLinksFromAffiliate(affiliateUrl: string):
   }
 
   if (!isAffiliateUrl(trimmed)) {
-    return { error: "Використовуйте партнерське посилання Admitad (rzekl.com / wbbsv.com / hxbok.com / dbnua.com)" };
+    return { error: "Використовуйте партнерське посилання Admitad (rzekl.com / wbbsv.com / hxbok.com / dbnua.com / uuwgc.com)" };
   }
 
   const external_url = extractExternalUrlFromAffiliate(trimmed);
