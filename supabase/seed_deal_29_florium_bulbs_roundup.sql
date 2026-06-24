@@ -58,10 +58,10 @@ SELECT
 
 • Яскравий мікс жоржин — ефектна клумба в сезон
 • Якісні бульби від перевіреного продавця
-• Ціна 440 ₴ (було 500 ₴)
+• Ціна 109,99 ₴ (було 549,95 ₴)
 • Підходить для висадки в саду та на балконі
 
-💰 Знижка 12% на Florium
+💰 Знижка 80% на Florium
 👉 Натисніть «Забрати зараз» для головної пропозиції
 
 🔥 Ще пропозиції:
@@ -71,8 +71,8 @@ SELECT
 • Ранункулюс Aviv Mix (бульби) — 127 ₴ → https://dbnua.com/g/pevph8c9odd66b47c306f91bc6a472/?ulp=https%3A%2F%2Fflorium.ua%2Fua%2Ftov-ranunkuljus-ljutik-aviv-mix%2F
 • Бегонія Cascade Mix (бульби) — 262 ₴ → https://dbnua.com/g/pevph8c9odd66b47c306f91bc6a472/?ulp=https%3A%2F%2Fflorium.ua%2Fua%2Ftov-begonija-cascade-mix%2F
 • Конвалія Hardwick Hall (кореневища) — 112 ₴ → https://dbnua.com/g/pevph8c9odd66b47c306f91bc6a472/?ulp=https%3A%2F%2Fflorium.ua%2Fua%2Ftov-landysh-hardwick-hall%2F$$,
-  440,
-  500,
+  109.99,
+  549.95,
   'https://florium.ua/ua/tov-zhorzhini-miks/',
   d.affiliate_url,
   'https://vyhodadeal.com/deals/florium-zhorzhini-miks.jpg',
