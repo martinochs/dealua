@@ -141,6 +141,15 @@ const deal26Links = (() => {
   return links;
 })();
 
+const DEAL_27_AFFILIATE =
+  "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005005068926217.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000031514524935%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0";
+
+const deal27Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_27_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -761,6 +770,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     expires_at: null,
     created_at: hoursAgo(0.0000000005),
     category: { slug: "diti", name_uk: "Дитячі товари", icon: "🧸" },
+    merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-27",
+    user_id: "user-1",
+    category_id: "cat-5",
+    merchant_id: "merch-4",
+    title: "Чоловічі бігові шорти — швидке висихання, подвійний шар | чорні",
+    description:
+      "Чоловічі спортивні шорти з технологією швидкого висихання та подвійним шаром — для бігу, фітнесу, тренувань у залі та бодібілдингу.\n\nОсобливості:\n\n• Подвійний шар — зовнішні шорти + внутрішня компресійна підкладка\n• Тканина швидкого висихання — комфорт під час інтенсивних тренувань\n• Вільний крій зовнішнього шару — не обмежує рух\n• Підходять для бігу, залу, кросфіту та повсякденного спорту\n• Класичний чорний колір\n• Зручні для тренувань і активного відпочинку\n\n💰 Вигідна ціна на AliExpress\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 189.45,
+    original_price_uah: 428.9,
+    external_url: deal27Links.external_url,
+    affiliate_url: deal27Links.affiliate_url,
+    image_url: "/deals/mens-quick-dry-double-layer-shorts-black.jpg",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.0000000002),
+    category: { slug: "sport", name_uk: "Спорт", icon: "⚽" },
     merchant: { name: "AliExpress", slug: "aliexpress", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
   },
