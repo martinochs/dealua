@@ -133,7 +133,7 @@ const deal25Links = (() => {
 })();
 
 const DEAL_26_AFFILIATE =
-  "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005005641392776.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000033860791952%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0";
+  "https://rzekl.com/g/1e8d114494d66b47c30616525dc3e8/?ulp=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005005641392776.html%3Fpdp_ext_f%3D%257B%2522sku_id%2522%253A%252212000033860791952%2522%257D%26sourceType%3D1%26spm%3Da2g0o.wish-manage-home.0.0%26dp%3Dcdf2629b209138ffc60e6df93987fa21%26af%3D2541698%26cv%3D47843%26afref%3D%26mall_affr%3Dpr3%26utm_source%3Dadmitad%26utm_medium%3Dcpa%26utm_campaign%3D2541698%26utm_content%3D47843%26dp%3Dcdf2629b209138ffc60e6df93987fa21%26af%3D2541698%26cv%3D47843%26afref%3D%26mall_affr%3Dpr3%26utm_source%3Dadmitad%26utm_medium%3Dcpa%26utm_campaign%3D2541698%26utm_content%3D47843%26aff_fcid%3D1558ce5304254106afe2fe7e75ec1f88-1782328783179-06315-_ePNSNV%26aff_fsk%3D_ePNSNV%26aff_platform%3Dportals-tool%26sk%3D_ePNSNV%26aff_trace_key%3D1558ce5304254106afe2fe7e75ec1f88-1782328783179-06315-_ePNSNV%26terminal_id%3D24059a455d5a4e34859882c89e70522a%26afSmartRedirect%3Dy";
 
 const deal26Links = (() => {
   const links = resolveDealLinksFromAffiliate(DEAL_26_AFFILIATE);
