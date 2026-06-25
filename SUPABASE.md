@@ -75,19 +75,57 @@ UPDATE profiles SET role = 'admin' WHERE username = 'your_username';
 
 ## 6. Google sign-in (optional)
 
-1. In [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → Credentials → **Create OAuth client ID** (Web application).
-2. Add **Authorized redirect URI**: your Supabase callback URL from **Authentication → Providers → Google** (looks like `https://xxxxx.supabase.co/auth/v1/callback`).
-3. In Supabase **Authentication → Providers → Google**: enable Google and paste Client ID + Client Secret.
-4. In Supabase **Authentication → URL Configuration**, set:
-   - **Site URL**: `https://vyhodadeal.com` (or your Vercel URL)
-   - **Redirect URLs**: `https://vyhodadeal.com/auth/callback` and `http://localhost:3000/auth/callback`
-5. Run the OAuth profile migration in SQL Editor:
+The app already has the **«Продовжити з Google»** button and `/auth/callback` route. You only need dashboard configuration:
+
+### A. Google Cloud Console
+
+1. Open [Google Cloud Console](https://console.cloud.google.com/) → select or create a project.
+2. **APIs & Services → OAuth consent screen** — configure app name, support email, add `vyhodadeal.com` under authorized domains if prompted.
+3. **APIs & Services → Credentials → Create credentials → OAuth client ID** → type **Web application**.
+4. **Authorized JavaScript origins:**
+   - `https://vyhodadeal.com`
+   - `http://localhost:3000` (for local testing)
+5. **Authorized redirect URIs** — copy the exact callback URL from Supabase (step B.2), e.g.  
+   `https://YOUR-PROJECT-REF.supabase.co/auth/v1/callback`
+6. Save and copy **Client ID** + **Client Secret**.
+
+### B. Supabase Dashboard
+
+1. **Authentication → Providers → Google** — enable, paste Client ID + Client Secret, save.
+2. Note the **Callback URL** shown on that page (for Google step A.5).
+3. **Authentication → URL Configuration:**
+   - **Site URL:** `https://vyhodadeal.com`
+   - **Redirect URLs** (add all):
+     - `https://vyhodadeal.com/auth/callback`
+     - `http://localhost:3000/auth/callback`
+     - `https://dealua.vercel.app/auth/callback` (optional preview URL)
+4. **SQL Editor** — run if not applied yet:
 
 ```
 supabase/migrations/20260103000000_oauth_profile_handling.sql
 ```
 
-Users can then click **«Продовжити з Google»** on login and register pages.
+This creates profiles with username + avatar from Google name/picture.
+
+### C. Vercel
+
+Ensure these env vars exist (Production):
+
+| Variable | Value |
+|----------|-------|
+| `USE_MOCK` | `false` |
+| `NEXT_PUBLIC_SUPABASE_URL` | your project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | anon key |
+| `NEXT_PUBLIC_SITE_URL` | `https://vyhodadeal.com` |
+
+Redeploy after changes.
+
+### D. Test
+
+1. Open [vyhodadeal.com/login](https://vyhodadeal.com/login)
+2. Click **«Продовжити з Google»**
+3. After Google consent you should land on the homepage, logged in
+4. Check profile: `SELECT id, username, avatar_url FROM profiles ORDER BY created_at DESC LIMIT 5;`
 
 ## 7. Telegram sign-in (optional)
 
