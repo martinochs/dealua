@@ -186,6 +186,15 @@ const deal32Links = (() => {
   return links;
 })();
 
+const DEAL_33_AFFILIATE =
+  "https://wbbsv.com/g/ynys1f2mjpd66b47c3060e81904d8b/?ulp=https%3A%2F%2Ftouch.com.ua%2Fua%2Fitem%2Fsony-playstation-5-slim-1tb-marvel-s-spider-man-2-bundle-igrovaya-pristavka-vaucher%2F";
+
+const deal33Links = (() => {
+  const links = resolveDealLinksFromAffiliate(DEAL_33_AFFILIATE);
+  if ("error" in links) throw new Error(links.error);
+  return links;
+})();
+
 export const MOCK_PROFILES: Profile[] = [
   {
     id: "user-1",
@@ -917,6 +926,28 @@ export const MOCK_DEALS: DealWithRelations[] = [
     cold_count: 0,
     expires_at: null,
     created_at: hoursAgo(0.0000000000001),
+    category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
+    merchant: { name: "TOUCH", slug: "touch", logo_url: null },
+    profile: { username: "VyhodaDeal Team", avatar_url: null },
+  },
+  {
+    id: "deal-33",
+    user_id: "user-1",
+    category_id: "cat-1",
+    merchant_id: "merch-5",
+    title: "Sony PlayStation 5 Slim 1TB + Marvel's Spider-Man 2 Bundle",
+    description:
+      "Ігрова консоль Sony PlayStation 5 Slim з накопичувачем 1 ТБ у комплекті з грою Marvel's Spider-Man 2 — акція в TOUCH.\n\nОсобливості:\n\n• PlayStation 5 Slim Blu-ray Edition — компактний корпус, SSD 1 ТБ\n• У комплекті ваучер Marvel's Spider-Man 2\n• Підтримка 4K, HDR та до 120 FPS\n• DualSense з тактильним зворотним зв'язком та адаптивними тригерами\n• Швидкий SSD — миттєве завантаження ігор\n• Зворотна сумісність з іграми PS4\n• Економія 2 750 ₴\n\n💰 Знижка 2 750 ₴ на TOUCH\n👉 Натисніть «Забрати зараз», щоб перейти до пропозиції.",
+    price_uah: 28649,
+    original_price_uah: 31399,
+    external_url: deal33Links.external_url,
+    affiliate_url: deal33Links.affiliate_url,
+    image_url: "/deals/ps5-slim-cod-bundle-touch.png",
+    status: "approved",
+    hot_count: 0,
+    cold_count: 0,
+    expires_at: null,
+    created_at: hoursAgo(0.00000000000001),
     category: { slug: "elektronika", name_uk: "Електроніка", icon: "📱" },
     merchant: { name: "TOUCH", slug: "touch", logo_url: null },
     profile: { username: "VyhodaDeal Team", avatar_url: null },
