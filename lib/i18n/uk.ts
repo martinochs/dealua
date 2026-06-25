@@ -13,6 +13,7 @@ const uk = {
     logout: "Вийти",
     admin: "Адмін",
     profile: "Профіль",
+    settings: "Налаштування",
     categories: "Категорії",
   },
   feed: {
@@ -186,6 +187,23 @@ const uk = {
   profile: {
     deals: "Пропозиції користувача",
     noDeals: "Користувач ще не додавав пропозицій",
+    settings: "Налаштування акаунту",
+  },
+  settings: {
+    title: "Налаштування акаунту",
+    subtitle: "Керування акаунтом",
+    backToProfile: "Повернутися до профілю",
+    deleteAccountTitle: "Видалити акаунт",
+    deleteAccountDescription:
+      "Цю дію неможливо скасувати. Після видалення акаунт і пов’язані дані будуть безповоротно втрачені.",
+    deleteAccountWarningDeals: "Усі ваші пропозиції будуть видалені",
+    deleteAccountWarningComments: "Усі ваші коментарі будуть видалені",
+    deleteAccountWarningVotes: "Усі ваші голоси будуть видалені",
+    deleteAccountConfirmLabel: "Підтвердження",
+    deleteAccountConfirmHint: "Введіть {username}, щоб підтвердити видалення",
+    deleteAccountButton: "Видалити акаунт назавжди",
+    deleteAccountAdminBlocked:
+      "Акаунт адміністратора не можна видалити самостійно. Зверніться до підтримки: support@vyhodadeal.com",
   },
   footer: {
     about: "Про нас",

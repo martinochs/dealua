@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import { DealFeed } from "@/components/deals/DealFeed";
 import { getProfileByUsername, getUserDeals, getCommentCounts, getUserVotes } from "@/lib/queries/deals";
 import { getProfile } from "@/lib/auth/session";
@@ -34,18 +36,25 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
   return (
     <div className="mx-auto w-full max-w-6xl space-y-4">
-      <div className="flex items-center gap-2.5 py-1">
-        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary">
-          {profile.username[0]?.toUpperCase()}
+      <div className="flex items-center justify-between gap-4 py-1">
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary">
+            {profile.username[0]?.toUpperCase()}
+          </div>
+          <div>
+            <h1 className="text-lg font-bold">@{profile.username}</h1>
+            {profile.role === "admin" && (
+              <Badge variant="secondary" className="mt-0.5 text-[10px]">
+                Адмін
+              </Badge>
+            )}
+          </div>
         </div>
-        <div>
-          <h1 className="text-lg font-bold">@{profile.username}</h1>
-          {profile.role === "admin" && (
-            <Badge variant="secondary" className="mt-0.5 text-[10px]">
-              Адмін
-            </Badge>
-          )}
-        </div>
+        {isOwnProfile && (
+          <Button asChild variant="outline" size="sm">
+            <Link href="/settings">{t("profile.settings")}</Link>
+          </Button>
+        )}
       </div>
 
       <section className="space-y-1">

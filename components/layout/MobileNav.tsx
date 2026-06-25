@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, User, LogOut, Shield, List, Grid3X3 } from "lucide-react";
+import { Menu, User, LogOut, Shield, List, Grid3X3, Settings } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { logoutAction } from "@/lib/actions/auth";
@@ -52,6 +52,14 @@ export function MobileNav({ profile, pendingCount = 0 }: MobileNavProps) {
                 >
                   <User className="h-4 w-4" />
                   {profile.username}
+                </Link>
+                <Link
+                  href="/settings"
+                  className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm hover:bg-accent min-h-[44px]"
+                  onClick={() => setOpen(false)}
+                >
+                  <Settings className="h-4 w-4" />
+                  {t("nav.settings")}
                 </Link>
                 {profile.role === "admin" && (
                   <Link
