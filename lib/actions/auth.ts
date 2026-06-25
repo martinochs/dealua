@@ -10,10 +10,15 @@ import {
   verifyMockAdminLogin,
 } from "@/lib/auth/mock-session";
 import { createClient } from "@/lib/supabase/server";
-import { safeRedirectPath } from "@/lib/site-url";
+import { getSiteUrl, safeRedirectPath } from "@/lib/site-url";
 import { loginSchema, mockLoginSchema, registerSchema } from "@/lib/validators/schemas";
 
-export type ActionResult = { error?: string; success?: boolean };
+export type ActionResult = {
+  error?: string;
+  success?: boolean;
+  emailConfirmationRequired?: boolean;
+  email?: string;
+};
 
 export async function loginAction(formData: FormData): Promise<ActionResult> {
   const next = safeRedirectPath(formData.get("next") as string | null);
@@ -82,18 +87,29 @@ export async function registerAction(formData: FormData): Promise<ActionResult> 
     "user";
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,
     password: parsed.data.password,
-    options: { data: { username: derivedUsername } },
+    options: {
+      data: { username: derivedUsername },
+      emailRedirectTo: `${getSiteUrl()}/auth/callback`,
+    },
   });
 
   if (error) {
     return { error: "Не вдалося створити акаунт" };
   }
 
-  revalidatePath("/", "layout");
-  redirect("/");
+  if (data.session) {
+    revalidatePath("/", "layout");
+    redirect("/");
+  }
+
+  return {
+    success: true,
+    emailConfirmationRequired: true,
+    email: parsed.data.email,
+  };
 }
 
 export async function logoutAction() {

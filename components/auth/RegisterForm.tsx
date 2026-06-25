@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useActionState, useState } from "react";
-import { Eye, EyeOff, Lock, Mail } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, MailCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,15 +10,38 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AuthDivider } from "@/components/auth/AuthDivider";
 import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
 import { TelegramSignInButton } from "@/components/auth/TelegramSignInButton";
-import { registerAction } from "@/lib/actions/auth";
+import { registerAction, type ActionResult } from "@/lib/actions/auth";
 import { t } from "@/lib/i18n/uk";
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [state, formAction, isPending] = useActionState(
-    async (_prev: { error?: string }, formData: FormData) => registerAction(formData),
+  const [state, formAction, isPending] = useActionState<ActionResult, FormData>(
+    async (_prev, formData) => registerAction(formData),
     {}
   );
+
+  if (state.emailConfirmationRequired) {
+    return (
+      <Card className="w-full shadow-lg">
+        <CardContent className="space-y-4 pt-8 text-center">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <MailCheck className="h-6 w-6" aria-hidden />
+          </div>
+          <div className="space-y-2">
+            <h2 className="text-xl font-semibold">{t("auth.confirmEmailTitle")}</h2>
+            <p className="text-sm text-muted-foreground">{t("auth.confirmEmailDescription")}</p>
+            {state.email && (
+              <p className="text-sm font-medium text-foreground">{state.email}</p>
+            )}
+            <p className="text-xs text-muted-foreground">{t("auth.confirmEmailSpamHint")}</p>
+          </div>
+          <Button asChild className="w-full" size="lg">
+            <Link href="/login">{t("auth.confirmEmailGoToLogin")}</Link>
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="w-full shadow-lg">
