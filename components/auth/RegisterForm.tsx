@@ -93,6 +93,25 @@ export function RegisterForm() {
             <p className="text-xs text-muted-foreground">{t("auth.passwordHint")}</p>
           </div>
 
+          <div className="space-y-2 rounded-lg border bg-muted/30 p-3">
+            <label htmlFor="age_confirmed" className="flex cursor-pointer items-start gap-2.5">
+              <input
+                id="age_confirmed"
+                name="age_confirmed"
+                type="checkbox"
+                required
+                className="mt-0.5 h-4 w-4 shrink-0 rounded border-input accent-primary"
+              />
+              <span className="text-sm leading-snug">
+                {t("auth.ageConfirmLabel")}.{" "}
+                <Link href="/rules" className="font-medium text-primary hover:underline">
+                  {t("footer.rules")}
+                </Link>
+              </span>
+            </label>
+            <p className="text-xs text-muted-foreground">{t("auth.ageConfirmHint")}</p>
+          </div>
+
           <Button type="submit" className="w-full" size="lg" disabled={isPending}>
             {t("auth.register")}
           </Button>
@@ -103,6 +122,7 @@ export function RegisterForm() {
         <div className="space-y-3">
           <GoogleSignInButton />
           <TelegramSignInButton />
+          <p className="text-center text-xs text-muted-foreground">{t("auth.ageConfirmOAuth")}</p>
         </div>
 
         <p className="text-center text-sm text-muted-foreground">

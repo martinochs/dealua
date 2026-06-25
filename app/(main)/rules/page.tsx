@@ -9,6 +9,11 @@ export default function RulesPage() {
     <div className="max-w-2xl mx-auto space-y-6">
       <h1 className="text-2xl font-bold">{t("footer.rules")}</h1>
       <ul className="space-y-3 text-muted-foreground list-disc pl-5">
+        <li>
+          Користуватися VyhodaDeal можуть лише особи, яким виповнилося{" "}
+          <strong className="font-semibold text-foreground">16 років</strong>. Реєструючись,
+          ви підтверджуєте відповідний вік.
+        </li>
         <li>Додавайте лише реальні пропозиції з актуальними цінами в гривнях (₴).</li>
         <li>Вказуйте правильне посилання на товар та магазин.</li>
         <li>Не спамте та не дублюйте однакові пропозиції.</li>

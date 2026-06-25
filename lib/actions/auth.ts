@@ -69,6 +69,10 @@ export async function registerAction(formData: FormData): Promise<ActionResult> 
     redirect("/login");
   }
 
+  if (formData.get("age_confirmed") !== "on") {
+    return { error: "Підтвердіть, що вам виповнилося 16 років" };
+  }
+
   const parsed = registerSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
