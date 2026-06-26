@@ -210,6 +210,13 @@ const uk = {
     title: "Налаштування акаунту",
     subtitle: "Керування акаунтом",
     backToProfile: "Повернутися до профілю",
+    avatarTitle: "Аватар профілю",
+    avatarDescription: "Оберіть аватар для вашого публічного профілю.",
+    avatarUseInitials: "Використовувати ініціали",
+    avatarCurrentInitials: "Зараз використовуються ініціали",
+    avatarCurrentPreset: "Обраний аватар",
+    avatarCurrentExternal: "Зображення з акаунту Google або Telegram",
+    avatarSaving: "Збереження…",
     deleteAccountTitle: "Видалити акаунт",
     deleteAccountDescription:
       "Цю дію неможливо скасувати. Після видалення акаунт і пов’язані дані будуть безповоротно втрачені.",

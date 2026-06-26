@@ -306,3 +306,10 @@ export function getMockUserProfileStats(userId: string) {
     coldPoints: approvedDeals.reduce((sum, deal) => sum + deal.cold_count, 0),
   };
 }
+
+export function updateMockProfileAvatar(userId: string, avatarUrl: string | null) {
+  const profile = MOCK_PROFILES.find((p) => p.id === userId);
+  if (profile) {
+    profile.avatar_url = avatarUrl;
+  }
+}

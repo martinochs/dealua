@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { AvatarPicker } from "@/components/account/AvatarPicker";
 import { DeleteAccountForm } from "@/components/account/DeleteAccountForm";
 import { Button } from "@/components/ui/button";
 import { getProfile } from "@/lib/auth/session";
@@ -24,6 +25,8 @@ export default async function SettingsPage() {
           </Link>
         </p>
       </div>
+
+      <AvatarPicker username={profile.username} currentAvatarUrl={profile.avatar_url} />
 
       <section className="space-y-4 rounded-lg border border-destructive/30 bg-destructive/5 p-6">
         <div className="space-y-2">
