@@ -3,6 +3,10 @@ import Link from "next/link";
 import { t } from "@/lib/i18n/uk";
 import { cn } from "@/lib/utils";
 
+/** Intrinsic size of public/logo.png — keep in sync if the asset is replaced. */
+const LOGO_WIDTH = 992;
+const LOGO_HEIGHT = 1024;
+
 type LogoSize = "header" | "register" | "compact";
 
 const sizeVariants: Record<LogoSize, string> = {
@@ -32,10 +36,11 @@ export function Logo({
       <Image
         src="/logo.png"
         alt={t("site.name")}
-        width={480}
-        height={120}
-        className={sizeVariants[size]}
+        width={LOGO_WIDTH}
+        height={LOGO_HEIGHT}
+        className={cn(sizeVariants[size], "object-contain object-left")}
         priority={priority}
+        unoptimized
       />
       {showTagline && (
         <span className="mt-0.5 text-[10px] font-medium text-muted-foreground/80 sm:text-[11px]">

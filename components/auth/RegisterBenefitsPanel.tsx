@@ -32,7 +32,7 @@ export function RegisterBenefitsPanel({ className }: RegisterBenefitsPanelProps)
     <div className={cn("flex w-full max-w-xl flex-col gap-8 lg:max-w-none lg:pt-2", className)}>
       <div className="space-y-4">
         <div className="space-y-1">
-          <Logo size="register" link={false} />
+          <Logo size="register" link={false} priority />
           <p className="text-sm text-muted-foreground">{registerTagline}</p>
         </div>
         <h1 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-[2rem]">
