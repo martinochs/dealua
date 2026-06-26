@@ -13,7 +13,9 @@ export function Header({ profile, pendingCount = 0 }: HeaderProps) {
     <header className="bg-card">
       <div className="container mx-auto px-4 py-3 sm:py-4">
         <div className="flex items-center justify-between gap-3">
-          <Logo priority />
+          <div className="flex min-w-0 flex-1 items-center">
+            <Logo priority />
+          </div>
           <HeaderActions profile={profile} pendingCount={pendingCount} />
         </div>
         <div className="mt-3 sm:mt-4">

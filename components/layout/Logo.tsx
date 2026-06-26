@@ -3,9 +3,17 @@ import Link from "next/link";
 import { t } from "@/lib/i18n/uk";
 import { cn } from "@/lib/utils";
 
+type LogoSize = "header" | "register" | "compact";
+
+const sizeVariants: Record<LogoSize, string> = {
+  header: "h-auto w-[13.5rem] sm:w-[16rem] md:w-[18.5rem]",
+  register: "h-auto w-[15rem] sm:w-[19rem] md:w-[22rem]",
+  compact: "h-auto w-40 sm:w-44",
+};
+
 interface LogoProps {
   className?: string;
-  heightClass?: string;
+  size?: LogoSize;
   link?: boolean;
   priority?: boolean;
   /** Hidden by default — show explicitly on pages like register */
@@ -14,7 +22,7 @@ interface LogoProps {
 
 export function Logo({
   className,
-  heightClass = "h-12 sm:h-14 md:h-16",
+  size = "header",
   link = true,
   priority = false,
   showTagline = false,
@@ -26,7 +34,7 @@ export function Logo({
         alt={t("site.name")}
         width={480}
         height={120}
-        className={cn("w-auto max-w-[15rem] sm:max-w-[18rem] md:max-w-[21rem]", heightClass)}
+        className={sizeVariants[size]}
         priority={priority}
       />
       {showTagline && (
