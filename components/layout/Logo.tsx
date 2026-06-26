@@ -3,16 +3,16 @@ import Link from "next/link";
 import { t } from "@/lib/i18n/uk";
 import { cn } from "@/lib/utils";
 
-/** Intrinsic size of public/logo.png — keep in sync if the asset is replaced. */
-const LOGO_WIDTH = 992;
+/** Full VyhodaDeal logo with stork — public/logo.png */
+const LOGO_WIDTH = 1024;
 const LOGO_HEIGHT = 1024;
 
 type LogoSize = "header" | "register" | "compact";
 
 const sizeVariants: Record<LogoSize, string> = {
-  header: "h-auto w-[13.5rem] sm:w-[16rem] md:w-[18.5rem]",
-  register: "h-auto w-[15rem] sm:w-[19rem] md:w-[22rem]",
-  compact: "h-auto w-40 sm:w-44",
+  header: "h-auto w-[11rem] sm:w-[13.5rem] md:w-[16rem] lg:w-[18rem]",
+  register: "h-auto w-[13rem] sm:w-[17rem] md:w-[20rem]",
+  compact: "h-auto w-36 sm:w-44",
 };
 
 interface LogoProps {
@@ -53,7 +53,7 @@ export function Logo({
   if (!link) return content;
 
   return (
-    <Link href="/" className="shrink-0 transition-opacity hover:opacity-90 active:opacity-80">
+    <Link href="/" className="block shrink-0 transition-opacity hover:opacity-90 active:opacity-80">
       {content}
     </Link>
   );
