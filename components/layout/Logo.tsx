@@ -8,13 +8,13 @@ interface LogoProps {
   heightClass?: string;
   link?: boolean;
   priority?: boolean;
-  /** Hidden by default — tagline is baked into logo.png */
+  /** Hidden by default — show explicitly on pages like register */
   showTagline?: boolean;
 }
 
 export function Logo({
   className,
-  heightClass = "h-14 sm:h-16",
+  heightClass = "h-12 sm:h-14 md:h-16",
   link = true,
   priority = false,
   showTagline = false,
@@ -24,9 +24,9 @@ export function Logo({
       <Image
         src="/logo.png"
         alt={t("site.name")}
-        width={320}
-        height={96}
-        className={cn("w-auto max-w-[14rem] sm:max-w-[17rem] md:max-w-[19rem]", heightClass)}
+        width={480}
+        height={120}
+        className={cn("w-auto max-w-[15rem] sm:max-w-[18rem] md:max-w-[21rem]", heightClass)}
         priority={priority}
       />
       {showTagline && (

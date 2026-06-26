@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     template: "%s | VyhodaDeal",
   },
   description: "Вигідні пропозиції та знижки для України щодня",
+  themeColor: "#0057B7",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   openGraph: {
     type: "website",
