@@ -292,3 +292,17 @@ export function getMockStats() {
     categories: MOCK_CATEGORIES.filter((c) => c.is_active).length,
   };
 }
+
+export function getMockUserProfileStats(userId: string) {
+  const store = getStore();
+  const approvedDeals = store.deals.filter(
+    (d) => d.user_id === userId && d.status === "approved"
+  );
+
+  return {
+    dealCount: approvedDeals.length,
+    commentCount: store.comments.filter((c) => c.user_id === userId).length,
+    hotPoints: approvedDeals.reduce((sum, deal) => sum + deal.hot_count, 0),
+    coldPoints: approvedDeals.reduce((sum, deal) => sum + deal.cold_count, 0),
+  };
+}

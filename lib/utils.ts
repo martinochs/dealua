@@ -13,6 +13,14 @@ export function formatUAH(amount: number): string {
   }).format(amount);
 }
 
+export function formatDateUk(date: string | Date): string {
+  return new Date(date).toLocaleDateString("uk-UA", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
 export function formatRelativeTime(date: string | Date): string {
   const now = new Date();
   const then = new Date(date);

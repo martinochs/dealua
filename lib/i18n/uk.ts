@@ -199,6 +199,12 @@ const uk = {
     deals: "Пропозиції користувача",
     noDeals: "Користувач ще не додавав пропозицій",
     settings: "Налаштування акаунту",
+    memberSince: "На сайті з",
+    adminBadge: "Адмін",
+    statsDeals: "пропозицій",
+    statsComments: "коментарів",
+    statsHot: "гарячих",
+    statsCold: "холодних",
   },
   settings: {
     title: "Налаштування акаунту",

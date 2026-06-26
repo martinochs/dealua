@@ -1,10 +1,9 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { DealFeed } from "@/components/deals/DealFeed";
+import { ProfileHeader } from "@/components/profile/ProfileHeader";
 import { getProfileByUsername, getUserDeals, getCommentCounts, getUserVotes } from "@/lib/queries/deals";
+import { getUserProfileStats } from "@/lib/queries/profile";
 import { getProfile } from "@/lib/auth/session";
-import { Badge } from "@/components/ui/badge";
 import { t } from "@/lib/i18n/uk";
 
 interface ProfilePageProps {
@@ -29,33 +28,15 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   const isOwnProfile = currentUser?.id === profile.id;
 
   const allDealIds = deals.map((d) => d.id);
-  const [commentCounts, userVotes] = await Promise.all([
+  const [stats, commentCounts, userVotes] = await Promise.all([
+    getUserProfileStats(profile.id),
     getCommentCounts(),
     currentUser ? getUserVotes(allDealIds, currentUser.id) : Promise.resolve({}),
   ]);
 
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-4">
-      <div className="flex items-center justify-between gap-4 py-1">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary">
-            {profile.username[0]?.toUpperCase()}
-          </div>
-          <div>
-            <h1 className="text-lg font-bold">@{profile.username}</h1>
-            {profile.role === "admin" && (
-              <Badge variant="secondary" className="mt-0.5 text-[10px]">
-                Адмін
-              </Badge>
-            )}
-          </div>
-        </div>
-        {isOwnProfile && (
-          <Button asChild variant="outline" size="sm">
-            <Link href="/settings">{t("profile.settings")}</Link>
-          </Button>
-        )}
-      </div>
+    <div className="mx-auto w-full max-w-6xl space-y-5">
+      <ProfileHeader profile={profile} stats={stats} isOwnProfile={isOwnProfile} />
 
       <section className="space-y-1">
         <h2 className="text-sm font-semibold">
