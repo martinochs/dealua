@@ -44,6 +44,7 @@ export function TelegramSignInButton({ next }: TelegramSignInButtonProps) {
     script.async = true;
     script.setAttribute("data-telegram-login", botUsername);
     script.setAttribute("data-size", "large");
+    script.setAttribute("data-radius", "12");
     script.setAttribute("data-onauth", "onTelegramAuth(user)");
     script.setAttribute("data-request-access", "write");
 
@@ -62,7 +63,7 @@ export function TelegramSignInButton({ next }: TelegramSignInButtonProps) {
     <div className="space-y-2">
       <div
         ref={containerRef}
-        className={`flex justify-center ${isLoading ? "pointer-events-none opacity-60" : ""}`}
+        className={`flex w-full justify-center [&>iframe]:!w-full ${isLoading ? "pointer-events-none opacity-60" : ""}`}
         aria-busy={isLoading}
       />
       {isLoading && (

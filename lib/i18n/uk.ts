@@ -121,15 +121,20 @@ const uk = {
     continueWithGoogle: "Продовжити з Google",
     googleLoading: "Перенаправлення…",
     googleError: "Не вдалося увійти через Google",
-    continueWithTelegram: "Увійти через Telegram",
+    continueWithTelegram: "Продовжити з Telegram",
     telegramLoading: "Вхід через Telegram…",
     telegramError: "Не вдалося увійти через Telegram",
     telegramUnavailable: "Вхід через Telegram недоступний",
     or: "або",
     oauthCallbackError: "Не вдалося завершити вхід. Спробуйте ще раз.",
-    createAccount: "Створіть акаунт",
-    createAccountSubtitle: "Це швидко, просто та безкоштовно!",
+    createAccount: "Створіть свій акаунт",
+    createAccountSubtitle: "Це швидко, просто і",
+    createAccountSubtitleFree: "безкоштовно!",
+    registerSubmit: "Зареєструватися",
+    emailPlaceholder: "Введіть ваш email",
+    passwordPlaceholder: "Створіть пароль",
     passwordHint: "Мінімум 6 символів",
+    registerTagline: "Найкращі знижки та пропозиції в Україні",
     confirmEmailTitle: "Перевірте поштову скриньку",
     confirmEmailDescription:
       "Ми надіслали лист із посиланням для підтвердження. Перейдіть за посиланням, щоб активувати акаунт, а потім увійдіть.",
@@ -141,7 +146,8 @@ const uk = {
     ageConfirmOAuth:
       "Продовжуючи через Google або Telegram, ви підтверджуєте, що вам виповнилося 16 років.",
     registerBenefits: {
-      headline: "Приєднуйтесь до спільноти розумних покупців!",
+      headlinePrefix: "Приєднуйтесь до спільноти",
+      headlineHighlight: "розумних покупців!",
       subheadline: "Разом знаходимо найкращі знижки та ділимося вигодою.",
       statsTitle: "Разом знаходимо найкращі знижки!",
       items: [

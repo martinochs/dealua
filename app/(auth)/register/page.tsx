@@ -10,7 +10,7 @@ import { t } from "@/lib/i18n/uk";
 export default function RegisterPage() {
   if (isMockMode()) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
+      <div className="flex min-h-screen items-center justify-center bg-background p-4">
         <Card className="w-full max-w-md">
           <CardContent className="space-y-4 pt-6 text-center">
             <p className="text-lg font-medium">{t("auth.register")}</p>
@@ -28,14 +28,15 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-muted/30">
-      <div className="container mx-auto flex min-h-screen flex-col items-center justify-center gap-8 px-4 py-8 lg:flex-row lg:items-center lg:justify-center lg:gap-16 xl:gap-24">
-        <RegisterBenefitsPanel variant="compact" className="w-full max-w-md lg:hidden" />
-        <RegisterBenefitsPanel variant="full" className="hidden w-full max-w-xl lg:flex lg:flex-1" />
-        <div className="w-full max-w-md shrink-0 lg:flex-1 lg:max-w-md">
-          <RegisterForm />
-          <RegisterTrustBadges />
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-8 sm:py-10 lg:py-12">
+        <div className="flex flex-1 flex-col items-center gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-12 xl:gap-20">
+          <RegisterBenefitsPanel className="lg:flex-1" />
+          <div className="w-full max-w-md shrink-0 lg:flex-1 lg:max-w-[420px]">
+            <RegisterForm />
+          </div>
         </div>
+        <RegisterTrustBadges className="mt-10 lg:mt-14" />
       </div>
     </div>
   );

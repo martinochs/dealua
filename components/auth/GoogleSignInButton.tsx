@@ -69,7 +69,7 @@ export function GoogleSignInButton({ next }: GoogleSignInButtonProps) {
       <Button
         type="button"
         variant="outline"
-        className="w-full"
+        className="h-12 w-full rounded-xl border-input bg-card text-base font-normal shadow-none hover:bg-muted/40"
         onClick={handleGoogleSignIn}
         disabled={isLoading}
       >
