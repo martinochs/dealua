@@ -2,6 +2,9 @@ import { RegisterBenefitsPanel } from "@/components/auth/RegisterBenefitsPanel";
 import { RegisterForm } from "@/components/auth/RegisterForm";
 import { RegisterTrustBadges } from "@/components/auth/RegisterTrustBadges";
 
+/** Avoid stale static HTML after deploys (browser/CDN cache showed old register layout). */
+export const dynamic = "force-dynamic";
+
 export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-background">

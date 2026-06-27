@@ -3,6 +3,10 @@ import Link from "next/link";
 import { t } from "@/lib/i18n/uk";
 import { cn } from "@/lib/utils";
 
+/** Bump when replacing public/logo.png so browsers fetch the new asset. */
+const LOGO_VERSION = "fox-2026";
+const LOGO_SRC = `/logo.png?v=${LOGO_VERSION}`;
+
 /** VyhodaDeal fox logo — public/logo.png (includes tagline) */
 const LOGO_WIDTH = 1024;
 const LOGO_HEIGHT = 298;
@@ -34,7 +38,7 @@ export function Logo({
   const content = (
     <div className={cn("flex flex-col", className)}>
       <Image
-        src="/logo.png"
+        src={LOGO_SRC}
         alt={t("site.name")}
         width={LOGO_WIDTH}
         height={LOGO_HEIGHT}
