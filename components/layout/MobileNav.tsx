@@ -96,7 +96,7 @@ export function MobileNav({ profile, pendingCount = 0 }: MobileNavProps) {
                   {t("nav.login")}
                 </Link>
                 <Link
-                  href="/register"
+                  href="/register?v=2"
                   className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm hover:bg-accent min-h-[44px]"
                   onClick={() => setOpen(false)}
                 >

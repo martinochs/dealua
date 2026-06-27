@@ -1,9 +1,14 @@
 import { RegisterBenefitsPanel } from "@/components/auth/RegisterBenefitsPanel";
 import { RegisterForm } from "@/components/auth/RegisterForm";
 import { RegisterTrustBadges } from "@/components/auth/RegisterTrustBadges";
+import type { Metadata } from "next";
 
 /** Avoid stale static HTML after deploys (browser/CDN cache showed old register layout). */
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Реєстрація",
+};
 
 export default function RegisterPage() {
   return (

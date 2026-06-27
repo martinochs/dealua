@@ -77,7 +77,7 @@ export function LoginForm({ mockMode = false, next, oauthError = false }: LoginF
           {!mockMode && (
             <p className="text-center text-sm text-muted-foreground">
               {t("auth.noAccount")}{" "}
-              <Link href="/register" className="text-primary hover:underline">
+              <Link href="/register?v=2" className="text-primary hover:underline">
                 {t("auth.register")}
               </Link>
             </p>
