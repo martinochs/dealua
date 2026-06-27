@@ -1,11 +1,14 @@
 import { ImageResponse } from "next/og";
+import { LOGO_HEIGHT, LOGO_WIDTH, getLogoDataUrl } from "@/lib/brand-icon";
 
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
-const BRAND_BLUE = "#0057B7";
+export default async function Icon() {
+  const src = await getLogoDataUrl();
+  const scale = size.height / LOGO_HEIGHT;
+  const imgWidth = LOGO_WIDTH * scale;
 
-export default function Icon() {
   return new ImageResponse(
     (
       <div
@@ -14,15 +17,13 @@ export default function Icon() {
           height: "100%",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          background: BRAND_BLUE,
+          justifyContent: "flex-start",
+          background: "#ffffff",
           borderRadius: 8,
-          color: "#ffffff",
-          fontSize: 20,
-          fontWeight: 800,
+          overflow: "hidden",
         }}
       >
-        %
+        <img src={src} width={imgWidth} height={size.height} alt="" />
       </div>
     ),
     { ...size }
