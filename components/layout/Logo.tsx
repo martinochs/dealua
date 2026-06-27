@@ -3,16 +3,16 @@ import Link from "next/link";
 import { t } from "@/lib/i18n/uk";
 import { cn } from "@/lib/utils";
 
-/** Full VyhodaDeal logo with stork — public/logo.png */
+/** VyhodaDeal fox logo — public/logo.png (includes tagline) */
 const LOGO_WIDTH = 1024;
-const LOGO_HEIGHT = 1024;
+const LOGO_HEIGHT = 298;
 
 type LogoSize = "header" | "register" | "compact";
 
 const sizeVariants: Record<LogoSize, string> = {
-  header: "h-auto w-[11rem] sm:w-[13.5rem] md:w-[16rem] lg:w-[18rem]",
-  register: "h-auto w-[13rem] sm:w-[17rem] md:w-[20rem]",
-  compact: "h-auto w-36 sm:w-44",
+  header: "h-auto w-[12.5rem] sm:w-[15.5rem] md:w-[18rem] lg:w-[20rem]",
+  register: "h-auto w-[14rem] sm:w-[18rem] md:w-[22rem]",
+  compact: "h-auto w-40 sm:w-48",
 };
 
 interface LogoProps {
@@ -20,7 +20,7 @@ interface LogoProps {
   size?: LogoSize;
   link?: boolean;
   priority?: boolean;
-  /** Hidden by default — show explicitly on pages like register */
+  /** Tagline is baked into logo.png — prop kept for optional extra line below */
   showTagline?: boolean;
 }
 
