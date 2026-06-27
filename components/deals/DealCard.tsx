@@ -1,4 +1,5 @@
 import { formatUAH, formatRelativeTime, getSavingsPercent, getVoteScore } from "@/lib/utils";
+import { SavingsPercentBadge } from "@/components/deals/SavingsPercentBadge";
 import { Badge } from "@/components/ui/badge";
 import { Flame, MessageCircle, Snowflake } from "lucide-react";
 import Link from "next/link";
@@ -73,10 +74,8 @@ export function DealCard({ deal, layout = "grid", commentCount = 0 }: DealCardPr
                   {formatUAH(Number(deal.original_price_uah))}
                 </span>
               )}
-              {savings && (
-                <Badge variant="hot" className="px-1.5 py-0 text-xs font-bold">
-                  -{savings}%
-                </Badge>
+              {savings !== null && savings >= 1 && (
+                <SavingsPercentBadge percent={savings} variant="inline" size="sm" minPercent={1} />
               )}
             </div>
 
@@ -143,7 +142,9 @@ export function DealCard({ deal, layout = "grid", commentCount = 0 }: DealCardPr
                 {formatUAH(Number(deal.original_price_uah))}
               </span>
             )}
-            {savings && <Badge variant="hot">-{savings}%</Badge>}
+            {savings !== null && savings >= 1 && (
+              <SavingsPercentBadge percent={savings} variant="inline" size="sm" minPercent={1} />
+            )}
           </div>
 
           <div className="mt-auto flex items-center gap-2 pt-2 text-xs text-muted-foreground">
