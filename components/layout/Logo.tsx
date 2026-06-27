@@ -11,12 +11,13 @@ const LOGO_SRC = `/logo.png?v=${LOGO_VERSION}`;
 const LOGO_WIDTH = 1024;
 const LOGO_HEIGHT = 298;
 
-type LogoSize = "header" | "register" | "compact";
+type LogoSize = "header" | "register" | "compact" | "bar";
 
 const sizeVariants: Record<LogoSize, string> = {
   header: "h-auto w-[12.5rem] sm:w-[15.5rem] md:w-[18rem] lg:w-[20rem]",
   register: "h-auto w-[14rem] sm:w-[18rem] md:w-[22rem]",
   compact: "h-auto w-40 sm:w-48",
+  bar: "h-auto w-[7.5rem] sm:w-[8.5rem] md:w-[9.5rem] lg:w-[10.5rem]",
 };
 
 interface LogoProps {

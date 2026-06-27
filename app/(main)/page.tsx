@@ -1,11 +1,9 @@
 import { InfiniteDealFeed } from "@/components/deals/InfiniteDealFeed";
 import { CommunityTipsBar } from "@/components/home/CommunityTipsBar";
-import { StickyFeedNav } from "@/components/home/StickyFeedNav";
 import { HOME_PAGE_SIZE, parseSortMode } from "@/lib/constants";
 import { getProfile } from "@/lib/auth/session";
 import {
   countDeals,
-  getCategories,
   getCommentCounts,
   getDeals,
   getUserVotes,
@@ -20,11 +18,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const sort = parseSortMode(params.sort);
   const categorySlug = params.cat?.trim() || undefined;
 
-  const [deals, total, commentCounts, categories, profile] = await Promise.all([
+  const [deals, total, commentCounts, profile] = await Promise.all([
     getDeals(sort, categorySlug, HOME_PAGE_SIZE, 0),
     countDeals(sort, categorySlug),
     getCommentCounts(),
-    getCategories(),
     getProfile(),
   ]);
 
@@ -37,24 +34,17 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
   return (
     <div className="mx-auto w-full max-w-6xl">
-      <StickyFeedNav
-        categories={categories}
-        activeCategory={categorySlug}
+      <InfiniteDealFeed
+        initialDeals={deals}
+        initialCommentCounts={commentCounts}
+        initialUserVotes={userVotes}
         sort={sort}
+        category={categorySlug}
+        initialPage={1}
+        hasMore={deals.length < total}
+        pageSize={HOME_PAGE_SIZE}
+        isLoggedIn={!!profile}
       />
-      <div className="pt-3 sm:pt-4">
-        <InfiniteDealFeed
-          initialDeals={deals}
-          initialCommentCounts={commentCounts}
-          initialUserVotes={userVotes}
-          sort={sort}
-          category={categorySlug}
-          initialPage={1}
-          hasMore={deals.length < total}
-          pageSize={HOME_PAGE_SIZE}
-          isLoggedIn={!!profile}
-        />
-      </div>
       <CommunityTipsBar />
     </div>
   );

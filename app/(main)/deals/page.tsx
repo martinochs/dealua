@@ -1,7 +1,6 @@
 import { DealFeed } from "@/components/deals/DealFeed";
 import { FeedTabs } from "@/components/deals/FeedTabs";
 import { LoadMore } from "@/components/deals/LoadMore";
-import { SearchBarWrapper } from "@/components/layout/SearchBarWrapper";
 import { getProfile } from "@/lib/auth/session";
 import { getDeals, countDeals, getCommentCounts, getUserVotes } from "@/lib/queries/deals";
 import { DEALS_PAGE_SIZE, parseSortMode } from "@/lib/constants";
@@ -56,11 +55,11 @@ export default async function DealsPage({ searchParams }: DealsPageProps) {
         </p>
       </div>
 
-      <SearchBarWrapper defaultQuery={query} />
-
       <FeedTabs
         currentSort={sort}
         basePath={query ? `/deals?q=${encodeURIComponent(query)}` : "/deals"}
+        showAllTab={false}
+        variant="underline"
       />
 
       {deals.length === 0 && query ? (

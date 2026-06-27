@@ -1,10 +1,12 @@
 import { Header } from "./Header";
+import { HeaderFeedNav } from "@/components/home/HeaderFeedNav";
 import { getProfile } from "@/lib/auth/session";
-import { getStats } from "@/lib/queries/deals";
+import { getCategories, getStats } from "@/lib/queries/deals";
 
 export async function SiteHeader() {
   const profile = await getProfile();
-  const stats = await getStats();
+  const [stats, categories] = await Promise.all([getStats(), getCategories()]);
+
   const pendingCount = profile?.role === "admin" ? stats.pendingDeals : 0;
 
   return (
@@ -14,6 +16,7 @@ export async function SiteHeader() {
     >
       <div className="uk-accent-line" aria-hidden />
       <Header profile={profile} pendingCount={pendingCount} />
+      <HeaderFeedNav categories={categories} />
     </div>
   );
 }

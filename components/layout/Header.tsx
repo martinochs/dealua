@@ -11,15 +11,16 @@ interface HeaderProps {
 export function Header({ profile, pendingCount = 0 }: HeaderProps) {
   return (
     <header className="bg-card">
-      <div className="container mx-auto px-4 py-3 sm:py-4">
-        <div className="flex items-start justify-between gap-2 sm:items-center sm:gap-3">
-          <div className="min-w-0 flex-1 py-0.5">
-            <Logo priority />
+      <div className="container mx-auto px-4 py-2.5 sm:py-3">
+        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
+          <Logo priority size="bar" className="shrink-0" />
+          <div className="hidden min-w-0 flex-1 md:block">
+            <SearchBarWrapper variant="header" />
           </div>
           <HeaderActions profile={profile} pendingCount={pendingCount} />
         </div>
-        <div className="mt-3 sm:mt-4">
-          <SearchBarWrapper />
+        <div className="mt-2.5 md:hidden">
+          <SearchBarWrapper variant="header" />
         </div>
       </div>
     </header>

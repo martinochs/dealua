@@ -4,11 +4,12 @@ import { cn } from "@/lib/utils";
 interface UserAvatarProps {
   username: string;
   avatarUrl?: string | null;
-  size?: "md" | "lg";
+  size?: "sm" | "md" | "lg";
   className?: string;
 }
 
 const sizeClasses = {
+  sm: "h-9 w-9 text-sm",
   md: "h-11 w-11 text-lg",
   lg: "h-16 w-16 text-xl sm:h-20 sm:w-20 sm:text-2xl",
 } as const;
